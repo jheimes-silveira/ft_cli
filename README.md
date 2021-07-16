@@ -151,8 +151,6 @@ class GenericError implements Exception {
 ---
 
 ```bash
-$ js_cli                                                                                              
-################### Clean Arch CLI ###################
 
 $ js_cli integration
 ################### Clean Arch CLI ###################
