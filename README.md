@@ -154,6 +154,13 @@ class GenericError implements Exception {
 $ js_cli                                                                                              
 ################### Clean Arch CLI ###################
 
+$ js_cli integration
+################### Clean Arch CLI ###################
+integration with flutter_modular lib
+Integration with some external lib?
+- flutter_modular
+- none
+
 $ js_cli g layer complete ./teste/features/dashboard
 ################### Clean Arch CLI ###################
 generating complete layer....
