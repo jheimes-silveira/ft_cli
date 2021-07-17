@@ -1,7 +1,8 @@
 abstract class IGenerateDatasources {
-  Future<bool> call(
-    String datasourceName,
-    String pathInterface,
-    String path,
-  );
+  Future<bool> call({
+    required String datasourceName,
+    required String path,
+    required String subPath,
+    required String subPathInterface,
+  });
 }

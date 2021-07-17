@@ -114,7 +114,7 @@ js_cli g dto /lib/src/features/home Home
 
 ```dart
 // home.dto.dart
-import '../../domain/entities/home.entity.dart';
+import '../../domain/models/entities/home.entity.dart';
 
 class HomeDto extends HomeEntity {
 

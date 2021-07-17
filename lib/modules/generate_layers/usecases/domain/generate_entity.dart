@@ -1,28 +1,31 @@
 import 'dart:io';
 
+import 'package:recase/recase.dart';
+
 import '../../../../core/errors/file_exists_error.dart';
 import '../../../../core/interfaces/igenerate_entity.dart';
 import '../../../../core/templates/domain/entities/entity_template.dart';
-import 'package:recase/recase.dart';
 
 class GenerateEntity implements IGenerateEntity {
   @override
-  Future<bool> call(String entityName, String path) async {
+  Future<bool> call({
+    required String entityName,
+    required String path,
+    required String subPath,
+  }) async {
     var isValidDirectory = await Directory(path).exists();
+    var completePath =
+        '$path/$subPath/${ReCase(entityName).snakeCase}_entity.dart';
     if (isValidDirectory) {
-      var existFile =
-          await File('$path/${ReCase(entityName).snakeCase}.entity.dart')
-              .exists();
+      var existFile = await File(completePath).exists();
 
       if (existFile) {
         throw FileExistsError(innerException: Exception());
       }
 
-      File('$path/${ReCase(entityName).snakeCase}.entity.dart')
-          .createSync(recursive: true);
+      File(completePath).createSync(recursive: true);
       var content = entityTemplate(entityName);
-      File('$path/${ReCase(entityName).snakeCase}.entity.dart')
-          .writeAsStringSync(content);
+      File(completePath).writeAsStringSync(content);
       return true;
     } else {
       return false;

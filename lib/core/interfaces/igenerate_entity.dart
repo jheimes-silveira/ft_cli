@@ -1,3 +1,7 @@
 abstract class IGenerateEntity {
-  Future<bool> call(String entityName, String path);
+  Future<bool> call({
+    required String entityName,
+    required String path,
+    required String subPath,
+  });
 }

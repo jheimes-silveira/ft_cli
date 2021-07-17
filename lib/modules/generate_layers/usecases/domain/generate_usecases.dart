@@ -1,46 +1,43 @@
 import 'dart:io';
 
+import 'package:js_cli/core/templates/core/generic_template.dart';
+import 'package:recase/recase.dart';
+
 import '../../../../core/errors/file_exists_error.dart';
 import '../../../../core/interfaces/igenerate_usecases.dart';
-import '../../../../core/templates/domain/usecases/usecase_template.dart';
-import 'package:recase/recase.dart';
 
 class GenerateUsecases implements IGenerateUsecases {
   @override
-  Future<bool> call(String usecaseName, String path) async {
-    var isValidDirectory = await Directory(path).exists();
+  Future<bool> call(String usecaseName, String path, String subPath) async {
+    if (!(Directory(path).existsSync())) return false;
 
-    var existFile =
-        await File('$path/${ReCase(usecaseName).snakeCase}.usecase.dart')
-            .exists();
+    var completePathI =
+        '$path/$subPath/${ReCase(usecaseName).snakeCase}_usecase.dart';
+    var completePath =
+        '$path/$subPath/${ReCase(usecaseName).snakeCase}_imp_usecase.dart';
 
-    if (existFile) {
+    if (File(completePathI).existsSync()) {
       throw FileExistsError(innerException: Exception());
     }
 
-    existFile =
-        await File('$path/${ReCase(usecaseName).snakeCase}_imp.usecase.dart')
-            .exists();
-
-    if (existFile) {
+    if (File(completePath).existsSync()) {
       throw FileExistsError(innerException: Exception());
     }
 
-    if (isValidDirectory) {
-      File('$path/${ReCase(usecaseName).snakeCase}.usecase.dart')
-          .createSync(recursive: true);
-      var contentInterface = usecaseTemplateInterface(usecaseName);
-      File('$path/${ReCase(usecaseName).snakeCase}.usecase.dart')
-          .writeAsStringSync(contentInterface);
+    File(completePathI).createSync(recursive: true);
+    var contentInterface = layerTemplateInterface(usecaseName, 'usecase');
+    File(completePathI).writeAsStringSync(contentInterface);
 
-      File('$path/${ReCase(usecaseName).snakeCase}_imp.usecase.dart')
-          .createSync(recursive: true);
-      var content = usecaseTemplate(usecaseName);
-      File('$path/${ReCase(usecaseName).snakeCase}_imp.usecase.dart')
-          .writeAsStringSync(content);
-      return true;
-    } else {
-      return false;
-    }
+    File(completePath).createSync(recursive: true);
+    var content = layerTemplate(usecaseName, 'usecase');
+
+    File(completePath).writeAsStringSync(content);
+
+    updateIntegrationModule(
+      path,
+      '${usecaseName}ImpUsecase',
+      subPath,
+    );
+    return true;
   }
 }

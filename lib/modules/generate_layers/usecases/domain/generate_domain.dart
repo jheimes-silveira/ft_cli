@@ -10,7 +10,9 @@ class GenerateDomain implements IGenerateLayers {
     if (isValidDirectory) {
       var dir = await Directory('$path/domain').create();
 
-      await Directory('${dir.path}/entities').create();
+      await Directory('${dir.path}/models').create();
+      await Directory('${dir.path}/models/entities').create();
+      await Directory('${dir.path}/models/dtos').create();
       await Directory('${dir.path}/usecases').create();
       await Directory('${dir.path}/repositories').create();
       return true;

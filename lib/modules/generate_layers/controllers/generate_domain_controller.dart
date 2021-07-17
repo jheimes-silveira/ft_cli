@@ -1,3 +1,5 @@
+import 'package:path/path.dart' as p;
+
 import '../../../core/errors/file_exists_error.dart';
 import '../../../core/interfaces/igenerate_datasources.dart';
 import '../../../core/interfaces/igenerate_dto.dart';
@@ -6,7 +8,6 @@ import '../../../core/interfaces/igenerate_error.dart';
 import '../../../core/interfaces/igenerate_repositories.dart';
 import '../../../core/interfaces/igenerate_usecases.dart';
 import '../../../core/utils/output_utils.dart' as output;
-import 'package:path/path.dart' as p;
 
 class GenerateDomainController {
   final IGenerateUsecases _generateUsecases;
@@ -16,7 +17,6 @@ class GenerateDomainController {
   final IGenerateDto _generateDto;
   final IGenerateDatasources _generateDatasources;
 
-
   GenerateDomainController(
     this._generateUsecases,
     this._generateEntity,
@@ -24,7 +24,6 @@ class GenerateDomainController {
     this._generateRepositories,
     this._generateDto,
     this._generateDatasources,
-
   );
 
   Future<bool> generateUsecase(String usecaseName, String path) async {
@@ -33,7 +32,10 @@ class GenerateDomainController {
 
     try {
       var result = await _generateUsecases.call(
-          usecaseName, pathNomalized + '/domain/usecases');
+        usecaseName,
+        pathNomalized,
+        'domain/usecases',
+      );
 
       if (result) {
         output.title('$usecaseName created');
@@ -52,7 +54,10 @@ class GenerateDomainController {
     var pathNomalized = p.normalize('${p.current}/$path');
     try {
       var result = await _generateEntity.call(
-          entityName, pathNomalized + '/domain/entities');
+        entityName: entityName,
+        path: pathNomalized,
+        subPath: 'domain/models/entities',
+      );
       if (result) {
         output.title('$entityName created');
         return true;
@@ -87,9 +92,10 @@ class GenerateDomainController {
     var pathNomalized = p.normalize('${p.current}/$path');
     try {
       var result = await _generateRepositories.call(
-        repositoryName,
-        pathNomalized + '/data/repositories',
-        pathNomalized + '/domain/repositories',
+        repositoryName: repositoryName,
+        path: pathNomalized,
+        subPath: 'data/repositories',
+        subPathInterface: 'domain/repositories',
       );
       if (result) {
         output.title('$repositoryName created');
@@ -108,9 +114,10 @@ class GenerateDomainController {
     var pathNomalized = p.normalize('${p.current}/$path');
     try {
       var result = await _generateDatasources.call(
-        datasourceName,
-        pathNomalized + '/external/datasources',
-        pathNomalized + '/data/datasources',
+        datasourceName: datasourceName,
+        path: pathNomalized,
+        subPath: 'external/datasources',
+        subPathInterface: 'data/datasources',
       );
       if (result) {
         output.title('$datasourceName created');

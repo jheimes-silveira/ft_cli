@@ -1,56 +1,50 @@
 import 'dart:io';
 
+import 'package:recase/recase.dart';
+
 import '../../../../core/errors/file_exists_error.dart';
 import '../../../../core/interfaces/igenerate_repositories.dart';
 import '../../../../core/templates/core/generic_template.dart';
-import 'package:recase/recase.dart';
 
 class GenerateRepositories implements IGenerateRepositories {
   @override
-  Future<bool> call(
-    String repositoryName,
-    String path,
-    String pathInterface,
-  ) async {
-    var isValidDirectoryInferface = await Directory(pathInterface).exists();
-    var isValidDirectory = await Directory(path).exists();
+  Future<bool> call({
+    required String repositoryName,
+    required String path,
+    required String subPath,
+    required String subPathInterface,
+  }) async {
+    var completePathI =
+        '$path/$subPathInterface/${ReCase(repositoryName).snakeCase}_repository.dart';
+    var completePath =
+        '$path/$subPath/${ReCase(repositoryName).snakeCase}_imp_repository.dart';
 
-    var existFile = await File(
-            '$pathInterface/${ReCase(repositoryName).snakeCase}.repository.dart')
-        .exists();
-
-    if (existFile) {
+    if (Directory(completePathI).existsSync()) {
+      throw FileExistsError(innerException: Exception());
+    }
+    if (Directory(completePath).existsSync()) {
       throw FileExistsError(innerException: Exception());
     }
 
-    existFile = await File(
-            '$path/${ReCase(repositoryName).snakeCase}_imp.repository.dart')
-        .exists();
+    File(completePathI).createSync(recursive: true);
+    var contentInterface = layerTemplateInterface(repositoryName, 'repository');
+    File(completePathI).writeAsStringSync(contentInterface);
 
-    if (existFile) {
-      throw FileExistsError(innerException: Exception());
-    }
+    File(completePath).createSync(recursive: true);
+    var content = layerTemplate(
+      repositoryName,
+      'repository',
+      outerLayer: '../../domain/repositories/',
+    );
 
-    if (isValidDirectory && isValidDirectoryInferface) {
-      File('$pathInterface/${ReCase(repositoryName).snakeCase}.repository.dart')
-          .createSync(recursive: true);
-      var contentInterface =
-          layerTemplateInterface(repositoryName, 'repository');
-      File('$pathInterface/${ReCase(repositoryName).snakeCase}.repository.dart')
-          .writeAsStringSync(contentInterface);
+    File(completePath).writeAsStringSync(content);
 
-      File('$path/${ReCase(repositoryName).snakeCase}_imp.repository.dart')
-          .createSync(recursive: true);
-      var content = layerTemplate(
-        repositoryName,
-        'repository',
-        outerLayer: '../../domain/repositories/',
-      );
-      File('$path/${ReCase(repositoryName).snakeCase}_imp.repository.dart')
-          .writeAsStringSync(content);
-      return true;
-    } else {
-      return false;
-    }
+    updateIntegrationModule(
+      path,
+      '${repositoryName}ImpRepository',
+      subPath,
+    );
+
+    return true;
   }
 }
