@@ -7,19 +7,21 @@ import 'package:recase/recase.dart';
 
 class GenerateDto implements IGenerateDto {
   @override
-  Future<bool> call(String dtoName, String path) async {
+  Future<bool> call({
+    required String dtoName,
+    required String path,
+    required String subPath,
+  }) async {
     var isValidDirectory = await Directory(path).exists();
     if (isValidDirectory) {
-      var existFile =
-          await File('$path/${ReCase(dtoName).snakeCase}.dto.dart').exists();
+      var completePath = '$path/$subPath/${ReCase(dtoName).snakeCase}_dto.dart';
 
+      var existFile = await File(completePath).exists();
       if (existFile) throw FileExistsError(innerException: Exception());
 
-      File('$path/${ReCase(dtoName).snakeCase}.dto.dart')
-          .createSync(recursive: true);
+      File(completePath).createSync(recursive: true);
       var content = dtoTemplate(dtoName);
-      File('$path/${ReCase(dtoName).snakeCase}.dto.dart')
-          .writeAsStringSync(content);
+      File(completePath).writeAsStringSync(content);
       return true;
     } else {
       return false;

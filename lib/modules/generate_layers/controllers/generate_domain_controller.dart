@@ -135,8 +135,11 @@ class GenerateDomainController {
     output.warn('generating dto $dtoName....');
     var pathNomalized = p.normalize('${p.current}/$path');
     try {
-      var result =
-          await _generateDto.call(dtoName, pathNomalized + '/data/dtos');
+      var result = await _generateDto.call(
+        dtoName: dtoName,
+        path: pathNomalized,
+        subPath: 'domain/models/dtos',
+      );
       if (result) {
         output.title('${dtoName}Dto created');
         return true;

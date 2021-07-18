@@ -5,9 +5,7 @@ String dtoTemplate(String dtoName) {
 import '../../domain/models/entities/${ReCase(dtoName).snakeCase}_entity.dart';
 
 class ${ReCase(dtoName).pascalCase}Dto extends ${ReCase(dtoName).pascalCase}Entity {
-
   ${ReCase(dtoName).pascalCase}Dto() : super();
-
 }
   ''';
 

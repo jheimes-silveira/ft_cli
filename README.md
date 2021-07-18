@@ -53,12 +53,12 @@ js_cli g usecase /lib/src/features/home GetHomeCards
 ```dart
 //get_home_cards.usecase.dart
 abstract class GetHomeCardsUsecase {
-  Future<void>call();
+  Future<void> call();
 }
 ```
 ```dart
 //get_home_cards_imp.usecase.dart
-import 'get_home_cards.usecase.dart';
+import 'get_home_cards_usecase.dart';
 
 class GetHomeCardsImpUsecase implements GetHomeCardsUsecase {
   @override
@@ -85,12 +85,12 @@ js_cli g repository /lib/src/features/home GetHomeCards
 ```dart
 // domain/repositories/get_home_cards.repository.dart
 abstract class GetHomeCardsRepository {
-  Future<void>call();
+  Future<void> call();
 }
 ```
 ```dart
 // data/repositories/get_home_cards_imp.repository.dart
-import '../../domain/repositories/get_home_cards.repository.dart';
+import '../../domain/repositories/get_home_cards_repository.dart';
 
 class GetHomeCardsImpRepository implements GetHomeCardsRepository {
   @override
@@ -113,8 +113,8 @@ js_cli g dto /lib/src/features/home Home
 <summary>Result</summary>
 
 ```dart
-// home.dto.dart
-import '../../domain/models/entities/home.entity.dart';
+// home_dto.dart
+import '../../domain/models/entities/home_entity.dart';
 
 class HomeDto extends HomeEntity {
 

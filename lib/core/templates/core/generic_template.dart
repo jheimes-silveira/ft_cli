@@ -7,7 +7,7 @@ import '../../utils/file_configs.dart';
 String layerTemplateInterface(String layerName, String layer) {
   var output = '''
 abstract class ${ReCase(layerName).pascalCase}${ReCase(layer).pascalCase} {
-  Future<void>call();
+  Future<void> call();
 }
   ''';
 
