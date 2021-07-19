@@ -4,9 +4,9 @@ import 'package:recase/recase.dart';
 
 import '../../utils/file_configs.dart';
 
-String layerTemplateInterface(String layerName, String layer) {
+String layerTemplateInterface(String nameClass) {
   var output = '''
-abstract class ${ReCase(layerName).pascalCase}${ReCase(layer).pascalCase} {
+abstract class ${ReCase(nameClass).pascalCase} {
   Future<void> call();
 }
   ''';
@@ -14,22 +14,31 @@ abstract class ${ReCase(layerName).pascalCase}${ReCase(layer).pascalCase} {
   return output;
 }
 
-String layerTemplate(
-  String layerName,
-  String layer, {
-  String outerLayer = '',
+String layerTemplate({
+  required String nameClass,
+  required String nameClassInterface,
+  required String nameFile,
+  required String nameFileInterface,
+  String pathInterface = '',
+  String path = '',
 }) {
-  var configs = FileConfigs.read();
+  if (path.isNotEmpty && path.split('/').isNotEmpty) {
+    path.split('/').forEach((e) {
+      pathInterface = '../' + pathInterface;
+    });
+  }
 
-  if (configs['integration'] == 'flutter_modular') {
+  var integration = FileConfigs.getIntegration();
+
+  if (integration == 'flutter_modular') {
     return '''
-import '$outerLayer${ReCase(layerName).snakeCase}_${ReCase(layer).originalText}.dart';
+import '$pathInterface/${ReCase(nameFileInterface).originalText}.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-part '${ReCase(layerName).snakeCase}_imp_${ReCase(layer).snakeCase}.g.dart';
+part '$nameFile.g.dart';
 
 @Injectable()
-class ${ReCase(layerName).pascalCase}Imp${ReCase(layer).pascalCase} implements ${ReCase(layerName).pascalCase}${ReCase(layer).pascalCase} {
+class ${ReCase(nameClass).pascalCase} implements ${ReCase(nameClassInterface).pascalCase} {
   @override
   Future<void> call() {
     // TODO: implement call
@@ -40,9 +49,9 @@ class ${ReCase(layerName).pascalCase}Imp${ReCase(layer).pascalCase} implements $
   }
 
   return '''
-import '$outerLayer${ReCase(layerName).snakeCase}_${ReCase(layer).originalText}.dart';
+import '$pathInterface/${ReCase(nameFileInterface).originalText}.dart';
 
-class ${ReCase(layerName).pascalCase}Imp${ReCase(layer).pascalCase} implements ${ReCase(layerName).pascalCase}${ReCase(layer).pascalCase} {
+class ${ReCase(nameClass).pascalCase} implements ${ReCase(nameClassInterface).pascalCase} {
   @override
   Future<void> call() {
     // TODO: implement call
@@ -57,8 +66,8 @@ void updateIntegrationModule(
   String paramsName,
   String subPathImport,
 ) {
-  final configs = FileConfigs.read();
-  if (configs['integration'] == 'flutter_modular') {
+  final integration = FileConfigs.getIntegration();
+  if (integration == 'flutter_modular') {
     final fileName = path + '\\' + path.split('\\').last + '_module.dart';
 
     if (File(fileName).existsSync()) {

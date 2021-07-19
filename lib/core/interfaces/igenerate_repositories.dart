@@ -1,8 +1,13 @@
 abstract class IGenerateRepositories {
   Future<bool> call({
-    required String repositoryName,
+    required String name,
     required String path,
-    required String subPath,
-    required String subPathInterface,
   });
+
+  String getNameFile(String name);
+  String getNameFileInterface(String name);
+  String getNameClass(String name);
+  String getNameClassInterface(String name);
+  String getPath();
+  String getPathInterface();
 }

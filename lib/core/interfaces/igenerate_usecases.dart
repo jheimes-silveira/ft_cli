@@ -1,7 +1,13 @@
 abstract class IGenerateUsecases {
-  Future<bool> call(
-    String usecaseName,
-    String path,
-    String pathPosFix,
-  );
+  Future<bool> call({
+    required String name,
+    required String path,
+  });
+
+  String getNameFile(String name);
+  String getNameFileInterface(String name);
+  String getNameClass(String name);
+  String getNameClassInterface(String name);
+  String getPath();
+  String getPathInterface();
 }

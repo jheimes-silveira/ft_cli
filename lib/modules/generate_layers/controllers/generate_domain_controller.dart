@@ -32,9 +32,8 @@ class GenerateDomainController {
 
     try {
       var result = await _generateUsecases.call(
-        usecaseName,
-        pathNomalized,
-        'domain/usecases',
+        name: usecaseName,
+        path: pathNomalized,
       );
 
       if (result) {
@@ -92,10 +91,8 @@ class GenerateDomainController {
     var pathNomalized = p.normalize('${p.current}/$path');
     try {
       var result = await _generateRepositories.call(
-        repositoryName: repositoryName,
+        name: repositoryName,
         path: pathNomalized,
-        subPath: 'data/repositories',
-        subPathInterface: 'domain/repositories',
       );
       if (result) {
         output.title('$repositoryName created');
@@ -114,10 +111,8 @@ class GenerateDomainController {
     var pathNomalized = p.normalize('${p.current}/$path');
     try {
       var result = await _generateDatasources.call(
-        datasourceName: datasourceName,
+        name: datasourceName,
         path: pathNomalized,
-        subPath: 'external/datasources',
-        subPathInterface: 'data/datasources',
       );
       if (result) {
         output.title('$datasourceName created');
