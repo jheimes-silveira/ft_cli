@@ -1,3 +1,6 @@
+import 'package:js_cli/core/interfaces/igenerate_page.dart';
+import 'package:js_cli/modules/generate_layers/usecases/domain/generate_page.dart';
+
 import '../../core/interfaces/igenerate_datasources.dart';
 import '../../core/interfaces/igenerate_dto.dart';
 import '../../core/interfaces/igenerate_error.dart';
@@ -27,6 +30,7 @@ class GenerateModule {
     getIt.registerLazySingleton<IGenerateEntity>(() => GenerateEntity());
     getIt.registerLazySingleton<IGenerateUsecases>(() => GenerateUsecases());
     getIt.registerLazySingleton<IGenerateDto>(() => GenerateDto());
+    getIt.registerLazySingleton<IGeneratePages>(() => GeneratePages());
     getIt.registerLazySingleton<IGenerateDatasources>(
       () => GenerateDatasources(),
     );
@@ -68,6 +72,7 @@ class GenerateModule {
         getIt.get<IGenerateRepositories>(),
         getIt.get<IGenerateDto>(),
         getIt.get<IGenerateDatasources>(),
+        getIt.get<IGeneratePages>(),
       ),
     );
   }

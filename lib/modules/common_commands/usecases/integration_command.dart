@@ -1,7 +1,7 @@
 import 'package:cli_dialog/cli_dialog.dart';
 
 import '../../../core/interfaces/iintegration_command.dart';
-import '../../../core/utils/file_configs.dart';
+import '../../../core/files/configs_file.dart';
 
 class IntegrationCommand implements IIntegrationCommand {
   IntegrationCommand();
@@ -20,6 +20,6 @@ class IntegrationCommand implements IIntegrationCommand {
     final dialog = CLI_Dialog(listQuestions: listQuestions);
     final answer = dialog.ask();
 
-    FileConfigs.setIntegration(answer['integration']);
+    ConfigsFile.setIntegration(answer['integration']);
   }
 }

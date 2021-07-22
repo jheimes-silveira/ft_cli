@@ -1,3 +1,4 @@
+import 'package:js_cli/core/interfaces/igenerate_page.dart';
 import 'package:path/path.dart' as p;
 
 import '../../../core/errors/file_exists_error.dart';
@@ -16,6 +17,7 @@ class GenerateDomainController {
   final IGenerateRepositories _generateRepositories;
   final IGenerateDto _generateDto;
   final IGenerateDatasources _generateDatasources;
+  final IGeneratePages _generatePages;
 
   GenerateDomainController(
     this._generateUsecases,
@@ -24,6 +26,7 @@ class GenerateDomainController {
     this._generateRepositories,
     this._generateDto,
     this._generateDatasources,
+    this._generatePages,
   );
 
   Future<bool> generateUsecase(String usecaseName, String path) async {
@@ -116,6 +119,26 @@ class GenerateDomainController {
       );
       if (result) {
         output.title('$datasourceName created');
+        return true;
+      }
+      output.error('Directory not exists');
+      return false;
+    } on FileExistsError catch (e) {
+      output.error(e.message);
+      return false;
+    }
+  }
+
+  Future<bool> generatePage(String pageName, String path) async {
+    output.warn('generating repository $pageName....');
+    var pathNomalized = p.normalize('${p.current}/$path');
+    try {
+      var result = await _generatePages.call(
+        name: pageName,
+        path: pathNomalized,
+      );
+      if (result) {
+        output.title('$pageName created');
         return true;
       }
       output.error('Directory not exists');

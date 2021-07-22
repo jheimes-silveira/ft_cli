@@ -91,6 +91,16 @@ void main(List<String> arguments) {
           error('Missing arguments, especific your datasource name');
         }
         break;
+      case 'page':
+        if (arguments.length > 3) {
+          generateDomainController.generatePage(
+            arguments[3],
+            arguments[2],
+          );
+        } else {
+          error('Missing arguments, especific your datasource name');
+        }
+        break;
       case 'dto':
         if (arguments.length > 3) {
           generateDomainController.generateDto(

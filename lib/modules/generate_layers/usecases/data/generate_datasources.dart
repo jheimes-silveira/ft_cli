@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:js_cli/core/interfaces/igenerate_datasources.dart';
-import 'package:js_cli/core/utils/file_configs.dart';
+import 'package:js_cli/core/files/configs_file.dart';
 import 'package:recase/recase.dart';
 
 import '../../../../core/errors/file_exists_error.dart';
@@ -58,11 +58,11 @@ class GenerateDatasources implements IGenerateDatasources {
 
   @override
   String getNameClass(String name) {
-    final configs = FileConfigs.read();
+    final configs = ConfigsFile.read();
 
     if (!configs.containsKey('datasourceNameClass')) {
       configs['datasourceNameClass'] = '{{name}}ImpDatasource';
-      FileConfigs.write(configs);
+      ConfigsFile.write(configs);
     }
 
     return (configs['datasourceNameClass'] as String).replaceAll(
@@ -73,11 +73,11 @@ class GenerateDatasources implements IGenerateDatasources {
 
   @override
   String getNameClassInterface(String name) {
-    final configs = FileConfigs.read();
+    final configs = ConfigsFile.read();
 
     if (!configs.containsKey('datasourceNameClassInterface')) {
       configs['datasourceNameClassInterface'] = '{{name}}Datasource';
-      FileConfigs.write(configs);
+      ConfigsFile.write(configs);
     }
 
     return (configs['datasourceNameClassInterface'] as String).replaceAll(
@@ -88,11 +88,11 @@ class GenerateDatasources implements IGenerateDatasources {
 
   @override
   String getNameFile(String name) {
-    final configs = FileConfigs.read();
+    final configs = ConfigsFile.read();
 
     if (!configs.containsKey('datasourceNameFile')) {
       configs['datasourceNameFile'] = '{{name}}_imp_datasource';
-      FileConfigs.write(configs);
+      ConfigsFile.write(configs);
     }
 
     return (configs['datasourceNameFile'] as String).replaceAll(
@@ -103,11 +103,11 @@ class GenerateDatasources implements IGenerateDatasources {
 
   @override
   String getNameFileInterface(String name) {
-    final configs = FileConfigs.read();
+    final configs = ConfigsFile.read();
 
     if (!configs.containsKey('datasourceNameFileInterface')) {
       configs['datasourceNameFileInterface'] = '{{name}}_datasource';
-      FileConfigs.write(configs);
+      ConfigsFile.write(configs);
     }
 
     return (configs['datasourceNameFileInterface'] as String).replaceAll(
@@ -118,11 +118,11 @@ class GenerateDatasources implements IGenerateDatasources {
 
   @override
   String getPath() {
-    final configs = FileConfigs.read();
+    final configs = ConfigsFile.read();
 
     if (!configs.containsKey('datasourcePath')) {
       configs['datasourcePath'] = 'data/datasources';
-      FileConfigs.write(configs);
+      ConfigsFile.write(configs);
     }
 
     return (configs['datasourcePath'] as String);
@@ -130,11 +130,11 @@ class GenerateDatasources implements IGenerateDatasources {
 
   @override
   String getPathInterface() {
-    final configs = FileConfigs.read();
+    final configs = ConfigsFile.read();
 
     if (!configs.containsKey('datasourcePathInterface')) {
       configs['datasourcePathInterface'] = 'external/datasources';
-      FileConfigs.write(configs);
+      ConfigsFile.write(configs);
     }
 
     return (configs['datasourcePathInterface'] as String);

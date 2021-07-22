@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:recase/recase.dart';
 
-import '../../utils/file_configs.dart';
+import '../../files/configs_file.dart';
 
 String layerTemplateInterface(String nameClass) {
   var output = '''
@@ -28,7 +28,7 @@ String layerTemplate({
     });
   }
 
-  var integration = FileConfigs.getIntegration();
+  var integration = ConfigsFile.getIntegration();
 
   if (integration == 'flutter_modular') {
     return '''
@@ -66,7 +66,7 @@ void updateIntegrationModule(
   String paramsName,
   String subPathImport,
 ) {
-  final integration = FileConfigs.getIntegration();
+  final integration = ConfigsFile.getIntegration();
   if (integration == 'flutter_modular') {
     final fileName = path + '\\' + path.split('\\').last + '_module.dart';
 

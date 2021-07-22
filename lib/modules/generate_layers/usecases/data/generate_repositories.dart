@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:js_cli/core/interfaces/igenerate_repositories.dart';
-import 'package:js_cli/core/utils/file_configs.dart';
+import 'package:js_cli/core/files/configs_file.dart';
 import 'package:recase/recase.dart';
 
 import '../../../../core/errors/file_exists_error.dart';
@@ -58,11 +58,11 @@ class GenerateRepositories implements IGenerateRepositories {
 
   @override
   String getNameClass(String name) {
-    final configs = FileConfigs.read();
+    final configs = ConfigsFile.read();
 
     if (!configs.containsKey('repositoryNameClass')) {
       configs['repositoryNameClass'] = '{{name}}ImpRepository';
-      FileConfigs.write(configs);
+      ConfigsFile.write(configs);
     }
 
     return (configs['repositoryNameClass'] as String).replaceAll(
@@ -73,11 +73,11 @@ class GenerateRepositories implements IGenerateRepositories {
 
   @override
   String getNameClassInterface(String name) {
-    final configs = FileConfigs.read();
+    final configs = ConfigsFile.read();
 
     if (!configs.containsKey('repositoryNameClassInterface')) {
       configs['repositoryNameClassInterface'] = '{{name}}Repository';
-      FileConfigs.write(configs);
+      ConfigsFile.write(configs);
     }
 
     return (configs['repositoryNameClassInterface'] as String).replaceAll(
@@ -88,11 +88,11 @@ class GenerateRepositories implements IGenerateRepositories {
 
   @override
   String getNameFile(String name) {
-    final configs = FileConfigs.read();
+    final configs = ConfigsFile.read();
 
     if (!configs.containsKey('repositoryNameFile')) {
       configs['repositoryNameFile'] = '{{name}}_imp_repository';
-      FileConfigs.write(configs);
+      ConfigsFile.write(configs);
     }
 
     return (configs['repositoryNameFile'] as String).replaceAll(
@@ -103,11 +103,11 @@ class GenerateRepositories implements IGenerateRepositories {
 
   @override
   String getNameFileInterface(String name) {
-    final configs = FileConfigs.read();
+    final configs = ConfigsFile.read();
 
     if (!configs.containsKey('repositoryNameFileInterface')) {
       configs['repositoryNameFileInterface'] = '{{name}}_repository';
-      FileConfigs.write(configs);
+      ConfigsFile.write(configs);
     }
 
     return (configs['repositoryNameFileInterface'] as String).replaceAll(
@@ -118,11 +118,11 @@ class GenerateRepositories implements IGenerateRepositories {
 
   @override
   String getPath() {
-    final configs = FileConfigs.read();
+    final configs = ConfigsFile.read();
 
     if (!configs.containsKey('repositoryPath')) {
       configs['repositoryPath'] = 'data/repositories';
-      FileConfigs.write(configs);
+      ConfigsFile.write(configs);
     }
 
     return (configs['repositoryPath'] as String);
@@ -130,11 +130,11 @@ class GenerateRepositories implements IGenerateRepositories {
 
   @override
   String getPathInterface() {
-    final configs = FileConfigs.read();
+    final configs = ConfigsFile.read();
 
     if (!configs.containsKey('repositoryPathInterface')) {
       configs['repositoryPathInterface'] = 'domain/repositories';
-      FileConfigs.write(configs);
+      ConfigsFile.write(configs);
     }
 
     return (configs['repositoryPathInterface'] as String);
