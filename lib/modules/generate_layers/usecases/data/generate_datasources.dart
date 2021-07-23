@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:js_cli/core/interfaces/igenerate_datasources.dart';
 import 'package:js_cli/core/files/configs_file.dart';
-import 'package:recase/recase.dart';
+import 'package:js_cli/core/interfaces/igenerate_datasources.dart';
+import 'package:js_cli/core/utils/reserved_words.dart';
 
 import '../../../../core/errors/file_exists_error.dart';
 import '../../../../core/templates/core/generic_template.dart';
@@ -58,85 +58,43 @@ class GenerateDatasources implements IGenerateDatasources {
 
   @override
   String getNameClass(String name) {
-    final configs = ConfigsFile.read();
-
-    if (!configs.containsKey('datasourceNameClass')) {
-      configs['datasourceNameClass'] = '{{name}}ImpDatasource';
-      ConfigsFile.write(configs);
-    }
-
-    return (configs['datasourceNameClass'] as String).replaceAll(
-      '{{name}}',
-      name,
+    return ReservedWords.replaceWordsInFile(
+      fileString: ConfigsFile.getDatasourceNameClass(),
+      name: name,
     );
   }
 
   @override
   String getNameClassInterface(String name) {
-    final configs = ConfigsFile.read();
-
-    if (!configs.containsKey('datasourceNameClassInterface')) {
-      configs['datasourceNameClassInterface'] = '{{name}}Datasource';
-      ConfigsFile.write(configs);
-    }
-
-    return (configs['datasourceNameClassInterface'] as String).replaceAll(
-      '{{name}}',
-      name,
+    return ReservedWords.replaceWordsInFile(
+      fileString: ConfigsFile.getDatasourceNameClassInterface(),
+      name: name,
     );
   }
 
   @override
   String getNameFile(String name) {
-    final configs = ConfigsFile.read();
-
-    if (!configs.containsKey('datasourceNameFile')) {
-      configs['datasourceNameFile'] = '{{name}}_imp_datasource';
-      ConfigsFile.write(configs);
-    }
-
-    return (configs['datasourceNameFile'] as String).replaceAll(
-      '{{name}}',
-      ReCase(name).snakeCase,
+    return ReservedWords.replaceWordsInFile(
+      fileString: ConfigsFile.getDatasourceNameFile(),
+      name: name,
     );
   }
 
   @override
   String getNameFileInterface(String name) {
-    final configs = ConfigsFile.read();
-
-    if (!configs.containsKey('datasourceNameFileInterface')) {
-      configs['datasourceNameFileInterface'] = '{{name}}_datasource';
-      ConfigsFile.write(configs);
-    }
-
-    return (configs['datasourceNameFileInterface'] as String).replaceAll(
-      '{{name}}',
-      ReCase(name).snakeCase,
+    return ReservedWords.replaceWordsInFile(
+      fileString: ConfigsFile.getDatasourceNameFileInterface(),
+      name: name,
     );
   }
 
   @override
   String getPath() {
-    final configs = ConfigsFile.read();
-
-    if (!configs.containsKey('datasourcePath')) {
-      configs['datasourcePath'] = 'data/datasources';
-      ConfigsFile.write(configs);
-    }
-
-    return (configs['datasourcePath'] as String);
+    return ConfigsFile.getDatasourcePath();
   }
 
   @override
   String getPathInterface() {
-    final configs = ConfigsFile.read();
-
-    if (!configs.containsKey('datasourcePathInterface')) {
-      configs['datasourcePathInterface'] = 'external/datasources';
-      ConfigsFile.write(configs);
-    }
-
-    return (configs['datasourcePathInterface'] as String);
+    return (ConfigsFile.getDatasourcePathInterface());
   }
 }

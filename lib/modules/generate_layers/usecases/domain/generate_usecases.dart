@@ -3,7 +3,8 @@ import 'dart:io';
 import 'package:js_cli/core/files/configs_file.dart';
 import 'package:js_cli/core/interfaces/igenerate_usecases.dart';
 import 'package:js_cli/core/templates/core/generic_template.dart';
-import 'package:recase/recase.dart';
+import 'package:js_cli/core/utils/directory_utils.dart';
+import 'package:js_cli/core/utils/reserved_words.dart';
 
 import '../../../../core/errors/file_exists_error.dart';
 
@@ -13,7 +14,13 @@ class GenerateUsecases implements IGenerateUsecases {
     required String name,
     required String path,
   }) async {
-    if (!(Directory(path).existsSync())) return false;
+    DirectoryUtils.create(
+      path,
+      ReservedWords.replaceWordsInFile(
+        fileString: getPath(),
+        name: name,
+      ),
+    );
 
     var completePathI =
         '$path/${getPathInterface()}/${getNameFileInterface(name)}.dart';
@@ -58,33 +65,33 @@ class GenerateUsecases implements IGenerateUsecases {
 
   @override
   String getNameClass(String name) {
-    return (ConfigsFile.getUsecaseNameClass()).replaceAll(
-      '{{name}}',
-      name,
+    return ReservedWords.replaceWordsInFile(
+      fileString: ConfigsFile.getUsecaseNameClass(),
+      name: name,
     );
   }
 
   @override
   String getNameClassInterface(String name) {
-    return (ConfigsFile.getUsecaseNameClassInterface()).replaceAll(
-      '{{name}}',
-      name,
+    return ReservedWords.replaceWordsInFile(
+      fileString: ConfigsFile.getUsecaseNameClassInterface(),
+      name: name,
     );
   }
 
   @override
   String getNameFile(String name) {
-    return (ConfigsFile.getUsecaseNameFile()).replaceAll(
-      '{{name}}',
-      ReCase(name).snakeCase,
+    return ReservedWords.replaceWordsInFile(
+      fileString: ConfigsFile.getUsecaseNameFile(),
+      name: name,
     );
   }
 
   @override
   String getNameFileInterface(String name) {
-    return (ConfigsFile.getUsecaseNameFileInterface()).replaceAll(
-      '{{name}}',
-      ReCase(name).snakeCase,
+    return ReservedWords.replaceWordsInFile(
+      fileString: ConfigsFile.getUsecaseNameFileInterface(),
+      name: name,
     );
   }
 

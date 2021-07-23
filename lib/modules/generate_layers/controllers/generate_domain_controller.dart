@@ -1,3 +1,4 @@
+import 'package:js_cli/core/interfaces/igenerate_controller.dart';
 import 'package:js_cli/core/interfaces/igenerate_page.dart';
 import 'package:path/path.dart' as p;
 
@@ -18,6 +19,7 @@ class GenerateDomainController {
   final IGenerateDto _generateDto;
   final IGenerateDatasources _generateDatasources;
   final IGeneratePages _generatePages;
+  final IGenerateController _generateController;
 
   GenerateDomainController(
     this._generateUsecases,
@@ -27,6 +29,7 @@ class GenerateDomainController {
     this._generateDto,
     this._generateDatasources,
     this._generatePages,
+    this._generateController,
   );
 
   Future<bool> generateUsecase(String usecaseName, String path) async {
@@ -130,7 +133,8 @@ class GenerateDomainController {
   }
 
   Future<bool> generatePage(String pageName, String path) async {
-    output.warn('generating repository $pageName....');
+    output.warn('generating page $pageName....');
+    output.warn('generating controller $pageName....');
     var pathNomalized = p.normalize('${p.current}/$path');
     try {
       var result = await _generatePages.call(
@@ -138,11 +142,25 @@ class GenerateDomainController {
         path: pathNomalized,
       );
       if (result) {
-        output.title('$pageName created');
-        return true;
+        output.title('$pageName page created');
+      } else {
+        output.error('Directory $pageName not exists');
+        return false;
       }
-      output.error('Directory not exists');
-      return false;
+
+      result = await _generateController.call(
+        name: pageName,
+        path: pathNomalized,
+      );
+      if (result) {
+        output.title('$pageName controller created');
+      } else {
+        output.error('Directory $pageName not exists');
+        return false;
+      }
+
+      output.title('Created Success');
+      return true;
     } on FileExistsError catch (e) {
       output.error(e.message);
       return false;

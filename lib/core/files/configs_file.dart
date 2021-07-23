@@ -25,7 +25,7 @@ class ConfigsFile {
   static String getRepositoryNameFileInterface() {
     final configs = read();
     if (!configs.containsKey('repositoryNameFileInterface')) {
-      configs['repositoryNameFileInterface'] = '{{name}}_repository';
+      configs['repositoryNameFileInterface'] = '{{name.snakeCase}}_repository';
       write(configs);
     }
 
@@ -45,7 +45,7 @@ class ConfigsFile {
   static String getRepositoryNameFile() {
     final configs = read();
     if (!configs.containsKey('repositoryNameFile')) {
-      configs['repositoryNameFile'] = '{{name}}_imp_repository';
+      configs['repositoryNameFile'] = '{{name.snakeCase}}_imp_repository';
       write(configs);
     }
 
@@ -55,7 +55,7 @@ class ConfigsFile {
   static String getRepositoryNameClassInterface() {
     final configs = read();
     if (!configs.containsKey('repositoryNameClassInterface')) {
-      configs['repositoryNameClassInterface'] = '{{name}}Repository';
+      configs['repositoryNameClassInterface'] = '{{name.pascalCase}}Repository';
       write(configs);
     }
 
@@ -65,7 +65,7 @@ class ConfigsFile {
   static String getRepositoryNameClass() {
     final configs = read();
     if (!configs.containsKey('repositoryNameClass')) {
-      configs['repositoryNameClass'] = '{{name}}ImpRepository';
+      configs['repositoryNameClass'] = '{{name.pascalCase}}ImpRepository';
       write(configs);
     }
 
@@ -75,7 +75,7 @@ class ConfigsFile {
   static String getDatasourcePathInterface() {
     final configs = read();
     if (!configs.containsKey('datasourcePathInterface')) {
-      configs['datasourcePathInterface'] = 'external/datasources';
+      configs['datasourcePathInterface'] = 'data/datasources';
       write(configs);
     }
 
@@ -85,7 +85,7 @@ class ConfigsFile {
   static String getDatasourceNameFileInterface() {
     final configs = read();
     if (!configs.containsKey('datasourceNameFileInterface')) {
-      configs['datasourceNameFileInterface'] = '{{name}}_datasource';
+      configs['datasourceNameFileInterface'] = '{{name.snakeCase}}_datasource';
       write(configs);
     }
 
@@ -95,7 +95,7 @@ class ConfigsFile {
   static String getDatasourcePath() {
     final configs = read();
     if (!configs.containsKey('datasourcePath')) {
-      configs['datasourcePath'] = 'data/datasources';
+      configs['datasourcePath'] = 'external/datasources';
       write(configs);
     }
 
@@ -105,7 +105,7 @@ class ConfigsFile {
   static String getDatasourceNameFile() {
     final configs = read();
     if (!configs.containsKey('datasourceNameFile')) {
-      configs['datasourceNameFile'] = '{{name}}_imp_datasource';
+      configs['datasourceNameFile'] = '{{name.snakeCase}}_imp_datasource';
       write(configs);
     }
 
@@ -115,7 +115,7 @@ class ConfigsFile {
   static String getDatasourceNameClassInterface() {
     final configs = read();
     if (!configs.containsKey('datasourceNameClassInterface')) {
-      configs['datasourceNameClassInterface'] = '{{name}}Datasource';
+      configs['datasourceNameClassInterface'] = '{{name.pascalCase}}Datasource';
       write(configs);
     }
 
@@ -125,7 +125,7 @@ class ConfigsFile {
   static String getDatasourceNameClass() {
     final configs = read();
     if (!configs.containsKey('datasourceNameClass')) {
-      configs['datasourceNameClass'] = '{{name}}ImpDatasource';
+      configs['datasourceNameClass'] = '{{name.pascalCase}}ImpDatasource';
       write(configs);
     }
 
@@ -145,7 +145,7 @@ class ConfigsFile {
   static String getUsecaseNameFileInterface() {
     final configs = read();
     if (!configs.containsKey('usecaseNameFileInterface')) {
-      configs['usecaseNameFileInterface'] = '{{name}}_usecase';
+      configs['usecaseNameFileInterface'] = '{{name.snakeCase}}_usecase';
       write(configs);
     }
 
@@ -165,7 +165,7 @@ class ConfigsFile {
   static String getUsecaseNameFile() {
     final configs = read();
     if (!configs.containsKey('usecaseNameFile')) {
-      configs['usecaseNameFile'] = '{{name}}_imp_usecase';
+      configs['usecaseNameFile'] = '{{name.snakeCase}}_imp_usecase';
       write(configs);
     }
 
@@ -175,7 +175,7 @@ class ConfigsFile {
   static String getUsecaseNameClassInterface() {
     final configs = read();
     if (!configs.containsKey('usecaseNameClassInterface')) {
-      configs['usecaseNameClassInterface'] = '{{name}}Usecase';
+      configs['usecaseNameClassInterface'] = '{{name.pascalCase}}Usecase';
       write(configs);
     }
 
@@ -185,7 +185,7 @@ class ConfigsFile {
   static String getUsecaseNameClass() {
     final configs = read();
     if (!configs.containsKey('usecaseNameClass')) {
-      configs['usecaseNameClass'] = '{{name}}ImpUsecase';
+      configs['usecaseNameClass'] = '{{name.pascalCase}}ImpUsecase';
       write(configs);
     }
 
@@ -195,7 +195,7 @@ class ConfigsFile {
   static String getPagePath() {
     final configs = read();
     if (!configs.containsKey('pagePath')) {
-      configs['pagePath'] = 'presentation/ui/pages';
+      configs['pagePath'] = 'presentation/ui/pages/{{name.snakeCase}}';
       write(configs);
     }
 
@@ -205,7 +205,7 @@ class ConfigsFile {
   static String getPageNameFile() {
     final configs = read();
     if (!configs.containsKey('pageNameFile')) {
-      configs['pageNameFile'] = '{{name}}_page';
+      configs['pageNameFile'] = '{{name.snakeCase}}_page';
       write(configs);
     }
 
@@ -215,7 +215,7 @@ class ConfigsFile {
   static String getPageNameClass() {
     final configs = read();
     if (!configs.containsKey('pageNameClass')) {
-      configs['pageNameClass'] = '{{name}}Page';
+      configs['pageNameClass'] = '{{name.pascalCase}}Page';
       write(configs);
     }
 
@@ -225,7 +225,7 @@ class ConfigsFile {
   static String getControllerPath() {
     final configs = read();
     if (!configs.containsKey('controllerPath')) {
-      configs['controllerPath'] = 'presentation/ui/pages';
+      configs['controllerPath'] = 'presentation/ui/pages/{{name.snakeCase}}';
       write(configs);
     }
 
@@ -235,7 +235,7 @@ class ConfigsFile {
   static String getControllerNameFile() {
     final configs = read();
     if (!configs.containsKey('controllerNameFile')) {
-      configs['controllerNameFile'] = '{{name}}_controller';
+      configs['controllerNameFile'] = '{{name.snakeCase}}_controller';
       write(configs);
     }
 
@@ -245,7 +245,7 @@ class ConfigsFile {
   static String getControllerNameClass() {
     final configs = read();
     if (!configs.containsKey('controllerNameClass')) {
-      configs['controllerNameClass'] = '{{name}}Controller';
+      configs['controllerNameClass'] = '{{name.pascalCase}}Controller';
       write(configs);
     }
 
@@ -256,7 +256,7 @@ class ConfigsFile {
     final configs = read();
 
     if (!configs.containsKey('usecaseFileInterface')) {
-      configs['usecaseFileInterface'] = '{{name}}_usecase';
+      configs['usecaseFileInterface'] = '{{name.snakeCase}}_usecase';
       write(configs);
     }
 

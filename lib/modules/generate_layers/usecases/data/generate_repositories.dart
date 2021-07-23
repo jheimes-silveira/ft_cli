@@ -1,8 +1,9 @@
 import 'dart:io';
 
-import 'package:js_cli/core/interfaces/igenerate_repositories.dart';
 import 'package:js_cli/core/files/configs_file.dart';
-import 'package:recase/recase.dart';
+import 'package:js_cli/core/interfaces/igenerate_repositories.dart';
+import 'package:js_cli/core/utils/directory_utils.dart';
+import 'package:js_cli/core/utils/reserved_words.dart';
 
 import '../../../../core/errors/file_exists_error.dart';
 import '../../../../core/templates/core/generic_template.dart';
@@ -13,11 +14,30 @@ class GenerateRepositories implements IGenerateRepositories {
     required String name,
     required String path,
   }) async {
-    if (!(Directory(path).existsSync())) return false;
+    DirectoryUtils.create(
+      path,
+      ReservedWords.replaceWordsInFile(
+        fileString: getPath(),
+        name: name,
+      ),
+    );
+    DirectoryUtils.create(
+      path,
+      ReservedWords.replaceWordsInFile(
+        fileString: getPathInterface(),
+        name: name,
+      ),
+    );
 
-    var completePathI =
-        '$path/${getPathInterface()}/${getNameFileInterface(name)}.dart';
-    var completePath = '$path/${getPath()}/${getNameFile(name)}.dart';
+    var completePath = ReservedWords.replaceWordsInFile(
+      fileString: '$path/${getPath()}/${getNameFile(name)}.dart',
+      name: name,
+    );
+    var completePathI = ReservedWords.replaceWordsInFile(
+      fileString:
+          '$path/${getPathInterface()}/${getNameFileInterface(name)}.dart',
+      name: name,
+    );
 
     if (File(completePathI).existsSync()) {
       throw FileExistsError(innerException: Exception());
@@ -58,85 +78,43 @@ class GenerateRepositories implements IGenerateRepositories {
 
   @override
   String getNameClass(String name) {
-    final configs = ConfigsFile.read();
-
-    if (!configs.containsKey('repositoryNameClass')) {
-      configs['repositoryNameClass'] = '{{name}}ImpRepository';
-      ConfigsFile.write(configs);
-    }
-
-    return (configs['repositoryNameClass'] as String).replaceAll(
-      '{{name}}',
-      name,
+    return ReservedWords.replaceWordsInFile(
+      fileString: ConfigsFile.getRepositoryNameClass(),
+      name: name,
     );
   }
 
   @override
   String getNameClassInterface(String name) {
-    final configs = ConfigsFile.read();
-
-    if (!configs.containsKey('repositoryNameClassInterface')) {
-      configs['repositoryNameClassInterface'] = '{{name}}Repository';
-      ConfigsFile.write(configs);
-    }
-
-    return (configs['repositoryNameClassInterface'] as String).replaceAll(
-      '{{name}}',
-      name,
+    return ReservedWords.replaceWordsInFile(
+      fileString: ConfigsFile.getRepositoryNameClassInterface(),
+      name: name,
     );
   }
 
   @override
   String getNameFile(String name) {
-    final configs = ConfigsFile.read();
-
-    if (!configs.containsKey('repositoryNameFile')) {
-      configs['repositoryNameFile'] = '{{name}}_imp_repository';
-      ConfigsFile.write(configs);
-    }
-
-    return (configs['repositoryNameFile'] as String).replaceAll(
-      '{{name}}',
-      ReCase(name).snakeCase,
+    return ReservedWords.replaceWordsInFile(
+      fileString: ConfigsFile.getRepositoryNameFile(),
+      name: name,
     );
   }
 
   @override
   String getNameFileInterface(String name) {
-    final configs = ConfigsFile.read();
-
-    if (!configs.containsKey('repositoryNameFileInterface')) {
-      configs['repositoryNameFileInterface'] = '{{name}}_repository';
-      ConfigsFile.write(configs);
-    }
-
-    return (configs['repositoryNameFileInterface'] as String).replaceAll(
-      '{{name}}',
-      ReCase(name).snakeCase,
+    return ReservedWords.replaceWordsInFile(
+      fileString: ConfigsFile.getRepositoryNameFileInterface(),
+      name: name,
     );
   }
 
   @override
   String getPath() {
-    final configs = ConfigsFile.read();
-
-    if (!configs.containsKey('repositoryPath')) {
-      configs['repositoryPath'] = 'data/repositories';
-      ConfigsFile.write(configs);
-    }
-
-    return (configs['repositoryPath'] as String);
+    return ConfigsFile.getRepositoryPath();
   }
 
   @override
   String getPathInterface() {
-    final configs = ConfigsFile.read();
-
-    if (!configs.containsKey('repositoryPathInterface')) {
-      configs['repositoryPathInterface'] = 'domain/repositories';
-      ConfigsFile.write(configs);
-    }
-
-    return (configs['repositoryPathInterface'] as String);
+    return (ConfigsFile.getRepositoryPathInterface());
   }
 }

@@ -1,22 +1,23 @@
+import 'package:get_it/get_it.dart';
+import 'package:js_cli/core/interfaces/igenerate_controller.dart';
 import 'package:js_cli/core/interfaces/igenerate_page.dart';
 import 'package:js_cli/modules/generate_layers/usecases/domain/generate_page.dart';
 
 import '../../core/interfaces/igenerate_datasources.dart';
 import '../../core/interfaces/igenerate_dto.dart';
+import '../../core/interfaces/igenerate_entity.dart';
 import '../../core/interfaces/igenerate_error.dart';
 import '../../core/interfaces/igenerate_repositories.dart';
+import '../../core/interfaces/igenerate_usecases.dart';
 import '../../modules/generate_layers/usecases/core/generate_error.dart';
 import '../../modules/generate_layers/usecases/data/generate_repositories.dart';
-import 'package:get_it/get_it.dart';
-
-import '../../core/interfaces/igenerate_entity.dart';
-import '../../core/interfaces/igenerate_usecases.dart';
 import 'controllers/generate_domain_controller.dart';
 import 'controllers/generate_layer_controller.dart';
 import 'usecases/data/generate_data.dart';
 import 'usecases/data/generate_datasources.dart';
 import 'usecases/data/generate_dto.dart';
 import 'usecases/data/generate_external.dart';
+import 'usecases/domain/generate_controller.dart';
 import 'usecases/domain/generate_domain.dart';
 import 'usecases/domain/generate_entity.dart';
 import 'usecases/domain/generate_usecases.dart';
@@ -31,6 +32,8 @@ class GenerateModule {
     getIt.registerLazySingleton<IGenerateUsecases>(() => GenerateUsecases());
     getIt.registerLazySingleton<IGenerateDto>(() => GenerateDto());
     getIt.registerLazySingleton<IGeneratePages>(() => GeneratePages());
+    getIt
+        .registerLazySingleton<IGenerateController>(() => GenerateController());
     getIt.registerLazySingleton<IGenerateDatasources>(
       () => GenerateDatasources(),
     );
@@ -73,6 +76,7 @@ class GenerateModule {
         getIt.get<IGenerateDto>(),
         getIt.get<IGenerateDatasources>(),
         getIt.get<IGeneratePages>(),
+        getIt.get<IGenerateController>(),
       ),
     );
   }
