@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:js_cli/core/files/configs_file.dart';
 import 'package:js_cli/core/files/generate_page_file.dart';
 import 'package:js_cli/core/interfaces/igenerate_page.dart';
+import 'package:js_cli/core/templates/core/generic_template.dart';
 import 'package:js_cli/core/utils/directory_utils.dart';
 import 'package:js_cli/core/utils/reserved_words.dart';
 
@@ -27,7 +28,6 @@ class GeneratePages implements IGeneratePages {
       name: name,
     );
 
- 
     if (File(completePath).existsSync()) {
       throw FileExistsError(innerException: Exception());
     }
@@ -40,11 +40,6 @@ class GeneratePages implements IGeneratePages {
 
     File(completePath).writeAsStringSync(content);
 
-    // updateIntegrationModule(
-    //   path,
-    //   getNameClass(name),
-    //   getPath(),
-    // );
     return true;
   }
 

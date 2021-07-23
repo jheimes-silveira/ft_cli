@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:js_cli/core/files/configs_file.dart';
 import 'package:js_cli/core/files/generate_controller_file.dart';
 import 'package:js_cli/core/interfaces/igenerate_controller.dart';
+import 'package:js_cli/core/templates/core/generic_template.dart';
 import 'package:js_cli/core/utils/directory_utils.dart';
 import 'package:js_cli/core/utils/reserved_words.dart';
 
@@ -39,11 +40,11 @@ class GenerateController implements IGenerateController {
 
     File(completePath).writeAsStringSync(content);
 
-    // updateIntegrationModule(
-    //   path,
-    //   getNameClass(name),
-    //   getPath(),
-    // );
+    updateIntegrationModule(
+      path,
+      getNameClass(name),
+      getPath(),
+    );
     return true;
   }
 
