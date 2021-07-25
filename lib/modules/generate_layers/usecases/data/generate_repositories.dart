@@ -1,42 +1,41 @@
 import 'dart:io';
 
 import 'package:js_cli/core/files/configs_file.dart';
+import 'package:js_cli/core/files/generate_repository_file.dart';
 import 'package:js_cli/core/interfaces/igenerate_repositories.dart';
 import 'package:js_cli/core/utils/directory_utils.dart';
 import 'package:js_cli/core/utils/reserved_words.dart';
 
 import '../../../../core/errors/file_exists_error.dart';
-import '../../../../core/templates/core/generic_template.dart';
+import '../../../../core/utils/replace_utils.dart';
 
 class GenerateRepositories implements IGenerateRepositories {
   @override
   Future<bool> call({
     required String name,
     required String path,
+    required String current,
   }) async {
     DirectoryUtils.create(
       path,
       ReservedWords.replaceWordsInFile(
         fileString: getPath(),
         name: name,
-      ),
-    );
-    DirectoryUtils.create(
-      path,
-      ReservedWords.replaceWordsInFile(
-        fileString: getPathInterface(),
-        name: name,
+        current: current,
       ),
     );
 
-    var completePath = ReservedWords.replaceWordsInFile(
-      fileString: '$path/${getPath()}/${getNameFile(name)}.dart',
-      name: name,
-    );
     var completePathI = ReservedWords.replaceWordsInFile(
       fileString:
-          '$path/${getPathInterface()}/${getNameFileInterface(name)}.dart',
+          '$path/${getPathInterface()}/${getNameFileInterface(name, current)}.dart',
       name: name,
+      current: current,
+    );
+
+    var completePath = ReservedWords.replaceWordsInFile(
+      fileString: '$path/${getPath()}/${getNameFile(name, current)}.dart',
+      name: name,
+      current: current,
     );
 
     if (File(completePathI).existsSync()) {
@@ -47,64 +46,67 @@ class GenerateRepositories implements IGenerateRepositories {
       throw FileExistsError(innerException: Exception());
     }
 
-    File(completePathI).createSync(recursive: true);
-
-    var contentInterface = layerTemplateInterface(
-      getNameClassInterface(name),
+    File(completePathI).writeAsStringSync(
+      ReservedWords.replaceWordsInFile(
+        fileString: GenerateRepositoryFile.readInterface(name),
+        name: name,
+        path: path,
+        current: current,
+      ),
     );
 
-    File(completePathI).writeAsStringSync(contentInterface);
-
-    File(completePath).createSync(recursive: true);
-
-    var content = layerTemplate(
-      nameFileInterface: getNameFileInterface(name),
-      nameClass: getNameClass(name),
-      nameClassInterface: getNameClassInterface(name),
-      nameFile: getNameFile(name),
-      pathInterface: getPathInterface(),
-      path: getPath(),
+    File(completePath).writeAsStringSync(
+      ReservedWords.replaceWordsInFile(
+        fileString: GenerateRepositoryFile.readImp(name),
+        name: name,
+        path: path,
+        current: current,
+      ),
     );
 
-    File(completePath).writeAsStringSync(content);
-
-    updateIntegrationModule(
-      path,
-      getNameClass(name),
-      getPath(),
+    applyReplaceIfNecessary(
+      current: current,
+      name: name,
+      path: path,
+      subPath: ConfigsFile.getRepositoryPath(),
+      prefixNameReplaceFile: 'repository',
     );
     return true;
   }
 
   @override
-  String getNameClass(String name) {
+  String getNameClass(String name, String current) {
     return ReservedWords.replaceWordsInFile(
       fileString: ConfigsFile.getRepositoryNameClass(),
       name: name,
+      current: current,
     );
   }
 
   @override
-  String getNameClassInterface(String name) {
+  String getNameClassInterface(String name, String current) {
     return ReservedWords.replaceWordsInFile(
       fileString: ConfigsFile.getRepositoryNameClassInterface(),
       name: name,
+      current: current,
     );
   }
 
   @override
-  String getNameFile(String name) {
+  String getNameFile(String name, String current) {
     return ReservedWords.replaceWordsInFile(
       fileString: ConfigsFile.getRepositoryNameFile(),
       name: name,
+      current: current,
     );
   }
 
   @override
-  String getNameFileInterface(String name) {
+  String getNameFileInterface(String name, String current) {
     return ReservedWords.replaceWordsInFile(
       fileString: ConfigsFile.getRepositoryNameFileInterface(),
       name: name,
+      current: current,
     );
   }
 

@@ -1,48 +1,56 @@
 import 'dart:io';
 
 import 'package:js_cli/core/files/configs_file.dart';
+import 'package:js_cli/core/utils/directory_utils.dart';
+import 'package:js_cli/core/utils/reserved_words.dart';
 
 class GenerateControllerFile {
-  static String templeteNone = r'''
+  static String template = r'''
 import 'package:mobx/mobx.dart';
 part '{{controllerNameFile.snakeCase}}.g.dart';
 
 class {{controllerNameClass.pascalCase}} = _{{controllerNameClass.pascalCase}}Base with _${{controllerNameClass.pascalCase}};
 
-abstract class _{{controllerNameClass.pascalCase}}Base with Store {}
+abstract class _{{controllerNameClass.pascalCase}}Base with Store {
+  @observable
+  bool loading = false;
+
+  @action
+  void setLoading(bool value) {
+    loading = value;
+  }
+}
 
           ''';
-  static String templeteFlutterModular = r'''
-import 'package:mobx/mobx.dart';
-part '{{controllerNameFile.snakeCase}}.g.dart';
 
-class {{controllerNameClass.pascalCase}} = _{{controllerNameClass.pascalCase}}Base with _${{controllerNameClass.pascalCase}};
+  static String readImp(String name) {
+    return _read(
+      name,
+      'controller.template',
+      template,
+      ReservedWords.removeWordsInFile(
+        fileString: ConfigsFile.getControllerPath(),
+      ),
+    );
+  }
 
-abstract class _{{controllerNameClass.pascalCase}}Base with Store {}
+  static String _read(
+    String name,
+    String file,
+    String template,
+    String path,
+  ) {
+    var root = '.js_cli';
 
-          ''';
+    path = 'template/$path';
 
-  static String read() {
-    final integration = ConfigsFile.getIntegration();
-    var path;
-    var templete;
-    if (integration == 'flutter_modular') {
-      path = 'generate_flutter_modular_controller.template';
-      templete = templeteFlutterModular;
-    } else {
-      path = 'generate_none_controller.template';
-      templete = templeteNone;
-    }
-
-    var existFile = File('.js_cli/template/$path').existsSync();
+    var existFile = File('$root/$path/$file').existsSync();
 
     if (!existFile) {
-      Directory('.js_cli').createSync();
-      Directory('.js_cli/template').createSync();
-  
-      File('.js_cli/template/$path').writeAsStringSync(templete);
+      DirectoryUtils.create(root, path);
+      File('$root/$path/$file').writeAsStringSync(template);
     }
 
-    return File('.js_cli/template/$path').readAsStringSync();
+    return File('$root/$path/$file').readAsStringSync();
   }
 }

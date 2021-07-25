@@ -1,4 +1,3 @@
-
 import 'package:js_cli/core/utils/output_utils.dart';
 import 'package:js_cli/core/utils/validate_arguments.dart';
 import 'package:js_cli/core/utils/wellcome_message.dart';
@@ -56,6 +55,7 @@ void main(List<String> arguments) {
           generateDomainController.generateUsecase(
             arguments[3],
             arguments[2],
+            isValidArguments,
           );
         } else {
           error('Missing arguments, especific your usecase name');
@@ -76,6 +76,7 @@ void main(List<String> arguments) {
           generateDomainController.generateRepository(
             arguments[3],
             arguments[2],
+            isValidArguments,
           );
         } else {
           error('Missing arguments, especific your repository name');
@@ -86,6 +87,7 @@ void main(List<String> arguments) {
           generateDomainController.generateDatasource(
             arguments[3],
             arguments[2],
+            isValidArguments,
           );
         } else {
           error('Missing arguments, especific your datasource name');
@@ -96,6 +98,7 @@ void main(List<String> arguments) {
           generateDomainController.generatePage(
             arguments[3],
             arguments[2],
+            isValidArguments,
           );
         } else {
           error('Missing arguments, especific your datasource name');

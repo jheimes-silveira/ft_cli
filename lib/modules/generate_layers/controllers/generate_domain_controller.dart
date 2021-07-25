@@ -32,7 +32,11 @@ class GenerateDomainController {
     this._generateController,
   );
 
-  Future<bool> generateUsecase(String usecaseName, String path) async {
+  Future<bool> generateUsecase(
+    String usecaseName,
+    String path,
+    String current,
+  ) async {
     output.warn('generating usecase $usecaseName....');
     var pathNomalized = p.normalize('${p.current}/$path');
 
@@ -40,6 +44,7 @@ class GenerateDomainController {
       var result = await _generateUsecases.call(
         name: usecaseName,
         path: pathNomalized,
+        current: current,
       );
 
       if (result) {
@@ -92,13 +97,18 @@ class GenerateDomainController {
     }
   }
 
-  Future<bool> generateRepository(String repositoryName, String path) async {
+  Future<bool> generateRepository(
+    String repositoryName,
+    String path,
+    String current,
+  ) async {
     output.warn('generating repository $repositoryName....');
     var pathNomalized = p.normalize('${p.current}/$path');
     try {
       var result = await _generateRepositories.call(
         name: repositoryName,
         path: pathNomalized,
+        current: current,
       );
       if (result) {
         output.title('$repositoryName created');
@@ -112,13 +122,18 @@ class GenerateDomainController {
     }
   }
 
-  Future<bool> generateDatasource(String datasourceName, String path) async {
+  Future<bool> generateDatasource(
+    String datasourceName,
+    String path,
+    String current,
+  ) async {
     output.warn('generating repository $datasourceName....');
     var pathNomalized = p.normalize('${p.current}/$path');
     try {
       var result = await _generateDatasources.call(
         name: datasourceName,
         path: pathNomalized,
+        current: current,
       );
       if (result) {
         output.title('$datasourceName created');
@@ -132,7 +147,11 @@ class GenerateDomainController {
     }
   }
 
-  Future<bool> generatePage(String pageName, String path) async {
+  Future<bool> generatePage(
+    String pageName,
+    String path,
+    String current,
+  ) async {
     output.warn('generating page $pageName....');
     output.warn('generating controller $pageName....');
     var pathNomalized = p.normalize('${p.current}/$path');
@@ -140,6 +159,7 @@ class GenerateDomainController {
       var result = await _generatePages.call(
         name: pageName,
         path: pathNomalized,
+        current: current,
       );
       if (result) {
         output.title('$pageName page created');
@@ -151,6 +171,7 @@ class GenerateDomainController {
       result = await _generateController.call(
         name: pageName,
         path: pathNomalized,
+        current: current,
       );
       if (result) {
         output.title('$pageName controller created');

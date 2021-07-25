@@ -1,23 +1,39 @@
 import 'dart:io';
 
 import 'package:js_cli/core/files/configs_file.dart';
+import 'package:js_cli/core/files/generate_datasource_file.dart';
 import 'package:js_cli/core/interfaces/igenerate_datasources.dart';
+import 'package:js_cli/core/utils/directory_utils.dart';
 import 'package:js_cli/core/utils/reserved_words.dart';
 
 import '../../../../core/errors/file_exists_error.dart';
-import '../../../../core/templates/core/generic_template.dart';
+import '../../../../core/utils/replace_utils.dart';
 
 class GenerateDatasources implements IGenerateDatasources {
   @override
   Future<bool> call({
     required String name,
     required String path,
+    required String current,
   }) async {
-    if (!(Directory(path).existsSync())) return false;
+    DirectoryUtils.create(
+      path,
+      ReservedWords.replaceWordsInFile(
+          fileString: getPath(), name: name, current: current),
+    );
 
-    var completePathI =
-        '$path/${getPathInterface()}/${getNameFileInterface(name)}.dart';
-    var completePath = '$path/${getPath()}/${getNameFile(name)}.dart';
+    var completePathI = ReservedWords.replaceWordsInFile(
+      fileString:
+          '$path/${getPathInterface()}/${getNameFileInterface(name, current)}.dart',
+      name: name,
+      current: current,
+    );
+
+    var completePath = ReservedWords.replaceWordsInFile(
+      fileString: '$path/${getPath()}/${getNameFile(name, current)}.dart',
+      name: name,
+      current: current,
+    );
 
     if (File(completePathI).existsSync()) {
       throw FileExistsError(innerException: Exception());
@@ -27,64 +43,67 @@ class GenerateDatasources implements IGenerateDatasources {
       throw FileExistsError(innerException: Exception());
     }
 
-    File(completePathI).createSync(recursive: true);
-
-    var contentInterface = layerTemplateInterface(
-      getNameClassInterface(name),
+    File(completePathI).writeAsStringSync(
+      ReservedWords.replaceWordsInFile(
+        fileString: GenerateDatasourceFile.readInterface(name),
+        name: name,
+        path: path,
+        current: current,
+      ),
     );
 
-    File(completePathI).writeAsStringSync(contentInterface);
-
-    File(completePath).createSync(recursive: true);
-
-    var content = layerTemplate(
-      nameFileInterface: getNameFileInterface(name),
-      nameClass: getNameClass(name),
-      nameClassInterface: getNameClassInterface(name),
-      nameFile: getNameFile(name),
-      pathInterface: getPathInterface(),
-      path: getPath(),
+    File(completePath).writeAsStringSync(
+      ReservedWords.replaceWordsInFile(
+        fileString: GenerateDatasourceFile.readImp(name),
+        name: name,
+        path: path,
+        current: current,
+      ),
     );
 
-    File(completePath).writeAsStringSync(content);
-
-    updateIntegrationModule(
-      path,
-      getNameClass(name),
-      getPath(),
+    applyReplaceIfNecessary(
+      current: current,
+      name: name,
+      path: path,
+      subPath: ConfigsFile.getDatasourcePath(),
+      prefixNameReplaceFile: 'datasource',
     );
     return true;
   }
 
   @override
-  String getNameClass(String name) {
+  String getNameClass(String name, String current) {
     return ReservedWords.replaceWordsInFile(
       fileString: ConfigsFile.getDatasourceNameClass(),
       name: name,
+      current: current,
     );
   }
 
   @override
-  String getNameClassInterface(String name) {
+  String getNameClassInterface(String name, String current) {
     return ReservedWords.replaceWordsInFile(
       fileString: ConfigsFile.getDatasourceNameClassInterface(),
       name: name,
+      current: current,
     );
   }
 
   @override
-  String getNameFile(String name) {
+  String getNameFile(String name, String current) {
     return ReservedWords.replaceWordsInFile(
       fileString: ConfigsFile.getDatasourceNameFile(),
       name: name,
+      current: current,
     );
   }
 
   @override
-  String getNameFileInterface(String name) {
+  String getNameFileInterface(String name, String current) {
     return ReservedWords.replaceWordsInFile(
       fileString: ConfigsFile.getDatasourceNameFileInterface(),
       name: name,
+      current: current,
     );
   }
 

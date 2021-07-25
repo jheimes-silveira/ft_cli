@@ -4,8 +4,22 @@ import 'package:recase/recase.dart';
 class ReservedWords {
   ReservedWords._();
 
+  static String removeWordsInFile({required String fileString}) {
+    while (fileString.contains('{{')) {
+      final start = fileString.indexOf('{{');
+      final end = fileString.indexOf('}}');
+
+      String? term = fileString.substring(start + 2, end);
+
+      fileString = fileString.replaceFirst('{{$term}}', '');
+    }
+
+    return fileString;
+  }
+
   static String replaceWordsInFile({
     required String fileString,
+    required String current,
     String name = '',
     String path = '',
   }) {
@@ -23,7 +37,7 @@ class ReservedWords {
         throw Exception('essa variavel não é aceita "$word"');
       }
 
-      word = _replaceWordWithOptions(word, name, path);
+      word = _replaceWordWithOptions(word, name, path, current);
 
       if (extension != null) {
         word = _recase(word!, extension);
@@ -33,9 +47,7 @@ class ReservedWords {
         }
       }
 
-      fileString = fileString.replaceFirst('{{', '');
-      fileString = fileString.replaceFirst('}}', '');
-      fileString = fileString.replaceFirst(term, word!);
+      fileString = fileString.replaceFirst('{{$term}}', word!);
     }
 
     return fileString;
@@ -45,7 +57,14 @@ class ReservedWords {
     return [
       'name',
       'path',
+      'module',
       'integration',
+      'currentPathInterface',
+      'currentNameFileInterface',
+      'currentPath',
+      'currentNameFile',
+      'currentNameClassInterface',
+      'currentNameClass',
       'repositoryPathInterface',
       'repositoryNameFileInterface',
       'repositoryPath',
@@ -77,6 +96,12 @@ class ReservedWords {
     if (word.contains('{{')) {
       return word;
     } //TDOO implementar algoritimo que aplique o replace em tudo exceto o conteudo dentro dos mustaches {{name.snakeCase}}_controller
+    if (word.contains('current')) {
+      return word;
+    } //TDOO a palavra current deve ser substituida no procimo laço
+    if (word.contains('module')) {
+      return word;
+    } //TDOO a palavra current deve ser substituida no procimo laço
     if (extension == 'camelCase') {
       return word.camelCase; // exemple testeCase
     } else if (extension == 'constantCase') {
@@ -106,8 +131,16 @@ class ReservedWords {
     String word,
     String name,
     String path,
+    String current,
   ) {
     final action = {
+      'module': '${path.split('\\').last}',
+      'currentPathInterface': '${current}PathInterface',
+      'currentNameFileInterface': '${current}NameFileInterface',
+      'currentPath': '${current}Path',
+      'currentNameFile': '${current}NameFile',
+      'currentNameClassInterface': '${current}NameClassInterface',
+      'currentNameClass': '${current}NameClass',
       'name': name,
       'path': path,
       'integration': ConfigsFile.getIntegration(),
