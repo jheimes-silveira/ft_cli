@@ -4,6 +4,10 @@
 
 Get Start:
 ```bash
+dart pub global activate js_cli
+
+or
+
 dart pub global activate --source path ./RepositoryProject
 ```
 
