@@ -16,7 +16,7 @@ class {{pageNameClass.pascalCase}} extends StatefulWidget {
   _{{pageNameClass.pascalCase}}State createState() => _{{pageNameClass.pascalCase}}State();
 }
 
-class _{{name.pascalCase}}State extends State<{{pageNameClass.pascalCase}}> {
+class _{{name.pascalCase}}PageState extends State<{{pageNameClass.pascalCase}}> {
   final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
