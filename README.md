@@ -215,7 +215,8 @@ Reserved words can be used in the templet files that are generated in .js_cli/te
 | controllerNameFile           | {{name.snakeCase}}_controller                                                                             |
 | controllerNameClass          | {{name.pascalCase}}Controller                                                                             |
 
-Extensions
+### Extensions
+
 | extension    | Exemple    |
 |--------------|------------|
 | camelCase    | testeCase  |
