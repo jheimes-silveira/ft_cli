@@ -59,7 +59,7 @@ class ReservedWords {
       'name',
       'path',
       'module',
-      'integration',
+      'fileExtension',
       'currentPathInterface',
       'currentNameFileInterface',
       'currentPath',
@@ -101,6 +101,9 @@ class ReservedWords {
       return word;
     } //TDOO a palavra current deve ser substituida no procimo laço
     if (word.contains('module')) {
+      return word;
+    } //TDOO a palavra current deve ser substituida no procimo laço
+    if (word.contains('fileExtension')) {
       return word;
     } //TDOO a palavra current deve ser substituida no procimo laço
     if (extension == 'camelCase') {
@@ -146,7 +149,7 @@ class ReservedWords {
       'currentNameClass': '${current}NameClass',
       'name': name,
       'path': path,
-      'integration': ConfigsFile.getIntegration(),
+      'fileExtension': ConfigsFile.getFileExtension(),
       'repositoryPathInterface': ConfigsFile.getRepositoryPathInterface(),
       'repositoryNameFileInterface':
           ConfigsFile.getRepositoryNameFileInterface(),

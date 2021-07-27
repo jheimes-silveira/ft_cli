@@ -36,9 +36,6 @@ void main(List<String> arguments) {
       case 'help':
         commomCommandsController.getHelpCommand();
         break;
-      case 'integration':
-        commomCommandsController.getIntegrationCommand();
-        break;
       case 'layer':
         if (arguments.length > 2) {
           generateLayerController.generateLayerFolders(

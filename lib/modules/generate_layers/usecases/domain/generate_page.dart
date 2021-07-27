@@ -24,10 +24,11 @@ class GeneratePages implements IGeneratePages {
         current: current,
       ),
     );
+    final fileExtension = ConfigsFile.getFileExtension();
 
     var completePath = ReservedWords.replaceWordsInFile(
       fileString:
-          '$path/${getPath(name, current)}/${getNameFile(name, current)}.dart',
+          '$path/${getPath(name, current)}/${getNameFile(name, current)}.$fileExtension',
       name: name,
       current: current,
     );

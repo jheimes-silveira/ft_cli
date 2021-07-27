@@ -1,3 +1,6 @@
+## 0.0.4+2 - Documentation improvement
+- possibility to change the extension
+
 ## 0.0.4+1 - Documentation improvement
 - Clearer documentation of possible options
 

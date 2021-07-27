@@ -24,10 +24,10 @@ class GenerateUsecases implements IGenerateUsecases {
         current: current,
       ),
     );
-
+final fileExtension = ConfigsFile.getFileExtension();
     var completePathI = ReservedWords.replaceWordsInFile(
       fileString:
-          '$path/${getPathInterface()}/${getNameFileInterface(name, current)}.dart',
+          '$path/${getPathInterface()}/${getNameFileInterface(name, current)}.$fileExtension',
       name: name,
       current: current,
     );

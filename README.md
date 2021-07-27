@@ -190,6 +190,7 @@ Reserved words can be used in the templet files that are generated in .js_cli/te
 | name                         | input input by the terminal, this value is the last parameter of the expression to generate the templates |
 | path                         | input input via terminal, path where the new file will be generated                                       |
 | module                       | input input by the terminal, name of the module that will generate the new files                          |
+| fileExtension                | dart                                                                                                      |
 | repositoryPathInterface      | domain/repositories                                                                                       |
 | repositoryNameFileInterface  | {{name.snakeCase}}_repository                                                                             |
 | repositoryPath               | data/repositories                                                                                         |

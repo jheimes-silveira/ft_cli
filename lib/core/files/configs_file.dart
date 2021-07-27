@@ -2,16 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 
 class ConfigsFile {
-  static String getIntegration() {
-    final configs = read();
-    if (!configs.containsKey('integration')) {
-      configs['integration'] = 'none';
-      write(configs);
-    }
-
-    return configs['integration'];
-  }
-
   static String getRepositoryPathInterface() {
     final configs = read();
     if (!configs.containsKey('repositoryPathInterface')) {
@@ -242,6 +232,16 @@ class ConfigsFile {
     return configs['controllerNameFile'];
   }
 
+  static String getFileExtension() {
+    final configs = read();
+    if (!configs.containsKey('fileExtension')) {
+      configs['fileExtension'] = 'dart';
+      write(configs);
+    }
+
+    return configs['fileExtension'];
+  }
+
   static String getControllerNameClass() {
     final configs = read();
     if (!configs.containsKey('controllerNameClass')) {
@@ -295,12 +295,6 @@ class ConfigsFile {
     }
 
     return configs['layerFolders'];
-  }
-
-  static void setIntegration(String integration) {
-    final configs = read();
-    configs['integration'] = integration;
-    write(configs);
   }
 
   static Map<String, dynamic> read() {

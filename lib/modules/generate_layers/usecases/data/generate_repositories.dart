@@ -24,16 +24,16 @@ class GenerateRepositories implements IGenerateRepositories {
         current: current,
       ),
     );
-
+final fileExtension = ConfigsFile.getFileExtension();
     var completePathI = ReservedWords.replaceWordsInFile(
       fileString:
-          '$path/${getPathInterface()}/${getNameFileInterface(name, current)}.dart',
+          '$path/${getPathInterface()}/${getNameFileInterface(name, current)}.$fileExtension',
       name: name,
       current: current,
     );
 
     var completePath = ReservedWords.replaceWordsInFile(
-      fileString: '$path/${getPath()}/${getNameFile(name, current)}.dart',
+      fileString: '$path/${getPath()}/${getNameFile(name, current)}.$fileExtension',
       name: name,
       current: current,
     );
