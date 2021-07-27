@@ -1,5 +1,6 @@
 import 'package:js_cli/core/files/configs_file.dart';
 import 'package:recase/recase.dart';
+import 'dart:io';
 
 class ReservedWords {
   ReservedWords._();
@@ -134,7 +135,9 @@ class ReservedWords {
     String current,
   ) {
     final action = {
-      'module': '${path.split('\\').last}',
+      'module': Platform.isMacOS
+          ? '${path.split('/').last}'
+          : '${path.split('\\').last}',
       'currentPathInterface': '${current}PathInterface',
       'currentNameFileInterface': '${current}NameFileInterface',
       'currentPath': '${current}Path',
