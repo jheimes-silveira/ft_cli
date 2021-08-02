@@ -1,6 +1,6 @@
 name: js_cli
 description: This project is one CLI for integrate Flutter and Dart with Clean Architecture
-version: 0.0.4+2
+version: 0.0.4+3
 homepage: https://github.com/jheimes-silveira/js_cli
 
 environment:

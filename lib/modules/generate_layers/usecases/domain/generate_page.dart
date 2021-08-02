@@ -46,7 +46,7 @@ class GeneratePages implements IGeneratePages {
 
     File(completePath).writeAsStringSync(content);
 
-    applyReplaceIfNecessary(
+    applyTriggersIfNecessary(
       current: current,
       name: name,
       path: path,

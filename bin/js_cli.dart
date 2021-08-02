@@ -41,6 +41,7 @@ void main(List<String> arguments) {
           generateLayerController.generateLayerFolders(
             layerCommand: arguments[2],
             path: arguments.length == 4 ? arguments[3] : './',
+            current: isValidArguments,
           );
         } else {
           error('Invalid command, try with --help or -h');

@@ -66,7 +66,7 @@ class GenerateDatasources implements IGenerateDatasources {
       ),
     );
 
-    applyReplaceIfNecessary(
+    applyTriggersIfNecessary(
       current: current,
       name: name,
       path: path,

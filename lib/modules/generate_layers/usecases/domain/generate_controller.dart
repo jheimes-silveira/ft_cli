@@ -45,7 +45,7 @@ class GenerateController implements IGenerateController {
 
     File(completePath).writeAsStringSync(content);
 
-    applyReplaceIfNecessary(
+    applyTriggersIfNecessary(
       current: current,
       name: name,
       path: path,

@@ -24,22 +24,23 @@ class GenerateLayerController {
     required String layer,
     required String path,
     required ClassLayer layerClass,
+    required String current,
   }) async {
     output.warn('generating $layer layer....');
     var pathNomalized = p.normalize('${p.current}/$path');
     var result;
     switch (layerClass) {
       case ClassLayer.Domain:
-        result = await _domain.call(pathNomalized);
+        result = await _domain.call(pathNomalized, current);
         break;
       case ClassLayer.Data:
-        result = await _data.call(pathNomalized);
+        result = await _data.call(pathNomalized, current);
         break;
       case ClassLayer.Presentation:
-        result = await _presentation.call(pathNomalized);
+        result = await _presentation.call(pathNomalized, current);
         break;
       case ClassLayer.Complete:
-        result = await _complete.call(pathNomalized);
+        result = await _complete.call(pathNomalized, current);
         break;
       default:
     }
@@ -53,6 +54,7 @@ class GenerateLayerController {
   Future<void> generateLayerFolders({
     required String layerCommand,
     required String path,
+    required String current,
   }) async {
     switch (layerCommand) {
       case 'domain':
@@ -60,6 +62,7 @@ class GenerateLayerController {
           layer: layerCommand,
           path: path,
           layerClass: ClassLayer.Domain,
+          current: current,
         );
         break;
       case 'data':
@@ -67,6 +70,7 @@ class GenerateLayerController {
           layer: layerCommand,
           path: path,
           layerClass: ClassLayer.Data,
+          current: current,
         );
         break;
       case 'presentation':
@@ -74,6 +78,7 @@ class GenerateLayerController {
           layer: layerCommand,
           path: path,
           layerClass: ClassLayer.Presentation,
+          current: current,
         );
         break;
       case 'complete':
@@ -81,6 +86,7 @@ class GenerateLayerController {
           layer: layerCommand,
           path: path,
           layerClass: ClassLayer.Complete,
+          current: current,
         );
         break;
       default:

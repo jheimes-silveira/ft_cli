@@ -64,7 +64,7 @@ final fileExtension = ConfigsFile.getFileExtension();
       ),
     );
 
-    applyReplaceIfNecessary(
+    applyTriggersIfNecessary(
       current: current,
       name: name,
       path: path,

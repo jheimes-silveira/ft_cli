@@ -3,7 +3,7 @@ import 'dart:io';
 class DirectoryUtils {
   static void create(String root, String path) {
     if (!(Directory(root).existsSync())) {
-      throw Exception('directory $root not found');
+      Directory(root).createSync();
     }
 
     var complete = '$root';

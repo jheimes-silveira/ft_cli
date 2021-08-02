@@ -7,6 +7,9 @@ Get Start:
 dart pub global activate js_cli
 ```
 
+### Overview
+To make it easier and more intuitive to implement Uncle Bob's Clean Architecture. This CLI provides the base structure, where it will dynamically generate the Classes as shown in the examples below.
+
 --- 
 
 ### Commands:
@@ -231,7 +234,9 @@ Reserved words can be used in the templet files that are generated in .js_cli/te
 | headerCase   | Teste-Case |
 | titleCase    | Teste Case |
 
-### Replace
+### Triggers
+
+##### Replace
 
 in .js_cli/templete a {{term}}_replace_trigger.json file is generated where from your annotation it can apply a replace to any input expression, for example:
 
@@ -248,5 +253,46 @@ in .js_cli/templete a {{term}}_replace_trigger.json file is generated where from
         "to": "//Dependence\nfinal {{controllerNameClass.camelCase}} = {{controllerNameClass.pascalCase}};"
     }
 ]
+```
+where will generate a variable from the expression
+
+##### Create new file
+
+in .js_cli / templete, a file {{term}} _ new_file_trigger.json is generated where, from his annotation, he can create a new file with the pre-defined templete, for example:
+
+Note, the ``generate`` variable must be ``true`` to generate the file.
+```json
+[
+    {
+        "pathFile": "{{path}}\\{{module}}_module",
+        "pathTemplete": ".js_cli/template/layer/complete_new_file_exemple.template",
+        "generate": true
+    }
+]
+```
+
+Templete file
+
+ ``.js_cli/template/layer/complete_new_file_exemple.template``
+
+```file
+class {{module.pascalCase}}Module extends Module {
+  @override
+  final List<Bind> binds = [
+    //Usercases
+
+    //Repositories
+
+    //Datasources
+      
+    //Controllers
+  ];
+
+  @override
+  final List<ModularRoute> routes = [
+    //Pages
+  ];
+}
+
 ```
 where will generate a variable from the expression
