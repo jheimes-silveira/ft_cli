@@ -20,12 +20,12 @@ class GenerateNewFile {
     var existFile = File('$root/$path/$file').existsSync();
 
     if (!existFile) {
-      DirectoryUtils.create(root, path);
+      DirectoryUtils.create(root + '/' + path);
       File('$root/$path/$fileTemplate').writeAsStringSync('');
       File('$root/$path/$file').writeAsStringSync(
         json.encode(
           [
-            NewFileDto('', '$root/$path/$fileTemplate').toJson(),
+            NewFileDto('', '$root/$path/$fileTemplate', 'dart').toJson(),
           ],
         ),
       );

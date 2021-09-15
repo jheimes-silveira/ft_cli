@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:js_cli/core/model/dtos/replace_dto.dart';
 import 'package:js_cli/core/utils/directory_utils.dart';
 import 'package:js_cli/core/utils/reserved_words.dart';
+import 'package:path/path.dart';
 
 class GenerateReplaceFile {
   static List<ReplaceDto> read(
@@ -13,15 +14,15 @@ class GenerateReplaceFile {
     final file = '${prefixNameReplaceFile}_replace_trigger.json';
     var root = '.js_cli';
 
-    path = ReservedWords.removeWordsInFile(
+    path = normalize(ReservedWords.removeWordsInFile(
       fileString: 'template/$path',
-    );
- 
+    ));
+
     var existFile = File('$root/$path/$file').existsSync();
-  
+
     if (!existFile) {
-      DirectoryUtils.create(root, path);
- 
+      DirectoryUtils.create(root + '/' + path);
+
       File('$root/$path/$file').writeAsStringSync(
         json.encode(
           [

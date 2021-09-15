@@ -1,6 +1,16 @@
-import 'package:js_cli/core/files/configs_file.dart';
-import 'package:recase/recase.dart';
 import 'dart:io';
+
+import 'package:js_cli/app/domain/models/entities/controller_design_pattern.dart';
+import 'package:js_cli/app/domain/models/entities/datasource_design_pattern.dart';
+import 'package:js_cli/app/domain/models/entities/datasource_interface_design_pattern.dart';
+import 'package:js_cli/app/domain/models/entities/dto_design_pattern.dart';
+import 'package:js_cli/app/domain/models/entities/entity_design_pattern.dart';
+import 'package:js_cli/app/domain/models/entities/page_design_pattern.dart';
+import 'package:js_cli/app/domain/models/entities/repository_design_pattern.dart';
+import 'package:js_cli/app/domain/models/entities/repository_interface_design_pattern.dart';
+import 'package:js_cli/app/domain/models/entities/usecase_design_pattern.dart';
+import 'package:js_cli/app/domain/models/entities/usecase_interface_design_pattern.dart';
+import 'package:recase/recase.dart';
 
 class ReservedWords {
   ReservedWords._();
@@ -15,12 +25,23 @@ class ReservedWords {
       fileString = fileString.replaceFirst('{{$term}}', '');
     }
 
+    while (fileString.startsWith('/')) {
+      fileString = fileString.substring(1, fileString.length);
+    }
+
+    while (fileString.endsWith('/')) {
+      fileString = fileString.substring(0, fileString.length - 1);
+    }
+
+    while (fileString.contains('//')) {
+      fileString = fileString.replaceAll('//', '/');
+    }
+
     return fileString;
   }
 
   static String replaceWordsInFile({
     required String fileString,
-    required String current,
     String name = '',
     String path = '',
   }) {
@@ -38,7 +59,7 @@ class ReservedWords {
         throw Exception('essa variavel não é aceita "$word"');
       }
 
-      word = _replaceWordWithOptions(word, name, path, current);
+      word = _replaceWordWithOptions(word, name, path);
 
       if (extension != null) {
         word = _recase(word!, extension);
@@ -90,6 +111,12 @@ class ReservedWords {
       'controllerPath',
       'controllerNameFile',
       'controllerNameClass',
+      'entityPath',
+      'entityNameFile',
+      'entityNameClass',
+      'dtoPath',
+      'dtoNameFile',
+      'dtoNameClass',
     ].contains(word);
   }
 
@@ -135,49 +162,47 @@ class ReservedWords {
     String word,
     String name,
     String path,
-    String current,
   ) {
     final action = {
       'module': Platform.isMacOS
           ? '${path.split('/').last}'
           : '${path.split('\\').last}',
-      'currentPathInterface': '${current}PathInterface',
-      'currentNameFileInterface': '${current}NameFileInterface',
-      'currentPath': '${current}Path',
-      'currentNameFile': '${current}NameFile',
-      'currentNameClassInterface': '${current}NameClassInterface',
-      'currentNameClass': '${current}NameClass',
       'name': name,
       'path': path,
-      'fileExtension': ConfigsFile.getFileExtension(),
-      'repositoryPathInterface': ConfigsFile.getRepositoryPathInterface(),
+      'repositoryPathInterface': RepositoryInterfaceDesignPattern().path(),
       'repositoryNameFileInterface':
-          ConfigsFile.getRepositoryNameFileInterface(),
-      'repositoryPath': ConfigsFile.getRepositoryPath(),
-      'repositoryNameFile': ConfigsFile.getRepositoryNameFile(),
+          RepositoryInterfaceDesignPattern().nameFile(),
+      'repositoryPath': RepositoryDesignPattern().path(),
+      'repositoryNameFile': RepositoryDesignPattern().nameFile(),
       'repositoryNameClassInterface':
-          ConfigsFile.getRepositoryNameClassInterface(),
-      'repositoryNameClass': ConfigsFile.getRepositoryNameClass(),
-      'datasourcePathInterface': ConfigsFile.getDatasourcePathInterface(),
+          RepositoryInterfaceDesignPattern().nameClass(),
+      'repositoryNameClass': RepositoryDesignPattern().nameClass(),
+      'datasourcePathInterface': DatasourceInterfaceDesignPattern().path(),
       'datasourceNameFileInterface':
-          ConfigsFile.getDatasourceNameFileInterface(),
-      'datasourcePath': ConfigsFile.getDatasourcePath(),
-      'datasourceNameFile': ConfigsFile.getDatasourceNameFile(),
+          DatasourceInterfaceDesignPattern().nameFile(),
+      'datasourcePath': DatasourceDesignPattern().path(),
+      'datasourceNameFile': DatasourceDesignPattern().nameFile(),
       'datasourceNameClassInterface':
-          ConfigsFile.getDatasourceNameClassInterface(),
-      'datasourceNameClass': ConfigsFile.getDatasourceNameClass(),
-      'usecasePathInterface': ConfigsFile.getUsecasePathInterface(),
-      'usecaseNameFileInterface': ConfigsFile.getUsecaseNameFileInterface(),
-      'usecasePath': ConfigsFile.getUsecasePath(),
-      'usecaseNameFile': ConfigsFile.getUsecaseNameFile(),
-      'usecaseNameClassInterface': ConfigsFile.getUsecaseNameClassInterface(),
-      'usecaseNameClass': ConfigsFile.getUsecaseNameClass(),
-      'pagePath': ConfigsFile.getPagePath(),
-      'pageNameFile': ConfigsFile.getPageNameFile(),
-      'pageNameClass': ConfigsFile.getPageNameClass(),
-      'controllerPath': ConfigsFile.getControllerPath(),
-      'controllerNameFile': ConfigsFile.getControllerNameFile(),
-      'controllerNameClass': ConfigsFile.getControllerNameClass(),
+          DatasourceInterfaceDesignPattern().nameClass(),
+      'datasourceNameClass': DatasourceDesignPattern().nameClass(),
+      'usecasePathInterface': UsecaseInterfaceDesignPattern().path(),
+      'usecaseNameFileInterface': UsecaseInterfaceDesignPattern().nameFile(),
+      'usecasePath': UsecaseDesignPattern().path(),
+      'usecaseNameFile': UsecaseDesignPattern().nameFile(),
+      'usecaseNameClassInterface': UsecaseInterfaceDesignPattern().nameClass(),
+      'usecaseNameClass': UsecaseDesignPattern().nameClass(),
+      'pagePath': PageDesignPattern().path(),
+      'pageNameFile': PageDesignPattern().nameFile(),
+      'pageNameClass': PageDesignPattern().nameClass(),
+      'controllerPath': ControllerDesignPattern().path(),
+      'controllerNameFile': ControllerDesignPattern().nameFile(),
+      'controllerNameClass': ControllerDesignPattern().nameClass(),
+      'entityPath': EntityDesignPattern().path(),
+      'entityNameFile': EntityDesignPattern().nameFile(),
+      'entityNameClass': EntityDesignPattern().nameClass(),
+      'dtoPath': DtoDesignPattern().path(),
+      'dtoNameFile': DtoDesignPattern().nameFile(),
+      'dtoNameClass': DtoDesignPattern().nameClass(),
     };
 
     return action[word];

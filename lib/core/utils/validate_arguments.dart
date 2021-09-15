@@ -6,45 +6,66 @@ class ValidateArguments {
 
   ValidateArguments({required this.appModule});
 
-  String validateArguments(List<String> arguments) {
+  bool validateArguments(List<String> arguments) {
     if (arguments.isEmpty) {
       output.error('No arguments, try with --help or -h');
-      return 'not valid arguments';
+      return false;
     }
 
-    appModule.argResults = appModule.argParser.parse(arguments);
-    if (appModule.argResults.arguments[0] == 'upgrade') {
-      return arguments[0];
+    // appModule.argResults = appModule.argParser.parse(arguments);
+    //TODO entender melhor o seu uso
+
+    if (['upgrade', 'u', 'version', 'v', 'help', 'h'].contains(arguments[0]) &&
+        arguments.length == 1) {
+      return true;
     }
 
-    if (arguments[0] == 'integration') {
-      return 'integration';
+    if (['gen', 'g'].contains(arguments[0]) &&
+        [
+          'layer',
+          'l',
+          'base_app',
+          'ba',
+          'micro_commons',
+          'mc',
+          'micro_app',
+          'mp',
+          'usecase',
+          'u',
+          'entity',
+          'e',
+          'repository',
+          'r',
+          'datasource',
+          'd',
+          'page',
+          'p',
+          'dto',
+          'error',
+          'controller',
+          'c',
+        ].contains(arguments[1])) {
+      if (!ifItContainsExtraArgumentsTheyAreValid(arguments)) return false;
+
+      return true;
     }
 
-    if (appModule.argResults['version']) {
-      return 'version';
+    output.error('Invalid command, try with --help or -h');
+    return false;
+  }
+
+  bool ifItContainsExtraArgumentsTheyAreValid(List<String> arguments) {
+    if (arguments.length > ['g', 'action', 'path', 'name'].length) {
+      for (var i = 4; i < arguments.length; i++) {
+        if (!['-u', '-e', '-r', '-d', '-p', '-dto', '-c']
+            .contains(arguments[i])) return false;
+      }
     }
 
-    if (appModule.argResults['help']) {
-      return 'help';
-    }
-    if (arguments.length < 2) {
-      output.error('Invalid command, try with --help or -h');
-      return 'not valid arguments';
-    }
-    var isValidArguments = appModule.argParser.options[arguments[0]]?.allowed
-        ?.contains(arguments[1]);
+    return true;
+  }
 
-    isValidArguments = appModule.argParser
-        .findByAbbreviation(arguments[0])
-        ?.allowed
-        ?.contains(arguments[1]);
-
-    if (isValidArguments!) {
-      return arguments[1];
-    } else {
-      output.error('Invalid command, try with --help or -h');
-      return 'not valid arguments';
-    }
+  List<String> argumentsExtra(List<String> arguments) {
+    return arguments.sublist(['g', 'action', 'path', 'name'].length);
   }
 }

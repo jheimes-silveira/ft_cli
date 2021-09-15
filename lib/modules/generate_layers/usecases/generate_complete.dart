@@ -1,38 +1,29 @@
 import 'dart:io';
 
-import 'package:js_cli/core/files/configs_file.dart';
 import 'package:js_cli/core/utils/directory_utils.dart';
 import 'package:js_cli/core/utils/replace_utils.dart';
 import 'package:js_cli/core/utils/reserved_words.dart';
+import 'package:js_cli/app/domain/models/entities/controller_design_pattern.dart';
+import 'package:js_cli/app/domain/models/entities/datasource_design_pattern.dart';
+import 'package:js_cli/app/domain/models/entities/datasource_interface_design_pattern.dart';
+import 'package:js_cli/app/domain/models/entities/page_design_pattern.dart';
+import 'package:js_cli/app/domain/models/entities/repository_design_pattern.dart';
+import 'package:js_cli/app/domain/models/entities/repository_interface_design_pattern.dart';
+import 'package:js_cli/app/domain/models/entities/usecase_design_pattern.dart';
+import 'package:js_cli/app/domain/models/entities/usecase_interface_design_pattern.dart';
+import 'package:path/path.dart';
 
 import '../../../core/interfaces/igenerate_layers.dart';
 
 class GenerateComplete implements IGenerateLayers {
-  final IGenerateLayers _gnDomain;
-  final IGenerateLayers _gnData;
-  final IGenerateLayers _gnPresentation;
-  final IGenerateLayers _gnExternal;
-
-  GenerateComplete(
-    this._gnDomain,
-    this._gnData,
-    this._gnPresentation,
-    this._gnExternal,
-  );
-
   @override
   Future<bool> call(String path, String current) async {
     var isValidDirectory = await Directory(path).exists();
     if (!isValidDirectory) await Directory(path).create(recursive: true);
 
     _createDirectories(path);
-    // await _gnDomain(path, current);
-    // await _gnData(path, current);
-    // await _gnPresentation(path, current);
-    // await _gnExternal(path, current);
 
     applyTriggersIfNecessary(
-      current: current,
       name: '',
       path: path,
       subPath: 'layer',
@@ -44,52 +35,60 @@ class GenerateComplete implements IGenerateLayers {
 
   void _createDirectories(String path) {
     DirectoryUtils.create(
-      path,
-      ReservedWords.removeWordsInFile(
-        fileString: ConfigsFile.getRepositoryPathInterface(),
-      ),
+      normalize(path +
+          '/' +
+          ReservedWords.removeWordsInFile(
+            fileString: RepositoryInterfaceDesignPattern().path(),
+          )),
     );
     DirectoryUtils.create(
-      path,
-      ReservedWords.removeWordsInFile(
-        fileString: ConfigsFile.getRepositoryPath(),
-      ),
+      normalize(path +
+          '/' +
+          ReservedWords.removeWordsInFile(
+            fileString: RepositoryDesignPattern().path(),
+          )),
     );
     DirectoryUtils.create(
-      path,
-      ReservedWords.removeWordsInFile(
-        fileString: ConfigsFile.getDatasourcePathInterface(),
-      ),
+      normalize(path +
+          '/' +
+          ReservedWords.removeWordsInFile(
+            fileString: DatasourceInterfaceDesignPattern().path(),
+          )),
     );
     DirectoryUtils.create(
-      path,
-      ReservedWords.removeWordsInFile(
-        fileString: ConfigsFile.getDatasourcePath(),
-      ),
+      normalize(path +
+          '/' +
+          ReservedWords.removeWordsInFile(
+            fileString: DatasourceDesignPattern().path(),
+          )),
     );
     DirectoryUtils.create(
-      path,
-      ReservedWords.removeWordsInFile(
-        fileString: ConfigsFile.getUsecasePathInterface(),
-      ),
+      normalize(path +
+          '/' +
+          ReservedWords.removeWordsInFile(
+            fileString: UsecaseInterfaceDesignPattern().path(),
+          )),
     );
     DirectoryUtils.create(
-      path,
-      ReservedWords.removeWordsInFile(
-        fileString: ConfigsFile.getUsecasePath(),
-      ),
+      normalize(path +
+          '/' +
+          ReservedWords.removeWordsInFile(
+            fileString: UsecaseDesignPattern().path(),
+          )),
     );
     DirectoryUtils.create(
-      path,
-      ReservedWords.removeWordsInFile(
-        fileString: ConfigsFile.getPagePath(),
-      ),
+      normalize(path +
+          '/' +
+          ReservedWords.removeWordsInFile(
+            fileString: PageDesignPattern().path(),
+          )),
     );
     DirectoryUtils.create(
-      path,
-      ReservedWords.removeWordsInFile(
-        fileString: ConfigsFile.getControllerPath(),
-      ),
+      normalize(path +
+          '/' +
+          ReservedWords.removeWordsInFile(
+            fileString: ControllerDesignPattern().path(),
+          )),
     );
   }
 }

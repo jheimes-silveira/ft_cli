@@ -15,6 +15,7 @@ class AppModule {
       'gen',
       abbr: 'g',
       allowed: [
+        'micro_app',
         'layer',
         'usecase',
         'repository',
@@ -25,6 +26,12 @@ class AppModule {
         'page',
       ],
       help: 'command to generate something',
+    );
+
+    argParser.addOption(
+      'layer',
+      abbr: 'l',
+      help: 'command structure folders',
     );
 
     argParser.addFlag(

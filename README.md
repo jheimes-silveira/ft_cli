@@ -7,10 +7,16 @@ Get Start:
 dart pub global activate js_cli
 ```
 
-### Overview
-To make it easier and more intuitive to implement Uncle Bob's Clean Architecture. This CLI provides the base structure, where it will dynamically generate the Classes as shown in the examples below.
+or
 
---- 
+```bash
+dart pub global activate --source path ./RepositoryProject
+```
+
+### Overview
+
+Para tornar mais fácil e intuitivo implementar a Arquitetura _Uncle Bob's Clean Architecture_. Esta CLI fornece a estrutura base, onde irá gerar dinamicamente as Classes conforme mostrado nos exemplos abaixo.
+
 
 ### Commands:
 
@@ -182,18 +188,20 @@ ViewerDto created
 
 ```
 ---
-### Reserved words
+### Palavras reservadas
 
 Reserved words can be used in the templet files that are generated in .js_cli/templete the reserved words must be used inside mustaches `{{}}` example `{{name}}`, can also be used in reserved words an extension, example `{{name.pascalCase}}` whose extension will format the word as needed, you can check the lists below for all reserved words and extensions
 
-* `Reserved words can be edited in my_project\.js_cli\configs.json`
+Palavras reservadas podem ser usadas nos arquivos de modelo que são gerados em .js_cli/templete as palavras reservadas devem ser usadas dentro de _mustaches_ `{{}}` exemplo `{{nome}}`, também podem ser usadas em palavras reservadas uma extensão, exemplo `{{name.pascalCase}}` cuja extensão formatará a palavra conforme necessário, você pode verificar as listas abaixo para todas as palavras reservadas e extensões
 
-| reserved words               | default                                                                                                   |
+* `Palavras reservadas podem ser editadas em meu_projeto\.js_cli\configs.json`
+
+| Palavras reservadas               | `default`                                                                                                   |
 |------------------------------|-----------------------------------------------------------------------------------------------------------|
-| name                         | input input by the terminal, this value is the last parameter of the expression to generate the templates |
-| path                         | input input via terminal, path where the new file will be generated                                       |
+| name                         | Entrada pelo terminal, este valor é o último parâmetro da expressão para gerar os modelos |
+| path                         | Entrada pelo terminal, caminho onde o novo arquivo será gerado                                       |
 | module                       | input input by the terminal, name of the module that will generate the new files                          |
-| fileExtension                | dart                                                                                                      |
+| fileExtension                | `dart`                                                                                                      |
 | repositoryPathInterface      | domain/repositories                                                                                       |
 | repositoryNameFileInterface  | {{name.snakeCase}}_repository                                                                             |
 | repositoryPath               | data/repositories                                                                                         |
@@ -240,6 +248,7 @@ Reserved words can be used in the templet files that are generated in .js_cli/te
 
 in .js_cli/templete a {{term}}_replace_trigger.json file is generated where from your annotation it can apply a replace to any input expression, for example:
 
+Em .js_cli/templete, um arquivo {{term}}_replace_trigger.json é gerado onde, a partir de sua anotação, ele pode aplicar uma substituição a qualquer expressão de entrada, por exemplo:
 ```json
 [
     {
@@ -254,13 +263,17 @@ in .js_cli/templete a {{term}}_replace_trigger.json file is generated where from
     }
 ]
 ```
-where will generate a variable from the expression
+Onde irá executar um _replace_ no arquivo apontado, a partir da expressão
 
-##### Create new file
+##### Criar novo arquivo
 
 in .js_cli / templete, a file {{term}} _ new_file_trigger.json is generated where, from his annotation, he can create a new file with the pre-defined templete, for example:
 
 Note, the ``generate`` variable must be ``true`` to generate the file.
+em .js_cli/templete, um arquivo {{term}}_new_file_trigger.json é gerado onde, a partir de sua anotação, ele pode criar um novo arquivo com o modelo predefinido, por exemplo:
+
+Observe que a variável ``generate`` deve ser ``true`` para gerar o arquivo.
+
 ```json
 [
     {
@@ -271,7 +284,7 @@ Note, the ``generate`` variable must be ``true`` to generate the file.
 ]
 ```
 
-Templete file
+Templete
 
  ``.js_cli/template/layer/complete_new_file_exemple.template``
 
@@ -295,4 +308,4 @@ class {{module.pascalCase}}Module extends Module {
 }
 
 ```
-where will generate a variable from the expression
+Onde irá gerar um novo arquivo partir do templete definido.
