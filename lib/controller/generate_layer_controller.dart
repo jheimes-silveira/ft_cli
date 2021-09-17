@@ -1,5 +1,6 @@
 import 'package:js_cli/core/utils/directory_utils.dart';
 import 'package:js_cli/core/utils/global_variable.dart';
+import 'package:js_cli/core/utils/output_utils.dart';
 import 'package:js_cli/core/utils/reserved_words.dart';
 import 'package:js_cli/models/entities/design_pattern/controller_design_pattern.dart';
 import 'package:js_cli/models/entities/design_pattern/datasource_design_pattern.dart';
@@ -28,15 +29,13 @@ class GenerateLayerController {
     _generateLayer(ControllerDesignPattern());
   }
 
-  void _generateLayer(DesignPattern designPattern) {
-    DirectoryUtils.create(
-      normalize(
-        GlobalVariable.path +
-            '/' +
-            ReservedWords.removeWordsInFile(
-              fileString: designPattern.path(),
-            ),
-      ),
-    );
+  Future<void> _generateLayer(DesignPattern designPattern) async {
+    final path = normalize(GlobalVariable.path +
+        '/' +
+        ReservedWords.removeWordsInFile(fileString: designPattern.path()));
+
+    await DirectoryUtils.create(path);
+
+    warn('Pasta criada: diretório de ${designPattern.nameDesignPattern()} $path');
   }
 }

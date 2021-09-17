@@ -10,6 +10,10 @@ import 'package:js_cli/models/entities/design_pattern/repository_design_pattern.
 import 'package:js_cli/models/entities/design_pattern/repository_interface_design_pattern.dart';
 import 'package:js_cli/models/entities/design_pattern/usecase_design_pattern.dart';
 import 'package:js_cli/models/entities/design_pattern/usecase_interface_design_pattern.dart';
+import 'package:js_cli/models/entities/microfrontend/base_app.dart';
+import 'package:js_cli/models/entities/microfrontend/micro_app.dart';
+import 'package:js_cli/models/entities/microfrontend/micro_commons.dart';
+import 'package:js_cli/models/entities/microfrontend/micro_core.dart';
 import 'package:recase/recase.dart';
 
 import 'global_variable.dart';
@@ -80,7 +84,17 @@ class ReservedWords {
       'name',
       'path',
       'module',
-      'fileExtension',
+      'projectNameComplete',
+      'projectName',
+      'action',
+      'pageExtension',
+      'controllerExtension',
+      'usecaseExtension',
+      'repositoryExtension',
+      'datasourceExtension',
+      'usecaseExtensionInterface',
+      'repositoryExtensionInterface',
+      'datasourceExtensionInterface',
       'currentPathInterface',
       'currentNameFileInterface',
       'currentPath',
@@ -117,6 +131,14 @@ class ReservedWords {
       'dtoPath',
       'dtoNameFile',
       'dtoNameClass',
+      'componentMicroApp',
+      'componentMicroCommons',
+      'componentMicroCore',
+      'componentBaseApp',
+      'divider',
+      'prefixMicroCommons',
+      'prefixMicroCore',
+      'prefixBaseApp',
     ].contains(word);
   }
 
@@ -201,6 +223,27 @@ class ReservedWords {
       'dtoPath': DtoDesignPattern().path(),
       'dtoNameFile': DtoDesignPattern().nameFile(),
       'dtoNameClass': DtoDesignPattern().nameClass(),
+      'pageExtension': PageDesignPattern().extension(),
+      'controllerExtension': ControllerDesignPattern().extension(),
+      'usecaseExtension': UsecaseDesignPattern().extension(),
+      'repositoryExtension': RepositoryDesignPattern().extension(),
+      'datasourceExtension': DatasourceDesignPattern().extension(),
+      'usecaseExtensionInterface': UsecaseInterfaceDesignPattern().extension(),
+      'repositoryExtensionInterface':
+          RepositoryInterfaceDesignPattern().extension(),
+      'datasourceExtensionInterface':
+          DatasourceInterfaceDesignPattern().extension(),
+      'componentMicroApp': MicroApp().component,
+      'componentMicroCommons': MicroCommons().component,
+      'componentMicroCore': MicroCore().component,
+      'componentBaseApp': BaseApp().component,
+      'divider': BaseApp().divider,
+      'prefixMicroCommons': MicroCommons().prefix,
+      'prefixMicroCore': MicroCore().prefix,
+      'prefixBaseApp': BaseApp().prefix,
+      'projectNameComplete': GlobalVariable.projectNameComplete,
+      'projectName': GlobalVariable.projectName,
+      'action': GlobalVariable.action,
     };
 
     return action[word];

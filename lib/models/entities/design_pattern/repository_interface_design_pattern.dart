@@ -35,6 +35,7 @@ abstract class {{repositoryNameClassInterface.pascalCase}} {
   @override
   String template() {
     return readTemplete(
+      'template',
       'repository_interface.template',
       _template,
       ReservedWords.removeWordsInFile(
@@ -45,7 +46,7 @@ abstract class {{repositoryNameClassInterface.pascalCase}} {
 
   @override
   String nameDesignPattern() {
-    return 'repository';
+    return 'repository_interface';
   }
 
   @override

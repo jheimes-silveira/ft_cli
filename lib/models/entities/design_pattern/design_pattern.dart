@@ -12,13 +12,14 @@ abstract class DesignPattern {
   String nameDesignPattern();
 
   String readTemplete(
+    String group,
     String file,
     String template,
     String path,
   ) {
     var root = '.js_cli';
 
-    path = 'template/$path';
+    path = '$group/$path';
 
     var existFile = File('$root/$path/$file').existsSync();
 

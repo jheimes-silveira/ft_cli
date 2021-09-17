@@ -40,6 +40,7 @@ class {{datasourceNameClass.pascalCase}} implements {{datasourceNameClassInterfa
   @override
   String template() {
     return readTemplete(
+      'template',
       'datasource.template',
       _template,
       ReservedWords.removeWordsInFile(

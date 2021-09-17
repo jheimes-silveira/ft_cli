@@ -3,7 +3,7 @@ import '../../../core/utils/output_utils.dart' as output;
 
 class GetVersionCliController {
   Future<bool> call() async {
-    output.title('CLI at $packageVersion');
+    output.title('CLI at ${Constants.packageVersion}');
     return true;
   }
 }

@@ -40,6 +40,7 @@ class {{usecaseNameClass.pascalCase}} implements {{usecaseNameClassInterface.pas
   @override
   String template() {
     return readTemplete(
+      'template',
       'usecase.template',
       _template,
       ReservedWords.removeWordsInFile(

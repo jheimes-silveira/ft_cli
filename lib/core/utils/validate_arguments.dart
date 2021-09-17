@@ -13,6 +13,8 @@ class ValidateArguments {
     }
 
     if ([
+          'init',
+          'i',
           'upgrade',
           'u',
           'version',

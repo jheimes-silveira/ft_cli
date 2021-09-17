@@ -1,8 +1,8 @@
 class GlobalVariable {
-  static late String name;
-  static late String path;
-  static late String action;
-  static late String module;
-  static late String projectNameComplete;
-  static late String projectName;
+  static String name = '';
+  static String path = '';
+  static String action = '';
+  static String module = '';
+  static String projectNameComplete = '';
+  static String projectName = '';
 }

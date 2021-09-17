@@ -53,6 +53,7 @@ class _{{name.pascalCase}}PageState extends State<{{pageNameClass.pascalCase}}> 
   @override
   String template() {
     return readTemplete(
+      'template',
       'page.template',
       _template,
       ReservedWords.removeWordsInFile(

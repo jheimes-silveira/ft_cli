@@ -42,6 +42,7 @@ class {{repositoryNameClass.pascalCase}} implements {{repositoryNameClassInterfa
   @override
   String template() {
     return readTemplete(
+      'template',
       'repository.template',
       _template,
       ReservedWords.removeWordsInFile(

@@ -35,6 +35,7 @@ abstract class {{datasourceNameClassInterface.pascalCase}} {
   @override
   String template() {
     return readTemplete(
+      'template',
       'datasource_interface.template',
       _template,
       ReservedWords.removeWordsInFile(
@@ -45,7 +46,7 @@ abstract class {{datasourceNameClassInterface.pascalCase}} {
 
   @override
   String nameDesignPattern() {
-    return 'datasource';
+    return 'datasource_interface';
   }
 
   @override

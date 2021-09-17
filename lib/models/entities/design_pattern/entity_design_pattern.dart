@@ -34,6 +34,7 @@ class {{entityNameClass.pascalCase}} {
   @override
   String template() {
     return readTemplete(
+      'template',
       'entity.template',
       _template,
       ReservedWords.removeWordsInFile(

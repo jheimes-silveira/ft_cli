@@ -35,6 +35,7 @@ abstract class {{usecaseNameClassInterface.pascalCase}} {
   @override
   String template() {
     return readTemplete(
+      'template',
       'usecase_interface.template',
       _template,
       ReservedWords.removeWordsInFile(
@@ -45,7 +46,7 @@ abstract class {{usecaseNameClassInterface.pascalCase}} {
 
   @override
   String nameDesignPattern() {
-    return 'usecase';
+    return 'usecase_interface';
   }
 
   @override

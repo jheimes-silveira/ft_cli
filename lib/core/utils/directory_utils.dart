@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:path/path.dart';
 
 class DirectoryUtils {
-  static void create(String path) {
+  static Future create(String path) async {
     path = normalize(path);
     if (Directory(path).existsSync()) {
       return;

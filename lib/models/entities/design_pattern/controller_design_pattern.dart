@@ -47,6 +47,7 @@ abstract class _{{controllerNameClass.pascalCase}}Base with Store {
   @override
   String template() {
     return readTemplete(
+      'template',
       'controller.template',
       _template,
       ReservedWords.removeWordsInFile(

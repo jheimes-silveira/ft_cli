@@ -34,6 +34,7 @@ class {{dtoNameClass.pascalCase}} {
   @override
   String template() {
     return readTemplete(
+      'template',
       'dto.template',
       _template,
       ReservedWords.removeWordsInFile(

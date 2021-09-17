@@ -30,7 +30,7 @@ class DesignPatternController {
       '$inputPath/$path/$nameFile.$extension',
     );
 
-    DirectoryUtils.create(
+    await DirectoryUtils.create(
       p.normalize(inputPath + '/' + path),
     );
 
@@ -44,13 +44,17 @@ class DesignPatternController {
     File(completePath).writeAsStringSync(templete);
     warn('create file $completePath....');
 
-    await TriggersUtils.applyIfNecessary(
+    await applyTriggersIfNecessary(designPattern);
+
+    return true;
+  }
+
+  static Future applyTriggersIfNecessary(DesignPattern designPattern) {
+    return TriggersUtils.applyIfNecessary(
       root: 'template',
       subPath: designPattern.path(),
       prefixNameReplaceFile: designPattern.nameDesignPattern(),
     );
-
-    return true;
   }
 
   static String _replaceWordsInFile(String file) {

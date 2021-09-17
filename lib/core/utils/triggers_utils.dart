@@ -2,24 +2,42 @@ import 'dart:io';
 
 import 'package:js_cli/core/files/generate_new_file.dart';
 import 'package:js_cli/core/files/generate_replace_file.dart';
+import 'package:js_cli/core/files/generate_scripts.dart';
 import 'package:js_cli/core/utils/global_variable.dart';
 import 'package:js_cli/core/utils/output_utils.dart';
 import 'package:js_cli/core/utils/reserved_words.dart';
 import 'package:js_cli/models/dtos/new_file_dto.dart';
 import 'package:js_cli/models/dtos/replace_dto.dart';
+import 'package:process_run/shell.dart';
 
 class TriggersUtils {
+  TriggersUtils._();
+  
   static Future applyIfNecessary({
     required String root,
     required String subPath,
     required String prefixNameReplaceFile,
+    bool isReplaceFiles = true,
+    bool isNewFiles = true,
+    bool isScripts = false,
   }) async {
-    final replaces = GenerateReplaceFile.read(
-      root,
-      subPath,
-      prefixNameReplaceFile,
-    );
+    if (isScripts) {
+      _initTriggerScripts(root, subPath, prefixNameReplaceFile);
+    }
+    if (isNewFiles) {
+      _initTriggerNewFile(root, subPath, prefixNameReplaceFile);
+    }
+    if (isReplaceFiles) {
+      _initTriggerReplace(root, subPath, prefixNameReplaceFile);
+    }
+    return;
+  }
 
+  static void _initTriggerNewFile(
+    String root,
+    String subPath,
+    String prefixNameReplaceFile,
+  ) {
     final newFiles = GenerateNewFile.read(
       root,
       subPath,
@@ -29,12 +47,38 @@ class TriggersUtils {
     newFiles.forEach((n) {
       _applyNewFileIfNecessary(n);
     });
+  }
+
+  static void _initTriggerReplace(
+    String root,
+    String subPath,
+    String prefixNameReplaceFile,
+  ) {
+    final replaces = GenerateReplaceFile.read(
+      root,
+      subPath,
+      prefixNameReplaceFile,
+    );
 
     replaces.forEach((r) {
       _applyReplaceIfNecessary(r);
     });
+  }
 
-    return;
+  static void _initTriggerScripts(
+    String root,
+    String subPath,
+    String prefixNameReplaceFile,
+  ) {
+    final scripts = GenerateScripts.read(
+      root,
+      subPath,
+      prefixNameReplaceFile,
+    );
+
+    scripts.forEach((script) {
+      _applyScriptsIfNecessary(script);
+    });
   }
 
   static void _applyReplaceIfNecessary(ReplaceDto r) {
@@ -99,5 +143,13 @@ class TriggersUtils {
     File('$pathFile.${newFileDto.extension}').createSync();
     File('$pathFile.${newFileDto.extension}').writeAsStringSync(contentExemple);
     warn('Criar arquivo: $pathFile ...');
+  }
+
+  static Future _applyScriptsIfNecessary(String script) async {
+    final shell = Shell();
+
+    script = ReservedWords.replaceWordsInFile(fileString: script);
+
+    await shell.run(script);
   }
 }

@@ -1,9 +1,11 @@
 import 'dart:io';
 
+import 'package:js_cli/app_module.dart';
 import 'package:js_cli/controller/design_pattern/design_pattern_controller.dart';
 import 'package:js_cli/controller/generate_layer_controller.dart';
 import 'package:js_cli/controller/get_version_controller.dart';
 import 'package:js_cli/controller/help_command_controller.dart';
+import 'package:js_cli/controller/init_controller.dart';
 import 'package:js_cli/controller/microfrontend/base_app_controller.dart';
 import 'package:js_cli/controller/microfrontend/micro_app_controller.dart';
 import 'package:js_cli/controller/microfrontend/micro_commons_controller.dart';
@@ -28,16 +30,23 @@ import 'package:js_cli/models/entities/microfrontend/base_app.dart';
 import 'package:js_cli/models/entities/microfrontend/micro_app.dart';
 import 'package:js_cli/models/entities/microfrontend/micro_commons.dart';
 import 'package:js_cli/models/entities/microfrontend/micro_core.dart';
-import 'package:js_cli/app_module.dart';
 
 late AppModule appModule;
+late InitController _initController;
 late ValidateArguments validateArguments;
-
+late GetVersionCliController _getVersionCliController;
+late HelpCommandController _helpCommandController;
+late GenerateLayerController _generateLayerController;
 void main(List<String> arguments) async {
   wellcomeMessage();
 
   appModule = AppModule();
   validateArguments = ValidateArguments(appModule: appModule);
+
+  _initController = InitController();
+  _getVersionCliController = GetVersionCliController();
+  _helpCommandController = HelpCommandController();
+  _generateLayerController = GenerateLayerController();
 
   var isValidArguments = validateArguments.validateArguments(arguments);
   if (!isValidArguments) {
@@ -52,27 +61,18 @@ Future<void> _runProcess(List<String> arguments) async {
   _loadGlobalVariables(arguments);
 
   final actions = {
+    'init': () => _getInit(),
     'version': () => _getVersion(),
-    'v': () => _getVersion(),
     'help': () => _getHelp(),
-    'h': () => _getHelp(),
     'layer': () => _getLayer(),
-    'l': () => _getLayer(),
     'microfrontend': () => _getMicroFrontend(),
-    'mf': () => _getMicroFrontend(),
     'usecase': () => _getUsecase(),
-    'u': () => _getUsecase(),
     'entity': () => _getEntity(),
-    'e': () => _getEntity(),
     'repository': () => _getRepository(),
-    'r': () => _getRepository(),
     'datasource': () => _getDatasource(),
-    'd': () => _getDatasource(),
     'page': () => _getPage(),
-    'p': () => _getPage(),
     'dto': () => _getDto(),
     'controller': () => _getController(),
-    'c': () => _getController(),
   };
   try {
     await actions[GlobalVariable.action]!();
@@ -102,8 +102,12 @@ Future<void> _runProcess(List<String> arguments) async {
   }
 }
 
+Future<void> _getInit() async {
+  await _initController();
+}
+
 void _loadGlobalVariables(List<String> arguments) {
-  GlobalVariable.action = arguments.length > 1 ? arguments[1] : arguments[0];
+  GlobalVariable.action = _getFormatAction(arguments);
   try {
     GlobalVariable.path = arguments[2];
     // ignore: empty_catches
@@ -114,16 +118,46 @@ void _loadGlobalVariables(List<String> arguments) {
   } catch (e) {}
 }
 
+String _getFormatAction(List<String> arguments) {
+  final action = arguments.length > 1 ? arguments[1] : arguments[0];
+
+  if (action == 'i') {
+    return 'init';
+  } else if (action == 'v') {
+    return 'version';
+  } else if (action == 'h') {
+    return 'help';
+  } else if (action == 'l') {
+    return 'layer';
+  } else if (action == 'mf') {
+    return 'microfrontend';
+  } else if (action == 'u') {
+    return 'usecase';
+  } else if (action == 'e') {
+    return 'entity';
+  } else if (action == 'r') {
+    return 'repository';
+  } else if (action == 'd') {
+    return 'datasource';
+  } else if (action == 'p') {
+    return 'page';
+  } else if (action == 'c') {
+    return 'controller';
+  }
+
+  return action;
+}
+
 Future<void> _getVersion() async {
-  await GetVersionCliController()();
+  await _getVersionCliController();
 }
 
 Future<void> _getHelp() async {
-  HelpCommandController()();
+  _helpCommandController();
 }
 
 Future<void> _getLayer() async {
-  await GenerateLayerController()();
+  await _generateLayerController();
 }
 
 Future<void> _getMicroFrontend() async {

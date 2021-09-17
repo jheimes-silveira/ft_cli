@@ -1,8 +1,7 @@
 import 'package:js_cli/core/utils/global_variable.dart';
-import 'package:js_cli/core/utils/output_utils.dart';
 import 'package:js_cli/core/utils/triggers_utils.dart';
 import 'package:js_cli/models/entities/microfrontend/microfrontend.dart';
-import 'package:process_run/cmd_run.dart';
+import 'package:process_run/shell.dart';
 
 abstract class MicrofrontendController {
   late Microfrontend _microfrontend;
@@ -21,16 +20,20 @@ abstract class MicrofrontendController {
     GlobalVariable.projectNameComplete = projectNameComplete;
     GlobalVariable.projectName = projectName;
 
-    final result = await runCmd(
-      ProcessCmd(_commandCreateApp(microfrontend, projectName, org), []),
+    var shell = Shell();
+    await shell.run(
+      _commandCreateApp(microfrontend, projectName, org),
     );
 
-    warn(result.stdout);
-    
+    return applyTriggersIfNecessary(_microfrontend);
+  }
+
+  static Future applyTriggersIfNecessary(Microfrontend microfrontend) {
     return TriggersUtils.applyIfNecessary(
       root: 'microfrontend',
-      subPath: _microfrontend.component,
-      prefixNameReplaceFile: _microfrontend.component,
+      subPath: microfrontend.component,
+      prefixNameReplaceFile: microfrontend.component,
+      isScripts: true,
     );
   }
 
