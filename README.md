@@ -99,7 +99,7 @@ abstract class GetHomeCardsRepository {
 ```
 ```dart
 // data/repositories/get_home_cards_imp.repository.dart
-import '../../domain/repositories/get_home_cards_repository.dart';
+import '../../repositories/get_home_cards_repository.dart';
 
 class GetHomeCardsImpRepository implements GetHomeCardsRepository {
   @override
@@ -123,7 +123,7 @@ js_cli g dto /lib/src/features/home Home
 
 ```dart
 // home_dto.dart
-import '../../domain/models/entities/home_entity.dart';
+import '../../models/entities/home_entity.dart';
 
 class HomeDto extends HomeEntity {
 

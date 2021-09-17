@@ -1,4 +1,4 @@
-import '../../modules/app_module.dart';
+import '../../app_module.dart';
 import 'output_utils.dart' as output;
 
 class ValidateArguments {
@@ -12,10 +12,16 @@ class ValidateArguments {
       return false;
     }
 
-    // appModule.argResults = appModule.argParser.parse(arguments);
-    //TODO entender melhor o seu uso
-
-    if (['upgrade', 'u', 'version', 'v', 'help', 'h'].contains(arguments[0]) &&
+    if ([
+          'upgrade',
+          'u',
+          'version',
+          'v',
+          'help',
+          'h',
+          'microfrontend',
+          'mf',
+        ].contains(arguments[0]) &&
         arguments.length == 1) {
       return true;
     }
@@ -24,12 +30,6 @@ class ValidateArguments {
         [
           'layer',
           'l',
-          'base_app',
-          'ba',
-          'micro_commons',
-          'mc',
-          'micro_app',
-          'mp',
           'usecase',
           'u',
           'entity',
@@ -45,7 +45,11 @@ class ValidateArguments {
           'controller',
           'c',
         ].contains(arguments[1])) {
-      if (!ifItContainsExtraArgumentsTheyAreValid(arguments)) return false;
+      if (ifContainsExtraArguments(arguments)) {
+        if (!extraArgumentsValid(arguments)) {
+          return false;
+        }
+      }
 
       return true;
     }
@@ -54,15 +58,20 @@ class ValidateArguments {
     return false;
   }
 
-  bool ifItContainsExtraArgumentsTheyAreValid(List<String> arguments) {
+  bool ifContainsExtraArguments(List<String> arguments) {
+    return arguments.length > ['g', 'action', 'path', 'name'].length;
+  }
+
+  bool extraArgumentsValid(List<String> arguments) {
     if (arguments.length > ['g', 'action', 'path', 'name'].length) {
       for (var i = 4; i < arguments.length; i++) {
         if (!['-u', '-e', '-r', '-d', '-p', '-dto', '-c']
             .contains(arguments[i])) return false;
       }
+      return true;
     }
 
-    return true;
+    return false;
   }
 
   List<String> argumentsExtra(List<String> arguments) {

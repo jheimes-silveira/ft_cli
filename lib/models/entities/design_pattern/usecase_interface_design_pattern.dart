@@ -1,0 +1,58 @@
+import 'package:js_cli/core/utils/reserved_words.dart';
+import 'package:js_cli/models/entities/design_pattern/design_pattern.dart';
+
+class UsecaseInterfaceDesignPattern extends DesignPattern {
+  static const _template = '''
+abstract class {{usecaseNameClassInterface.pascalCase}} {
+  Future<void> call();
+}
+  ''';
+
+  @override
+  String nameFile() {
+    return persistValue(
+      'usecaseNameFileInterface',
+      '{{name.snakeCase}}_usecase',
+    );
+  }
+
+  @override
+  String path() {
+    return persistValue(
+      'usecasePathInterface',
+      'domain/usecases',
+    );
+  }
+
+  @override
+  String nameClass() {
+    return persistValue(
+      'usecaseNameClassInterface',
+      '{{name.pascalCase}}Usecase',
+    );
+  }
+
+  @override
+  String template() {
+    return readTemplete(
+      'usecase_interface.template',
+      _template,
+      ReservedWords.removeWordsInFile(
+        fileString: path(),
+      ),
+    );
+  }
+
+  @override
+  String nameDesignPattern() {
+    return 'usecase';
+  }
+
+  @override
+  String extension() {
+    return persistValue(
+      'usecaseExtensionInterface',
+      'dart',
+    );
+  }
+}

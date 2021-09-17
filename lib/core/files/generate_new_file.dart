@@ -1,12 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:js_cli/core/model/dtos/new_file_dto.dart';
 import 'package:js_cli/core/utils/directory_utils.dart';
 import 'package:js_cli/core/utils/reserved_words.dart';
+import 'package:js_cli/models/dtos/new_file_dto.dart';
 
 class GenerateNewFile {
   static List<NewFileDto> read(
+    String group,
     String path,
     String prefixNameNewFile,
   ) {
@@ -15,7 +16,7 @@ class GenerateNewFile {
     var root = '.js_cli';
 
     path = ReservedWords.removeWordsInFile(
-      fileString: 'template/$path',
+      fileString: '$group/$path',
     );
     var existFile = File('$root/$path/$file').existsSync();
 

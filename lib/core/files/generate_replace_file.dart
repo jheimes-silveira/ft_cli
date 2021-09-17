@@ -1,13 +1,14 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:js_cli/core/model/dtos/replace_dto.dart';
 import 'package:js_cli/core/utils/directory_utils.dart';
 import 'package:js_cli/core/utils/reserved_words.dart';
+import 'package:js_cli/models/dtos/replace_dto.dart';
 import 'package:path/path.dart';
 
 class GenerateReplaceFile {
   static List<ReplaceDto> read(
+    String group,
     String path,
     String prefixNameReplaceFile,
   ) {
@@ -15,7 +16,7 @@ class GenerateReplaceFile {
     var root = '.js_cli';
 
     path = normalize(ReservedWords.removeWordsInFile(
-      fileString: 'template/$path',
+      fileString: '$group/$path',
     ));
 
     var existFile = File('$root/$path/$file').existsSync();

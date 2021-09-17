@@ -1,16 +1,18 @@
 import 'dart:io';
 
-import 'package:js_cli/app/domain/models/entities/controller_design_pattern.dart';
-import 'package:js_cli/app/domain/models/entities/datasource_design_pattern.dart';
-import 'package:js_cli/app/domain/models/entities/datasource_interface_design_pattern.dart';
-import 'package:js_cli/app/domain/models/entities/dto_design_pattern.dart';
-import 'package:js_cli/app/domain/models/entities/entity_design_pattern.dart';
-import 'package:js_cli/app/domain/models/entities/page_design_pattern.dart';
-import 'package:js_cli/app/domain/models/entities/repository_design_pattern.dart';
-import 'package:js_cli/app/domain/models/entities/repository_interface_design_pattern.dart';
-import 'package:js_cli/app/domain/models/entities/usecase_design_pattern.dart';
-import 'package:js_cli/app/domain/models/entities/usecase_interface_design_pattern.dart';
+import 'package:js_cli/models/entities/design_pattern/controller_design_pattern.dart';
+import 'package:js_cli/models/entities/design_pattern/datasource_design_pattern.dart';
+import 'package:js_cli/models/entities/design_pattern/datasource_interface_design_pattern.dart';
+import 'package:js_cli/models/entities/design_pattern/dto_design_pattern.dart';
+import 'package:js_cli/models/entities/design_pattern/entity_design_pattern.dart';
+import 'package:js_cli/models/entities/design_pattern/page_design_pattern.dart';
+import 'package:js_cli/models/entities/design_pattern/repository_design_pattern.dart';
+import 'package:js_cli/models/entities/design_pattern/repository_interface_design_pattern.dart';
+import 'package:js_cli/models/entities/design_pattern/usecase_design_pattern.dart';
+import 'package:js_cli/models/entities/design_pattern/usecase_interface_design_pattern.dart';
 import 'package:recase/recase.dart';
+
+import 'global_variable.dart';
 
 class ReservedWords {
   ReservedWords._();
@@ -42,8 +44,6 @@ class ReservedWords {
 
   static String replaceWordsInFile({
     required String fileString,
-    String name = '',
-    String path = '',
   }) {
     while (fileString.contains('{{')) {
       final start = fileString.indexOf('{{');
@@ -59,7 +59,7 @@ class ReservedWords {
         throw Exception('essa variavel não é aceita "$word"');
       }
 
-      word = _replaceWordWithOptions(word, name, path);
+      word = _replaceWordWithOptions(word);
 
       if (extension != null) {
         word = _recase(word!, extension);
@@ -160,15 +160,13 @@ class ReservedWords {
 
   static String? _replaceWordWithOptions(
     String word,
-    String name,
-    String path,
   ) {
     final action = {
       'module': Platform.isMacOS
-          ? '${path.split('/').last}'
-          : '${path.split('\\').last}',
-      'name': name,
-      'path': path,
+          ? '${GlobalVariable.path.split('/').last}'
+          : '${GlobalVariable.path.split('\\').last}',
+      'name': GlobalVariable.name,
+      'path': GlobalVariable.path,
       'repositoryPathInterface': RepositoryInterfaceDesignPattern().path(),
       'repositoryNameFileInterface':
           RepositoryInterfaceDesignPattern().nameFile(),
