@@ -1,4 +1,4 @@
-# JS Arch CLI
+# Flutter Arch CLI
 
 ## Code generator to facilitate development
 
