@@ -1,18 +1,20 @@
 import 'dart:io';
 
-import 'package:js_cli/core/files/generate_new_file.dart';
-import 'package:js_cli/core/files/generate_replace_file.dart';
-import 'package:js_cli/core/files/generate_scripts.dart';
-import 'package:js_cli/core/utils/global_variable.dart';
-import 'package:js_cli/core/utils/output_utils.dart';
-import 'package:js_cli/core/utils/reserved_words.dart';
-import 'package:js_cli/models/dtos/new_file_dto.dart';
-import 'package:js_cli/models/dtos/replace_dto.dart';
+import 'package:ft_cli/core/files/generate_new_file.dart';
+import 'package:ft_cli/core/files/generate_replace_file.dart';
+import 'package:ft_cli/core/files/generate_scripts.dart';
+import 'package:ft_cli/core/utils/directory_utils.dart';
+import 'package:ft_cli/core/utils/output_utils.dart';
+import 'package:ft_cli/core/utils/reserved_words.dart';
+import 'package:ft_cli/models/dtos/new_file_dto.dart';
+import 'package:ft_cli/models/dtos/replace_dto.dart';
 import 'package:process_run/shell.dart';
+
+import 'global_variable.dart';
 
 class TriggersUtils {
   TriggersUtils._();
-  
+
   static Future applyIfNecessary({
     required String root,
     required String subPath,
@@ -97,26 +99,24 @@ class TriggersUtils {
       var lines = File(pathFile).readAsStringSync();
       lines = lines.replaceFirst(from, to);
       File(pathFile).writeAsStringSync(lines);
-      warn('replace em arquivo $pathFile....');
+      warn('replace em arquivo $pathFile....\nde: ${r.from}\npara:${r.to}');
     }
   }
 
-  static Future _applyNewFileIfNecessary(NewFileDto newFileDto) async {
+  static Future _applyNewFileIfNecessary(
+    NewFileDto newFileDto,
+  ) async {
     if (!newFileDto.generate) return;
 
     if (newFileDto.pathFile.isEmpty) {
-      final path = GlobalVariable.path;
-      final name = GlobalVariable.name;
-
-      error('Variavel pathFile em $path $name vazia');
+      error(
+        'Variavel pathFile em ${GlobalVariable.path} ${GlobalVariable.name} vazia',
+      );
       return;
     }
 
     if (newFileDto.extension.isEmpty) {
-      final path = GlobalVariable.path;
-      final name = GlobalVariable.name;
-
-      error('extenção vazia $path $name');
+      error('extenção vazia ${GlobalVariable.path} ${GlobalVariable.name}');
       return;
     }
 
@@ -140,16 +140,28 @@ class TriggersUtils {
       return;
     }
 
+    await DirectoryUtils.create(_pathFolder(pathFile));
+
     File('$pathFile.${newFileDto.extension}').createSync();
     File('$pathFile.${newFileDto.extension}').writeAsStringSync(contentExemple);
-    warn('Criar arquivo: $pathFile ...');
   }
 
-  static Future _applyScriptsIfNecessary(String script) async {
+  static Future _applyScriptsIfNecessary(
+    String script,
+  ) async {
     final shell = Shell();
 
-    script = ReservedWords.replaceWordsInFile(fileString: script);
+    script = ReservedWords.replaceWordsInFile(
+      fileString: script,
+    );
 
     await shell.run(script);
+  }
+
+  static String _pathFolder(String pathFile) {
+    return pathFile
+        .split('\\')
+        .sublist(0, pathFile.split('\\').length - 1)
+        .join('\\');
   }
 }

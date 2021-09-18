@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:js_cli/core/utils/directory_utils.dart';
-import 'package:js_cli/core/utils/reserved_words.dart';
-import 'package:js_cli/models/dtos/new_file_dto.dart';
+import 'package:ft_cli/core/utils/directory_utils.dart';
+import 'package:ft_cli/core/utils/reserved_words.dart';
+import 'package:ft_cli/models/dtos/new_file_dto.dart';
 
 class GenerateNewFile {
   static List<NewFileDto> read(
@@ -13,7 +13,7 @@ class GenerateNewFile {
   ) {
     final file = '${prefixNameNewFile}_new_file_trigger.json';
     final fileTemplate = '${prefixNameNewFile}_new_file_exemple.template';
-    var root = '.js_cli';
+    var root = '.ft_cli';
 
     path = ReservedWords.removeWordsInFile(
       fileString: '$group/$path',

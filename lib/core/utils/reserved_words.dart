@@ -1,19 +1,19 @@
 import 'dart:io';
 
-import 'package:js_cli/models/entities/design_pattern/controller_design_pattern.dart';
-import 'package:js_cli/models/entities/design_pattern/datasource_design_pattern.dart';
-import 'package:js_cli/models/entities/design_pattern/datasource_interface_design_pattern.dart';
-import 'package:js_cli/models/entities/design_pattern/dto_design_pattern.dart';
-import 'package:js_cli/models/entities/design_pattern/entity_design_pattern.dart';
-import 'package:js_cli/models/entities/design_pattern/page_design_pattern.dart';
-import 'package:js_cli/models/entities/design_pattern/repository_design_pattern.dart';
-import 'package:js_cli/models/entities/design_pattern/repository_interface_design_pattern.dart';
-import 'package:js_cli/models/entities/design_pattern/usecase_design_pattern.dart';
-import 'package:js_cli/models/entities/design_pattern/usecase_interface_design_pattern.dart';
-import 'package:js_cli/models/entities/microfrontend/base_app.dart';
-import 'package:js_cli/models/entities/microfrontend/micro_app.dart';
-import 'package:js_cli/models/entities/microfrontend/micro_commons.dart';
-import 'package:js_cli/models/entities/microfrontend/micro_core.dart';
+import 'package:ft_cli/models/entities/design_pattern/controller_design_pattern.dart';
+import 'package:ft_cli/models/entities/design_pattern/datasource_design_pattern.dart';
+import 'package:ft_cli/models/entities/design_pattern/datasource_interface_design_pattern.dart';
+import 'package:ft_cli/models/entities/design_pattern/dto_design_pattern.dart';
+import 'package:ft_cli/models/entities/design_pattern/entity_design_pattern.dart';
+import 'package:ft_cli/models/entities/design_pattern/page_design_pattern.dart';
+import 'package:ft_cli/models/entities/design_pattern/repository_design_pattern.dart';
+import 'package:ft_cli/models/entities/design_pattern/repository_interface_design_pattern.dart';
+import 'package:ft_cli/models/entities/design_pattern/usecase_design_pattern.dart';
+import 'package:ft_cli/models/entities/design_pattern/usecase_interface_design_pattern.dart';
+import 'package:ft_cli/models/entities/microfrontend/base_app.dart';
+import 'package:ft_cli/models/entities/microfrontend/micro_app.dart';
+import 'package:ft_cli/models/entities/microfrontend/micro_commons.dart';
+import 'package:ft_cli/models/entities/microfrontend/micro_core.dart';
 import 'package:recase/recase.dart';
 
 import 'global_variable.dart';
@@ -180,9 +180,7 @@ class ReservedWords {
     }
   }
 
-  static String? _replaceWordWithOptions(
-    String word,
-  ) {
+  static String? _replaceWordWithOptions(String word) {
     final action = {
       'module': Platform.isMacOS
           ? '${GlobalVariable.path.split('/').last}'

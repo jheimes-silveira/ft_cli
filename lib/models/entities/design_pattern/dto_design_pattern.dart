@@ -1,5 +1,5 @@
-import 'package:js_cli/core/utils/reserved_words.dart';
-import 'package:js_cli/models/entities/design_pattern/design_pattern.dart';
+import 'package:ft_cli/core/utils/reserved_words.dart';
+import 'package:ft_cli/models/entities/design_pattern/design_pattern.dart';
 
 class DtoDesignPattern extends DesignPattern {
   static const String _template = '''

@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:js_cli/core/utils/directory_utils.dart';
-import 'package:js_cli/core/utils/reserved_words.dart';
-import 'package:js_cli/models/dtos/replace_dto.dart';
+import 'package:ft_cli/core/utils/directory_utils.dart';
+import 'package:ft_cli/core/utils/reserved_words.dart';
+import 'package:ft_cli/models/dtos/replace_dto.dart';
 import 'package:path/path.dart';
 
 class GenerateReplaceFile {
@@ -13,7 +13,7 @@ class GenerateReplaceFile {
     String prefixNameReplaceFile,
   ) {
     final file = '${prefixNameReplaceFile}_replace_trigger.json';
-    var root = '.js_cli';
+    var root = '.ft_cli';
 
     path = normalize(ReservedWords.removeWordsInFile(
       fileString: '$group/$path',

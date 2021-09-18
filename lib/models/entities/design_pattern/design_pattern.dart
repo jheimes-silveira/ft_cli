@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:js_cli/core/utils/directory_utils.dart';
+import 'package:ft_cli/core/utils/directory_utils.dart';
 
 abstract class DesignPattern {
   String extension();
@@ -17,7 +17,7 @@ abstract class DesignPattern {
     String template,
     String path,
   ) {
-    var root = '.js_cli';
+    var root = '.ft_cli';
 
     path = '$group/$path';
 
@@ -42,21 +42,21 @@ abstract class DesignPattern {
   }
 
   Map<String, dynamic> _readConfigs() {
-    var existFile = File('.js_cli/configs.json').existsSync();
+    var existFile = File('.ft_cli/configs.json').existsSync();
 
     if (!existFile) {
-      Directory('.js_cli').createSync();
+      Directory('.ft_cli').createSync();
 
-      File('.js_cli/configs.json').writeAsStringSync('{}');
+      File('.ft_cli/configs.json').writeAsStringSync('{}');
     }
 
     return json.decode(
-      File('.js_cli/configs.json').readAsStringSync(),
+      File('.ft_cli/configs.json').readAsStringSync(),
     );
   }
 
   void _writeConfigs(Map<String, dynamic> configs) {
-    File('.js_cli/configs.json').writeAsStringSync(
+    File('.ft_cli/configs.json').writeAsStringSync(
       json.encode(configs),
     );
   }

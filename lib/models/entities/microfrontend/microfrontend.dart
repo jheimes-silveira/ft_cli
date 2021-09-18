@@ -29,21 +29,21 @@ abstract class Microfrontend {
   }
 
   Map<String, dynamic> _readConfigs() {
-    var existFile = File('.js_cli/configs_microfrontend.json').existsSync();
+    var existFile = File('.ft_cli/configs_microfrontend.json').existsSync();
 
     if (!existFile) {
-      Directory('.js_cli').createSync();
+      Directory('.ft_cli').createSync();
 
-      File('.js_cli/configs_microfrontend.json').writeAsStringSync('{}');
+      File('.ft_cli/configs_microfrontend.json').writeAsStringSync('{}');
     }
 
     return json.decode(
-      File('.js_cli/configs_microfrontend.json').readAsStringSync(),
+      File('.ft_cli/configs_microfrontend.json').readAsStringSync(),
     );
   }
 
   void _writeConfigs(Map<String, dynamic> configs) {
-    File('.js_cli/configs_microfrontend.json').writeAsStringSync(
+    File('.ft_cli/configs_microfrontend.json').writeAsStringSync(
       json.encode(configs),
     );
   }

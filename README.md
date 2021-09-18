@@ -4,10 +4,10 @@
 
 Get Start:
 ```bash
-dart pub global activate js_cli
+dart pub global activate ft_cli
 ```
 
-or
+ou
 
 ```bash
 dart pub global activate --source path ./RepositoryProject
@@ -18,11 +18,18 @@ dart pub global activate --source path ./RepositoryProject
 Para tornar mais fácil e intuitivo implementar a Arquitetura _Uncle Bob's Clean Architecture_. Esta CLI fornece a estrutura base, onde irá gerar dinamicamente as Classes conforme mostrado nos exemplos abaixo.
 
 
-### Commands:
+### Comandos:
+
+Crie as variaveis configuraveis do seu projeto, gerando uma estrutura básica, onde ira gerar uma pasta .ft_cli
 
 ```bash
-# Generate Feature
-js_cli g layer complete /lib/src/features/home
+ft_cli init 
+```
+
+Gerando um novo módulo
+
+```bash
+ft_cli g layer lib/app/module/home
 ```
 <details>
 <summary>Result</summary>
@@ -34,7 +41,7 @@ js_cli g layer complete /lib/src/features/home
 
 ```bash
 # Generate Entity
-js_cli g entity /lib/src/features/home Home
+ft_cli g entity lib/app/module/home Home
 ```
 <details>
 <summary>Result</summary>
@@ -54,7 +61,7 @@ class HomeEntity {
 
 ```bash
 # Generate UseCase
-js_cli g usecase /lib/src/features/home GetHomeCards
+ft_cli g usecase lib/app/module/home GetHomeCards
 ```
 <details>
 <summary>Result</summary>
@@ -84,9 +91,9 @@ class GetHomeCardsImpUsecase implements GetHomeCardsUsecase {
 
 --- 
 
-```bash
+```bash 
 # Generate Repository
-js_cli g repository /lib/src/features/home GetHomeCards
+ft_cli g repository lib/app/module/home GetHomeCards
 ```
 <details>
 <summary>Result</summary>
@@ -116,7 +123,7 @@ class GetHomeCardsImpRepository implements GetHomeCardsRepository {
 
 ```bash
 # Generate Dto
-js_cli g dto /lib/src/features/home Home
+ft_cli g dto lib/app/module/home Home
 ```
 <details>
 <summary>Result</summary>
@@ -134,74 +141,49 @@ class HomeDto extends HomeEntity {
 ![](./screenshots/dto.png)
 </details>
 
---- 
+```bash
+# Generate Page
+ft_cli g page lib/app/module/home HomeCards
+```
 
 ```bash
-# Generate Error
-js_cli g error /lib/src/core/errors Generic  
+# Generate Controller
+ft_cli g controller lib/app/module/home HomeCards
 ```
-<details>
-<summary>Result</summary>
-
-```dart
-// generic.error.dart
-class GenericError implements Exception {
-  final String _message;
-  final Exception innerException;
-
-  GenericError(String message, this.innerException) : _message = message;
-
-  String get message => _message;
-}
-```
-![](./screenshots/error.png)
-</details>
-
----
 
 ```bash
 
-$ js_cli g layer complete ./teste/features/dashboard
-################### Clean Arch CLI ###################
-generating complete layer....
-COMPLETE layer created
+-------------------------- HELPS -------------------------- 
 
-$ js_cli g entity ./teste/features/dashboard Viewer
-################### Clean Arch CLI ###################
-generating usecase Viewer....
-Viewer created
+i, init             Gera os arquivos configuraveis do projeto...
+g, gen              Geração de estruturade acordo com a opção page, datasoure, repository...
+p, page             Cria uma nova pagina com um controller...
+c, controller       Cria um novo controller...
+d, datasource       Cria a camada de busca dados de fontes externas...
+r, repository       Cria a camada para tratar os dados...
+u, usecase          Cria a camada para tratar as regras de negócio...
+e, entity           Cria as entidades...
+dto                 Cria os dto para transferência de dados...
 
-$ js_cli g usecase ./teste/features/dashboard getViewer
-################### Clean Arch CLI ###################
-generating usecase getViewer....
-getViewer created
-
-$ js_cli g repository ./teste/features/dashboard getViewer
-################### Clean Arch CLI ###################
-generating repository getViewer....
-getViewer created
-
-$ js_cli g dto ./teste/features/dashboard Viewer
-################### Clean Arch CLI ###################
-generating dto Viewer....
-ViewerDto created
+mf, microfrontend   Seleciona a opção para criação de novos componentes de microfrontend...
 
 ```
 ---
 ### Palavras reservadas
 
-Reserved words can be used in the templet files that are generated in .js_cli/templete the reserved words must be used inside mustaches `{{}}` example `{{name}}`, can also be used in reserved words an extension, example `{{name.pascalCase}}` whose extension will format the word as needed, you can check the lists below for all reserved words and extensions
+Reserved words can be used in the templet files that are generated in .ft_cli/templete the reserved words must be used inside mustaches `{{}}` example `{{name}}`, can also be used in reserved words an extension, example `{{name.pascalCase}}` whose extension will format the word as needed, you can check the lists below for all reserved words and extensions
 
-Palavras reservadas podem ser usadas nos arquivos de modelo que são gerados em .js_cli/templete as palavras reservadas devem ser usadas dentro de _mustaches_ `{{}}` exemplo `{{nome}}`, também podem ser usadas em palavras reservadas uma extensão, exemplo `{{name.pascalCase}}` cuja extensão formatará a palavra conforme necessário, você pode verificar as listas abaixo para todas as palavras reservadas e extensões
+Palavras reservadas podem ser usadas nos arquivos de modelo que são gerados em .ft_cli/templete as palavras reservadas devem ser usadas dentro de _mustaches_ `{{}}` exemplo `{{nome}}`, também podem ser usadas em palavras reservadas uma extensão, exemplo `{{name.pascalCase}}` cuja extensão formatará a palavra conforme necessário, você pode verificar as listas abaixo para todas as palavras reservadas e extensões
 
-* `Palavras reservadas podem ser editadas em meu_projeto\.js_cli\configs.json`
+* `Palavras reservadas podem ser editadas em meu_projeto\.ft_cli\configs.json`
 
-| Palavras reservadas               | `default`                                                                                                   |
+| Palavras reservadas               | `default`                                                                                            |
 |------------------------------|-----------------------------------------------------------------------------------------------------------|
-| name                         | Entrada pelo terminal, este valor é o último parâmetro da expressão para gerar os modelos |
-| path                         | Entrada pelo terminal, caminho onde o novo arquivo será gerado                                       |
+| name                         | Entrada pelo terminal, este valor é o último parâmetro da expressão para gerar os modelos                 |
+| path                         | Entrada pelo terminal, caminho onde o novo arquivo será gerado                                            |
 | module                       | input input by the terminal, name of the module that will generate the new files                          |
-| fileExtension                | `dart`                                                                                                      |
+| projectName                  | Entrada do nome do projeto quando é criado um componente de microfrontend                                 |
+| projectNameComplete          | O nome do projeto concatenado com o padrão do modelo dos microfrontend                                    |
 | repositoryPathInterface      | domain/repositories                                                                                       |
 | repositoryNameFileInterface  | {{name.snakeCase}}_repository                                                                             |
 | repositoryPath               | data/repositories                                                                                         |
@@ -246,9 +228,9 @@ Palavras reservadas podem ser usadas nos arquivos de modelo que são gerados em 
 
 ##### Replace
 
-in .js_cli/templete a {{term}}_replace_trigger.json file is generated where from your annotation it can apply a replace to any input expression, for example:
+in .ft_cli/templete a {{term}}_replace_trigger.json file is generated where from your annotation it can apply a replace to any input expression, for example:
 
-Em .js_cli/templete, um arquivo {{term}}_replace_trigger.json é gerado onde, a partir de sua anotação, ele pode aplicar uma substituição a qualquer expressão de entrada, por exemplo:
+Em .ft_cli/templete, um arquivo {{term}}_replace_trigger.json é gerado onde, a partir de sua anotação, ele pode aplicar uma substituição a qualquer expressão de entrada, por exemplo:
 ```json
 [
     {
@@ -267,10 +249,10 @@ Onde irá executar um _replace_ no arquivo apontado, a partir da expressão
 
 ##### Criar novo arquivo
 
-in .js_cli / templete, a file {{term}} _ new_file_trigger.json is generated where, from his annotation, he can create a new file with the pre-defined templete, for example:
+in .ft_cli / templete, a file {{term}} _ new_file_trigger.json is generated where, from his annotation, he can create a new file with the pre-defined templete, for example:
 
 Note, the ``generate`` variable must be ``true`` to generate the file.
-em .js_cli/templete, um arquivo {{term}}_new_file_trigger.json é gerado onde, a partir de sua anotação, ele pode criar um novo arquivo com o modelo predefinido, por exemplo:
+em .ft_cli/templete, um arquivo {{term}}_new_file_trigger.json é gerado onde, a partir de sua anotação, ele pode criar um novo arquivo com o modelo predefinido, por exemplo:
 
 Observe que a variável ``generate`` deve ser ``true`` para gerar o arquivo.
 
@@ -278,7 +260,7 @@ Observe que a variável ``generate`` deve ser ``true`` para gerar o arquivo.
 [
     {
         "pathFile": "{{path}}\\{{module}}_module",
-        "pathTemplete": ".js_cli/template/layer/complete_new_file_exemple.template",
+        "pathTemplete": ".ft_cli/template/layer/complete_new_file_exemple.template",
         "generate": true
     }
 ]
@@ -286,7 +268,7 @@ Observe que a variável ``generate`` deve ser ``true`` para gerar o arquivo.
 
 Templete
 
- ``.js_cli/template/layer/complete_new_file_exemple.template``
+ ``.ft_cli/template/layer/complete_new_file_exemple.template``
 
 ```file
 class {{module.pascalCase}}Module extends Module {

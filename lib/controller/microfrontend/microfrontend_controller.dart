@@ -1,6 +1,6 @@
-import 'package:js_cli/core/utils/global_variable.dart';
-import 'package:js_cli/core/utils/triggers_utils.dart';
-import 'package:js_cli/models/entities/microfrontend/microfrontend.dart';
+import 'package:ft_cli/core/utils/global_variable.dart';
+import 'package:ft_cli/core/utils/triggers_utils.dart';
+import 'package:ft_cli/models/entities/microfrontend/microfrontend.dart';
 import 'package:process_run/shell.dart';
 
 abstract class MicrofrontendController {
@@ -19,6 +19,7 @@ abstract class MicrofrontendController {
 
     GlobalVariable.projectNameComplete = projectNameComplete;
     GlobalVariable.projectName = projectName;
+    GlobalVariable.path = projectNameComplete;
 
     var shell = Shell();
     await shell.run(

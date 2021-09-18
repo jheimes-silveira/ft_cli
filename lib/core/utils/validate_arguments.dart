@@ -23,6 +23,7 @@ class ValidateArguments {
           'h',
           'microfrontend',
           'mf',
+          'i18n',
         ].contains(arguments[0]) &&
         arguments.length == 1) {
       return true;

@@ -1,20 +1,18 @@
 import 'dart:io';
 
-import 'package:js_cli/core/errors/file_exists_error.dart';
-import 'package:js_cli/core/utils/directory_utils.dart';
-import 'package:js_cli/core/utils/global_variable.dart';
-import 'package:js_cli/core/utils/output_utils.dart';
-import 'package:js_cli/core/utils/reserved_words.dart';
-import 'package:js_cli/core/utils/triggers_utils.dart';
-import 'package:js_cli/models/entities/design_pattern/design_pattern.dart';
+import 'package:ft_cli/core/errors/file_exists_error.dart';
+import 'package:ft_cli/core/utils/directory_utils.dart';
+import 'package:ft_cli/core/utils/global_variable.dart';
+import 'package:ft_cli/core/utils/output_utils.dart';
+import 'package:ft_cli/core/utils/reserved_words.dart';
+import 'package:ft_cli/core/utils/triggers_utils.dart';
+import 'package:ft_cli/models/entities/design_pattern/design_pattern.dart';
 import 'package:path/path.dart' as p;
 
 class DesignPatternController {
   static Future<bool> call(
     DesignPattern designPattern,
   ) async {
-    final inputPath = GlobalVariable.path;
-
     var path = _replaceWordsInFile(
       designPattern.path(),
     );
@@ -27,11 +25,11 @@ class DesignPatternController {
     var extension = designPattern.extension();
 
     var completePath = p.normalize(
-      '$inputPath/$path/$nameFile.$extension',
+      '${GlobalVariable.path}/$path/$nameFile.$extension',
     );
 
     await DirectoryUtils.create(
-      p.normalize(inputPath + '/' + path),
+      p.normalize(GlobalVariable.path + '/' + path),
     );
 
     if (File(completePath).existsSync()) {

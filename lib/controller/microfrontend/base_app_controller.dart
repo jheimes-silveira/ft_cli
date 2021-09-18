@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:js_cli/core/utils/dialog_utils.dart';
-import 'package:js_cli/models/entities/microfrontend/base_app.dart';
+import 'package:ft_cli/core/utils/dialog_utils.dart';
+import 'package:ft_cli/models/entities/microfrontend/base_app.dart';
 
 import 'microfrontend_controller.dart';
 
