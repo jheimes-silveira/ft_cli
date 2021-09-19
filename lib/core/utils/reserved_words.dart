@@ -65,6 +65,10 @@ class ReservedWords {
 
       word = _replaceWordWithOptions(word);
 
+      while (word != null && word.contains('{{')) {
+        word = replaceWordsInFile(fileString: word);
+      }
+
       if (extension != null) {
         word = _recase(word!, extension);
 

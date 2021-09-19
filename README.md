@@ -1,6 +1,6 @@
 # Flutter Arch CLI
 
-## Code generator to facilitate development
+## Gerador de código para facilitar uma arquitetura limpa
 
 Get Start:
 ```bash
@@ -291,3 +291,7 @@ class {{module.pascalCase}}Module extends Module {
 
 ```
 Onde irá gerar um novo arquivo partir do templete definido.
+
+##### Criar novo arquivo
+
+Envie solicitações de recursos e bugs para melhorar a __CLI__ [relatar problemas](https://github.com/jheimes-silveira/ft_cli/issues).

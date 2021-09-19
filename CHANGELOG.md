@@ -1,3 +1,6 @@
+## 0.1.3 - Correção de bug
+- as extension não estavam formatando corretamente
+
 ## 0.0.4+2 - Documentation improvement
 - possibility to change the extension
 
