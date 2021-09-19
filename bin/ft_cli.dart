@@ -38,6 +38,7 @@ late GetVersionCliController _getVersionCliController;
 late HelpCommandController _helpCommandController;
 late GenerateLayerController _generateLayerController;
 late Localization _localization;
+
 void main(List<String> arguments) async {
   wellcomeMessage();
 
