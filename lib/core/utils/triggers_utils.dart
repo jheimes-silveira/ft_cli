@@ -162,8 +162,8 @@ class TriggersUtils {
 
   static String _pathFolder(String pathFile) {
     return pathFile
-        .split('\\')
-        .sublist(0, pathFile.split('\\').length - 1)
-        .join('\\');
+        .split(Platform.pathSeparator)
+        .sublist(0, pathFile.split(Platform.pathSeparator).length - 1)
+        .join(Platform.pathSeparator);
   }
 }

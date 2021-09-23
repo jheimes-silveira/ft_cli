@@ -186,9 +186,7 @@ class ReservedWords {
 
   static String? _replaceWordWithOptions(String word) {
     final action = {
-      'module': Platform.isMacOS
-          ? '${GlobalVariable.path.split('/').last}'
-          : '${GlobalVariable.path.split('\\').last}',
+      'module': '${GlobalVariable.path.split(Platform.pathSeparator).last}',
       'name': GlobalVariable.name,
       'path': GlobalVariable.path,
       'repositoryPathInterface': RepositoryInterfaceDesignPattern().path(),
