@@ -1,3 +1,6 @@
+## 0.1.6+2 - Correção separação por plataforma
+- Não estava sendo possível utilizar a lib no macOS por causa dos path separators.
+
 ## 0.1.6 - Correção de start run
 - Correção de start run
 
