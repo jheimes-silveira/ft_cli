@@ -26,7 +26,10 @@ class GenerateNewFile {
       File('$root/$path/$file').writeAsStringSync(
         json.encode(
           [
-            NewFileDto('', '$root/$path/$fileTemplate', 'dart').toJson(),
+            NewFileDto(
+              pathFile: '',
+              pathTemplete: '$root/$path/$fileTemplate',
+            ).toJson(),
           ],
         ),
       );

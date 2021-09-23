@@ -124,9 +124,11 @@ class TriggersUtils {
       fileString: newFileDto.pathFile,
     );
 
-    if (File('$pathFile.${newFileDto.extension}').existsSync()) {
-      error('Arquivo já existe: $pathFile.${newFileDto.extension}');
-      return;
+    if (!newFileDto.replaceOldFileWithNew) {
+      if (File('$pathFile.${newFileDto.extension}').existsSync()) {
+        error('Arquivo já existe: $pathFile.${newFileDto.extension}');
+        return;
+      }
     }
 
     final exempleFile = File(newFileDto.pathTemplete).readAsStringSync();

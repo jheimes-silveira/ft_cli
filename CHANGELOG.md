@@ -1,3 +1,6 @@
+## 0.1.6 - Correção de start run
+- Correção de start run
+
 ## 0.1.3 - Correção de bug
 - as extension não estavam formatando corretamente
 

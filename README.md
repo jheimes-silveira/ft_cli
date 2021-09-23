@@ -17,6 +17,8 @@ dart pub global activate --source path ./RepositoryProject
 
 Para tornar mais fácil e intuitivo implementar a Arquitetura _Uncle Bob's Clean Architecture_. Esta CLI fornece a estrutura base, onde irá gerar dinamicamente as Classes conforme mostrado nos exemplos abaixo.
 
+Também podendo ter a vantagem de editar de uma forma facíl e dinâmica atraves da edição de templete e __triggers__ para aplicar __replace__ em algum trexo de código e criar novos arquivos apartir dos comandos.
+
 
 ### Comandos:
 
