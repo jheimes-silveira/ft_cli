@@ -1,3 +1,5 @@
+import 'package:ft_cli/core/utils/path.dart';
+
 class GlobalVariable {
   static String name = '';
   static String path = '';
@@ -9,7 +11,7 @@ class GlobalVariable {
   static init(List<String> arguments) {
     GlobalVariable.action = _getFormatAction(arguments);
     try {
-      GlobalVariable.path = arguments[2];
+      GlobalVariable.path = normalize(arguments[2]);
       // ignore: empty_catches
     } catch (e) {}
     try {

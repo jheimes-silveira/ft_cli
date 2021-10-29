@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:ft_cli/app_module.dart';
 import 'package:ft_cli/controller/design_pattern/design_pattern_controller.dart';
 import 'package:ft_cli/controller/generate_layer_controller.dart';
@@ -15,7 +16,6 @@ import 'package:ft_cli/core/utils/dialog_utils.dart';
 import 'package:ft_cli/core/utils/global_variable.dart';
 import 'package:ft_cli/core/utils/output_utils.dart';
 import 'package:ft_cli/core/utils/validate_arguments.dart';
-import 'package:ft_cli/core/utils/wellcome_message.dart';
 import 'package:ft_cli/models/entities/design_pattern/controller_design_pattern.dart';
 import 'package:ft_cli/models/entities/design_pattern/datasource_design_pattern.dart';
 import 'package:ft_cli/models/entities/design_pattern/datasource_interface_design_pattern.dart';
@@ -40,8 +40,6 @@ late GenerateLayerController _generateLayerController;
 late Localization _localization;
 
 void main(List<String> arguments) async {
-  wellcomeMessage();
-
   appModule = AppModule();
   validateArguments = ValidateArguments(appModule: appModule);
 

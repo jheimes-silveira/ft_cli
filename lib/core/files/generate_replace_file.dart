@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:ft_cli/core/utils/directory_utils.dart';
 import 'package:ft_cli/core/utils/reserved_words.dart';
 import 'package:ft_cli/models/dtos/replace_dto.dart';
-import 'package:path/path.dart';
+import 'package:ft_cli/core/utils/path.dart';
 
 class GenerateReplaceFile {
   static List<ReplaceDto> read(

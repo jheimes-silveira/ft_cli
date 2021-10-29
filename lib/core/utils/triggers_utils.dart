@@ -5,6 +5,7 @@ import 'package:ft_cli/core/files/generate_replace_file.dart';
 import 'package:ft_cli/core/files/generate_scripts.dart';
 import 'package:ft_cli/core/utils/directory_utils.dart';
 import 'package:ft_cli/core/utils/output_utils.dart';
+import 'package:ft_cli/core/utils/path.dart';
 import 'package:ft_cli/core/utils/reserved_words.dart';
 import 'package:ft_cli/models/dtos/new_file_dto.dart';
 import 'package:ft_cli/models/dtos/replace_dto.dart';
@@ -84,9 +85,9 @@ class TriggersUtils {
   }
 
   static void _applyReplaceIfNecessary(ReplaceDto r) {
-    final pathFile = ReservedWords.replaceWordsInFile(
+    final pathFile = normalize(ReservedWords.replaceWordsInFile(
       fileString: r.pathFile,
-    );
+    ));
 
     if (File(pathFile).existsSync()) {
       final from = ReservedWords.replaceWordsInFile(
@@ -120,9 +121,9 @@ class TriggersUtils {
       return;
     }
 
-    final pathFile = ReservedWords.replaceWordsInFile(
+    final pathFile = normalize(ReservedWords.replaceWordsInFile(
       fileString: newFileDto.pathFile,
-    );
+    ));
 
     if (!newFileDto.replaceOldFileWithNew) {
       if (File('$pathFile.${newFileDto.extension}').existsSync()) {

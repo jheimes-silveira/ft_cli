@@ -1,6 +1,7 @@
 import 'package:ft_cli/core/utils/directory_utils.dart';
 import 'package:ft_cli/core/utils/global_variable.dart';
 import 'package:ft_cli/core/utils/output_utils.dart';
+import 'package:ft_cli/core/utils/path.dart';
 import 'package:ft_cli/core/utils/reserved_words.dart';
 import 'package:ft_cli/core/utils/triggers_utils.dart';
 import 'package:ft_cli/models/entities/design_pattern/controller_design_pattern.dart';
@@ -12,7 +13,6 @@ import 'package:ft_cli/models/entities/design_pattern/repository_design_pattern.
 import 'package:ft_cli/models/entities/design_pattern/repository_interface_design_pattern.dart';
 import 'package:ft_cli/models/entities/design_pattern/usecase_design_pattern.dart';
 import 'package:ft_cli/models/entities/design_pattern/usecase_interface_design_pattern.dart';
-import 'package:path/path.dart';
 
 class GenerateLayerController {
   Future<void> call() async {

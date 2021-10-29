@@ -7,7 +7,7 @@ import 'package:ft_cli/core/utils/output_utils.dart';
 import 'package:ft_cli/core/utils/reserved_words.dart';
 import 'package:ft_cli/core/utils/triggers_utils.dart';
 import 'package:ft_cli/models/entities/design_pattern/design_pattern.dart';
-import 'package:path/path.dart' as p;
+import 'package:ft_cli/core/utils/path.dart' as p;
 
 class DesignPatternController {
   static Future<bool> call(

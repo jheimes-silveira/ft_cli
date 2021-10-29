@@ -1,3 +1,6 @@
+## 0.1.7 - Correção em trigges para mac
+- Não estava sendo possível utilizar as trigges com path para o mac.
+
 ## 0.1.6+2 - Correção separação por plataforma
 - Não estava sendo possível utilizar a lib no macOS por causa dos path separators.
 
