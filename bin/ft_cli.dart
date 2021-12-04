@@ -61,44 +61,53 @@ void main(List<String> arguments) async {
 Future<void> _runProcess(List<String> arguments) async {
   GlobalVariable.init(arguments);
 
-  final actions = {
-    'init': () => _getInit(),
-    'i18n': () => _generateFileI18n(),
-    'version': () => _getVersion(),
-    'help': () => _getHelp(),
-    'layer': () => _getLayer(),
-    'microfrontend': () => _getMicroFrontend(),
-    'usecase': () => _getUsecase(),
-    'entity': () => _getEntity(),
-    'repository': () => _getRepository(),
-    'datasource': () => _getDatasource(),
-    'page': () => _getPage(),
-    'dto': () => _getDto(),
-    'controller': () => _getController(),
-  };
-  try {
-    await actions[GlobalVariable.action]!();
-  } catch (e) {
-    error(e);
+  if (GlobalVariable.action == 'init') {
+    await _getInit();
+  } else if (GlobalVariable.action == 'i18n') {
+    await _generateFileI18n();
+  } else if (GlobalVariable.action == 'version') {
+    await _getVersion();
+  } else if (GlobalVariable.action == 'help') {
+    await _getHelp();
+  } else if (GlobalVariable.action == 'layer') {
+    await _getLayer();
+  } else if (GlobalVariable.action == 'microfrontend') {
+    await _getMicroFrontend();
+  } else if (GlobalVariable.action == 'usecase') {
+    await _getUsecase();
+  } else if (GlobalVariable.action == 'entity') {
+    await _getEntity();
+  } else if (GlobalVariable.action == 'repository') {
+    await _getRepository();
+  } else if (GlobalVariable.action == 'datasource') {
+    await _getDatasource();
+  } else if (GlobalVariable.action == 'page') {
+    await _getPage();
+  } else if (GlobalVariable.action == 'dto') {
+    await _getDto();
+  } else if (GlobalVariable.action == 'controller') {
+    await _getController();
   }
 
   if (validateArguments.extraArgumentsValid(arguments)) {
     validateArguments.argumentsExtra(arguments).forEach((element) async {
       final path = GlobalVariable.path;
       final name = GlobalVariable.name;
-      final actions = {
-        '-u': () => _runProcess(['g', 'u', path, name]),
-        '-e': () => _runProcess(['g', 'e', path, name]),
-        '-r': () => _runProcess(['g', 'r', path, name]),
-        '-d': () => _runProcess(['g', 'd', path, name]),
-        '-p': () => _runProcess(['g', 'p', path, name]),
-        '-c': () => _runProcess(['g', 'c', path, name]),
-        '-dto': () => _runProcess(['g', 'dto', path, name]),
-      };
-      try {
-        await actions[element]!();
-      } catch (e) {
-        error(e);
+
+      if (element == '-u') {
+        await _runProcess(['g', 'u', path, name]);
+      } else if (element == '-e') {
+        await _runProcess(['g', 'e', path, name]);
+      } else if (element == '-r') {
+        await _runProcess(['g', 'r', path, name]);
+      } else if (element == '-d') {
+        await _runProcess(['g', 'd', path, name]);
+      } else if (element == '-p') {
+        await _runProcess(['g', 'p', path, name]);
+      } else if (element == '-c') {
+        await _runProcess(['g', 'c', path, name]);
+      } else if (element == '-dto') {
+        await _runProcess(['g', 'dto', path, name]);
       }
     });
   }
@@ -130,22 +139,30 @@ Future<void> _getMicroFrontend() async {
   final microCommons = MicroCommons();
   final microCore = MicroCore();
 
-  var action = DialogUtils.newQuestion(
-    'Qual componente você deseja criar?\n${microApp.component} (ma)\n${microCommons.component} (ms)\n${microCore.component} (mc)\n${baseApp.component} (ba)\nvocê so pode digitar ma, ms, mc ou ba\nDigite a opção que esta entre conchetes:',
-  );
+  var options = <String>[
+    microApp.component,
+    microCommons.component,
+    microCore.component,
+    baseApp.component,
+  ];
 
-  if (!['ma', 'ms', 'mc', 'ba'].contains(action)) {
-    error('Você não pode entrar com valores diferentes de: ma, ms, mc ou ba');
-    return;
-  }
+  var action = DialogUtils.newChoose(
+    'Qual componente você deseja criar?',
+    options,
+  );
 
   stdout.write('\n\n');
   late MicrofrontendController controller;
 
-  if (action == 'ma') controller = MicroAppController(microApp);
-  if (action == 'ms') controller = MicroCommonsController(microCommons);
-  if (action == 'mc') controller = MicroCoreController(microCore);
-  if (action == 'ba') controller = BaseAppController(baseApp);
+  if (action == microApp.component) {
+    controller = MicroAppController(microApp);
+  } else if (action == microCommons.component) {
+    controller = MicroCommonsController(microCommons);
+  } else if (action == microCore.component) {
+    controller = MicroCoreController(microCore);
+  } else if (action == baseApp.component) {
+    controller = BaseAppController(baseApp);
+  }
 
   await controller.run();
 }

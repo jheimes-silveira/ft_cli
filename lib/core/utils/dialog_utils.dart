@@ -1,11 +1,25 @@
-import 'package:cli_dialog/cli_dialog.dart';
+import 'package:interact/interact.dart';
 
 class DialogUtils {
   static String newQuestion(String question) {
-    final dialog = CLI_Dialog();
-    dialog.addQuestion(question, 'name');
-    final anwers = dialog.ask();
+    return Input(
+      prompt: question,
+      validator: (String x) {
+        if (x.isNotEmpty) {
+          return true;
+        } else {
+          throw ValidationError('Nenhuma entrada');
+        }
+      },
+    ).interact();
+  }
 
-    return anwers['name'];
+  static String newChoose(String question, List<String> options) {
+    final index = Select(
+      prompt: question,
+      options: options,
+    ).interact();
+
+    return options[index];
   }
 }

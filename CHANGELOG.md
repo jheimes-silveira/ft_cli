@@ -1,3 +1,6 @@
+## 0.1.8 - Melhorias em fluxo de criação de mf
+- Aplicar um dialog com opções de escolha para selecionar o componente de criação de um novo microfrontend.
+
 ## 0.1.7 - Correção em trigges para mac
 - Não estava sendo possível utilizar as trigges com path para o mac.
 
