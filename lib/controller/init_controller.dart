@@ -48,6 +48,8 @@ class InitController {
     designPattern.path();
     designPattern.template();
     designPattern.nameDesignPattern();
+    designPattern.extension();
+    designPattern.generate();
 
     await DesignPatternController.applyTriggersIfNecessary(designPattern);
   }

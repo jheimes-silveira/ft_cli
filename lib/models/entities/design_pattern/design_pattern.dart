@@ -10,6 +10,7 @@ abstract class DesignPattern {
   String path();
   String template();
   String nameDesignPattern();
+  bool generate();
 
   String readTemplete(
     String group,
@@ -31,7 +32,7 @@ abstract class DesignPattern {
     return File('$root/$path/$file').readAsStringSync();
   }
 
-  String persistValue(String key, String value) {
+  dynamic persistValue(String key, dynamic value) {
     final configs = _readConfigs();
     if (!configs.containsKey(key)) {
       configs[key] = value;

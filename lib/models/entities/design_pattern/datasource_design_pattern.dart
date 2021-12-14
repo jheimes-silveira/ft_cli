@@ -1,3 +1,4 @@
+import 'package:ft_cli/core/utils/bool_utils.dart';
 import 'package:ft_cli/core/utils/reserved_words.dart';
 import 'package:ft_cli/models/entities/design_pattern/design_pattern.dart';
 
@@ -60,5 +61,13 @@ class {{datasourceNameClass.pascalCase}} implements {{datasourceNameClassInterfa
       'datasourceExtension',
       'dart',
     );
+  }
+
+  @override
+  bool generate() {
+    return BoolUtils.parse(persistValue(
+      'datasourceGenerate',
+      true,
+    ));
   }
 }

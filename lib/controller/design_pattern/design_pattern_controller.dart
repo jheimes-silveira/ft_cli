@@ -28,19 +28,24 @@ class DesignPatternController {
       '${GlobalVariable.path}/$path/$nameFile.$extension',
     );
 
+    if (!designPattern.generate()) {
+      warn('Para gerar o arquivo: "$nameFile.$extension" altera em .ft_cli/config a variavel "generate"');
+      return true;
+    }
+
     await DirectoryUtils.create(
       p.normalize(GlobalVariable.path + '/' + path),
     );
 
     if (File(completePath).existsSync()) {
-      error('exist file: $nameFile.$extension....');
+      error('Arquivo já existe: $nameFile.$extension....');
       throw FileExistsError(innerException: Exception());
     }
 
-    warn('generating $nameFile.$extension....');
+    warn('Gerando $nameFile.$extension....');
 
     File(completePath).writeAsStringSync(templete);
-    warn('create file $completePath....');
+    warn('Arquivo criado $completePath....');
 
     await applyTriggersIfNecessary(designPattern);
 

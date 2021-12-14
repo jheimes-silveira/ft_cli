@@ -9,6 +9,12 @@ class HelpCommandController {
 i, init             Gera os arquivos configuraveis do projeto...
 Exemplo: ft_cli init
 
+mf, microfrontend   Seleciona a opção para criação de novos componentes de microfrontend...
+Exemplo: ft_cli mf
+
+l, layer            Gera a estrutura de pastas de um modulo...
+Exemplo: ft_cli g l lib/app/modules/nome_modulo
+
 p, page             Cria uma nova pagina com um controller...
 Exemplo: ft_cli g p lib/app/modules/nome_modulo Nome
 
@@ -29,9 +35,6 @@ Exemplo: ft_cli g e lib/app/modules/nome_modulo Nome
 
 dto                 Cria os dto para transferência de dados...
 Exemplo: ft_cli g dto lib/app/modules/nome_modulo Nome
-
-mf, microfrontend   Seleciona a opção para criação de novos componentes de microfrontend...
-Exemplo: ft_cli mf
 ''',
     );
   }

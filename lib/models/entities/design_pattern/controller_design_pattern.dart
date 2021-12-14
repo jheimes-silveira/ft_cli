@@ -1,23 +1,16 @@
+import 'package:ft_cli/core/utils/bool_utils.dart';
 import 'package:ft_cli/core/utils/reserved_words.dart';
 import 'package:ft_cli/models/entities/design_pattern/design_pattern.dart';
 
 class ControllerDesignPattern extends DesignPattern {
   static const String _template = r'''
-import 'package:mobx/mobx.dart';
-part '{{controllerNameFile.snakeCase}}.g.dart';
-
-class {{controllerNameClass.pascalCase}} = _{{controllerNameClass.pascalCase}}Base with _${{controllerNameClass.pascalCase}};
-
-abstract class _{{controllerNameClass.pascalCase}}Base with Store {
-  @observable
+class {{controllerNameClass.pascalCase}} {
   bool loading = false;
 
-  @action
   void setLoading(bool value) {
     loading = value;
   }
 }
-
           ''';
 
   @override
@@ -67,5 +60,13 @@ abstract class _{{controllerNameClass.pascalCase}}Base with Store {
       'controllerExtension',
       'dart',
     );
+  }
+
+  @override
+  bool generate() {
+    return BoolUtils.parse(persistValue(
+      'controllerGenerate',
+      true,
+    ));
   }
 }

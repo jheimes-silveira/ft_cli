@@ -1,3 +1,4 @@
+import 'package:ft_cli/core/utils/bool_utils.dart';
 import 'package:ft_cli/core/utils/reserved_words.dart';
 import 'package:ft_cli/models/entities/design_pattern/design_pattern.dart';
 
@@ -13,14 +14,14 @@ class {{pageNameClass.pascalCase}} extends StatefulWidget {
 }
 
 class _{{name.pascalCase}}PageState extends State<{{pageNameClass.pascalCase}}> {
-  final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: AppBar(),
-      body: Container(),
+      appBar: const AppBar(),
+      body: const Container(),
     );
   }
 }
@@ -73,5 +74,13 @@ class _{{name.pascalCase}}PageState extends State<{{pageNameClass.pascalCase}}> 
       'pageExtension',
       'dart',
     );
+  }
+
+  @override
+  bool generate() {
+    return BoolUtils.parse(persistValue(
+      'pageGenerate',
+      true,
+    ));
   }
 }
