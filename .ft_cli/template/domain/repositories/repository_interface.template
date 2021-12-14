@@ -1,4 +1,0 @@
-abstract class {{repositoryNameClassInterface.pascalCase}} {
-  Future<void> call();
-}
-  

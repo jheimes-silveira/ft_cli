@@ -1,4 +1,0 @@
-abstract class {{datasourceNameClassInterface.pascalCase}} {
-  Future<void> call();
-}
-  
