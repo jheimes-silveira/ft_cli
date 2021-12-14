@@ -1,0 +1,11 @@
+import '../../{{repositoryPathInterface}}/{{repositoryNameFileInterface.snakeCase}}.dart';
+
+class {{repositoryNameClass.pascalCase}} implements {{repositoryNameClassInterface.pascalCase}} {
+  @override
+  Future<void> call() {
+    // TODO: implement call
+    throw UnimplementedError();
+  }
+}
+  
+  

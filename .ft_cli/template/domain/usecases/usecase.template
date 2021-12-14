@@ -1,0 +1,10 @@
+import '{{usecaseNameFileInterface.snakeCase}}.dart';
+
+class {{usecaseNameClass.pascalCase}} implements {{usecaseNameClassInterface.pascalCase}} {
+  @override
+  Future<void> call() {
+    // TODO: implement call
+    throw UnimplementedError();
+  }
+}
+  

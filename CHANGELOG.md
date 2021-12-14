@@ -1,3 +1,6 @@
+## 0.1.8+3 - Agora é possivel gerar a camada de serviço
+- Para ficar mais completo e tambem poder cobrir o design de uma arquitetura que tenho uma camada de serviço.
+
 ## 0.1.8 - Melhorias em fluxo de criação de mf
 - Aplicar um dialog com opções de escolha para selecionar o componente de criação de um novo microfrontend.
 

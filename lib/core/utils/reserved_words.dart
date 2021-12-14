@@ -8,6 +8,8 @@ import 'package:ft_cli/models/entities/design_pattern/entity_design_pattern.dart
 import 'package:ft_cli/models/entities/design_pattern/page_design_pattern.dart';
 import 'package:ft_cli/models/entities/design_pattern/repository_design_pattern.dart';
 import 'package:ft_cli/models/entities/design_pattern/repository_interface_design_pattern.dart';
+import 'package:ft_cli/models/entities/design_pattern/service_design_pattern.dart';
+import 'package:ft_cli/models/entities/design_pattern/service_interface_design_pattern.dart';
 import 'package:ft_cli/models/entities/design_pattern/usecase_design_pattern.dart';
 import 'package:ft_cli/models/entities/design_pattern/usecase_interface_design_pattern.dart';
 import 'package:ft_cli/models/entities/microfrontend/base_app.dart';
@@ -93,10 +95,8 @@ class ReservedWords {
       'action',
       'pageExtension',
       'controllerExtension',
-      'usecaseExtension',
       'repositoryExtension',
       'datasourceExtension',
-      'usecaseExtensionInterface',
       'repositoryExtensionInterface',
       'datasourceExtensionInterface',
       'currentPathInterface',
@@ -123,6 +123,16 @@ class ReservedWords {
       'usecaseNameFile',
       'usecaseNameClassInterface',
       'usecaseNameClass',
+      'usecaseExtensionInterface',
+      'usecaseExtension',
+      'servicePathInterface',
+      'serviceNameFileInterface',
+      'servicePath',
+      'serviceNameFile',
+      'serviceNameClassInterface',
+      'serviceNameClass',
+      'serviceExtensionInterface',
+      'serviceExtension',
       'pagePath',
       'pageNameFile',
       'pageNameClass',
@@ -211,6 +221,16 @@ class ReservedWords {
       'usecaseNameFile': UsecaseDesignPattern().nameFile(),
       'usecaseNameClassInterface': UsecaseInterfaceDesignPattern().nameClass(),
       'usecaseNameClass': UsecaseDesignPattern().nameClass(),
+      'usecaseExtension': UsecaseDesignPattern().extension(),
+      'usecaseExtensionInterface': UsecaseInterfaceDesignPattern().extension(),
+      'servicePathInterface': ServiceInterfaceDesignPattern().path(),
+      'serviceNameFileInterface': ServiceInterfaceDesignPattern().nameFile(),
+      'servicePath': ServiceDesignPattern().path(),
+      'serviceNameFile': ServiceDesignPattern().nameFile(),
+      'serviceNameClassInterface': ServiceInterfaceDesignPattern().nameClass(),
+      'serviceNameClass': ServiceDesignPattern().nameClass(),
+      'serviceExtension': ServiceDesignPattern().extension(),
+      'serviceExtensionInterface': ServiceInterfaceDesignPattern().extension(),
       'pagePath': PageDesignPattern().path(),
       'pageNameFile': PageDesignPattern().nameFile(),
       'pageNameClass': PageDesignPattern().nameClass(),
@@ -225,10 +245,8 @@ class ReservedWords {
       'dtoNameClass': DtoDesignPattern().nameClass(),
       'pageExtension': PageDesignPattern().extension(),
       'controllerExtension': ControllerDesignPattern().extension(),
-      'usecaseExtension': UsecaseDesignPattern().extension(),
       'repositoryExtension': RepositoryDesignPattern().extension(),
       'datasourceExtension': DatasourceDesignPattern().extension(),
-      'usecaseExtensionInterface': UsecaseInterfaceDesignPattern().extension(),
       'repositoryExtensionInterface':
           RepositoryInterfaceDesignPattern().extension(),
       'datasourceExtensionInterface':

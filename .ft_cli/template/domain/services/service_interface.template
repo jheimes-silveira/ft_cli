@@ -1,0 +1,4 @@
+abstract class {{serviceNameClassInterface.pascalCase}} {
+  Future<void> call();
+}
+  

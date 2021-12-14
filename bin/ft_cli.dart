@@ -24,6 +24,8 @@ import 'package:ft_cli/models/entities/design_pattern/entity_design_pattern.dart
 import 'package:ft_cli/models/entities/design_pattern/page_design_pattern.dart';
 import 'package:ft_cli/models/entities/design_pattern/repository_design_pattern.dart';
 import 'package:ft_cli/models/entities/design_pattern/repository_interface_design_pattern.dart';
+import 'package:ft_cli/models/entities/design_pattern/service_design_pattern.dart';
+import 'package:ft_cli/models/entities/design_pattern/service_interface_design_pattern.dart';
 import 'package:ft_cli/models/entities/design_pattern/usecase_design_pattern.dart';
 import 'package:ft_cli/models/entities/design_pattern/usecase_interface_design_pattern.dart';
 import 'package:ft_cli/models/entities/microfrontend/base_app.dart';
@@ -87,6 +89,8 @@ Future<void> _runProcess(List<String> arguments) async {
     await _getDto();
   } else if (GlobalVariable.action == 'controller') {
     await _getController();
+  } else if (GlobalVariable.action == 'service') {
+    await _getService();
   }
 
   if (validateArguments.extraArgumentsValid(arguments)) {
@@ -108,6 +112,8 @@ Future<void> _runProcess(List<String> arguments) async {
         await _runProcess(['g', 'c', path, name]);
       } else if (element == '-dto') {
         await _runProcess(['g', 'dto', path, name]);
+      } else if (element == '-s') {
+        await _runProcess(['g', 's', path, name]);
       }
     });
   }
@@ -183,6 +189,15 @@ Future<void> _getUsecase() async {
   );
   await DesignPatternController.call(
     UsecaseInterfaceDesignPattern(),
+  );
+}
+
+Future<void> _getService() async {
+  await DesignPatternController.call(
+    ServiceDesignPattern(),
+  );
+  await DesignPatternController.call(
+    ServiceInterfaceDesignPattern(),
   );
 }
 

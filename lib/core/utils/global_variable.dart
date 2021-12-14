@@ -45,6 +45,8 @@ class GlobalVariable {
       return 'page';
     } else if (action == 'c') {
       return 'controller';
+    } else if (action == 's') {
+      return 'service';
     }
 
     return action;

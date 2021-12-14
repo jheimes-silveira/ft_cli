@@ -30,6 +30,9 @@ Exemplo: ft_cli g r lib/app/modules/nome_modulo Nome
 u, usecase          Cria a camada para tratar as regras de negócio...
 Exemplo: ft_cli g u lib/app/modules/nome_modulo Nome
 
+s, service          Cria a camada para tratar os serviços...
+Exemplo: ft_cli g s lib/app/modules/nome_modulo Nome
+
 e, entity           Cria as entidades...
 Exemplo: ft_cli g e lib/app/modules/nome_modulo Nome
 

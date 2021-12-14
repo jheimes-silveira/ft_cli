@@ -43,6 +43,8 @@ class ValidateArguments {
           'd',
           'page',
           'p',
+          'service',
+          's',
           'dto',
           'error',
           'controller',
@@ -68,7 +70,7 @@ class ValidateArguments {
   bool extraArgumentsValid(List<String> arguments) {
     if (arguments.length > ['g', 'action', 'path', 'name'].length) {
       for (var i = 4; i < arguments.length; i++) {
-        if (!['-u', '-e', '-r', '-d', '-p', '-dto', '-c']
+        if (!['-u', '-e', '-r', '-s', '-d', '-p', '-dto', '-c']
             .contains(arguments[i])) return false;
       }
       return true;
