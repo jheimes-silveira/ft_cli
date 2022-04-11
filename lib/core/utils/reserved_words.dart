@@ -19,6 +19,7 @@ import 'package:ft_cli/models/entities/microfrontend/micro_core.dart';
 import 'package:recase/recase.dart';
 
 import 'global_variable.dart';
+import 'output_utils.dart';
 
 class ReservedWords {
   ReservedWords._();
@@ -55,7 +56,11 @@ class ReservedWords {
       final start = fileString.indexOf('{{');
       final end = fileString.indexOf('}}');
 
+      var termReplace = _termReplace(fileString);
+
       String? term = fileString.substring(start + 2, end);
+      term = _removeTermReplace(term);
+
       String? word = term.split('.')[0];
       String? extension;
 
@@ -66,6 +71,7 @@ class ReservedWords {
       }
 
       word = _replaceWordWithOptions(word);
+      word = _replaceWordWithTermReplace(word, termReplace);
 
       while (word != null && word.contains('{{')) {
         word = replaceWordsInFile(fileString: word);
@@ -79,6 +85,7 @@ class ReservedWords {
         }
       }
 
+      fileString = _removeTermReplace(fileString);
       fileString = fileString.replaceFirst('{{$term}}', word!);
     }
 
@@ -265,5 +272,45 @@ class ReservedWords {
     };
 
     return action[word];
+  }
+
+  static Map<String, String>? _termReplace(String fileString) {
+    final content = RegExp(r'''\((.*)\)''');
+
+    try {
+      if (content.hasMatch(fileString)) {
+        final term = content
+            .stringMatch(fileString)
+            ?.replaceAll('(', '')
+            .replaceAll(')', '')
+            .split(',');
+        final key = term?[0] ?? '';
+        final value = term?[1] ?? '';
+
+        return {key: value};
+      }
+      return null;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  static String _removeTermReplace(String fileString) {
+    final removeReplace = RegExp(r'''.replace\((.*)\)''');
+    return fileString.replaceFirst(removeReplace, '');
+  }
+
+  static String? _replaceWordWithTermReplace(
+    String? word,
+    Map<String, String>? termReplace,
+  ) {
+    if (termReplace != null) {
+      return word?.replaceAll(
+        termReplace.entries.first.key,
+        termReplace.entries.first.value,
+      );
+    }
+
+    return word;
   }
 }

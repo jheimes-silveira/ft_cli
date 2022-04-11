@@ -276,7 +276,7 @@ Templete
 class {{module.pascalCase}}Module extends Module {
   @override
   final List<Bind> binds = [
-    //Usercases
+    //Usecases
 
     //Repositories
 

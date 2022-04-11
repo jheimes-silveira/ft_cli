@@ -42,6 +42,7 @@ late GenerateLayerController _generateLayerController;
 late Localization _localization;
 
 void main(List<String> arguments) async {
+  warn(arguments);
   appModule = AppModule();
   validateArguments = ValidateArguments(appModule: appModule);
 

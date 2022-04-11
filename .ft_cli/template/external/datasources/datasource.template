@@ -1,0 +1,10 @@
+import '../../{{datasourcePathInterface}}/{{datasourceNameFileInterface.snakeCase}}.dart';
+
+class {{datasourceNameClass.pascalCase}} implements {{datasourceNameClassInterface.pascalCase}} {
+  @override
+  Future<void> call() {
+    // TODO: implement call
+    throw UnimplementedError();
+  }
+}
+  

@@ -1,0 +1,4 @@
+abstract class {{usecaseNameClassInterface.pascalCase}} {
+  Future<void> call();
+}
+  

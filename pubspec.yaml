@@ -1,18 +1,18 @@
 name: ft_cli
 description: This project is one CLI for integrate Flutter and Dart with Clean Architecture
-version: 0.1.8+3
+version: 0.1.8+4
 homepage: https://github.com/jheimes-silveira/ft_cli
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ">=2.15.0 <3.0.0"
 
 dependencies:
-  path: ^1.8.0
+  path: ^1.8.1
   args: ^2.3.0
   get_it: ^7.2.0
   ansicolor: ^2.0.1
   recase: ^4.0.0
-  process_run: ^0.12.2+2
+  process_run: ^0.12.3+2
   interact: ^2.1.1
 
 dev_dependencies:

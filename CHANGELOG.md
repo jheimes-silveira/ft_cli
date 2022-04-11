@@ -1,3 +1,6 @@
+## 0.1.8+4 - Agora é possivel user o replace
+- Nova ação de aplicar replace quando necessario dentro de qualquer teste de template.
+
 ## 0.1.8+3 - Agora é possivel gerar a camada de serviço
 - Para ficar mais completo e tambem poder cobrir o design de uma arquitetura que tenho uma camada de serviço.
 
