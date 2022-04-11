@@ -43,6 +43,7 @@ late Localization _localization;
 
 void main(List<String> arguments) async {
   warn(arguments);
+  arguments = ['g', 'd', 'flut_micro_app_profile\\lib\\app\\profile', 'TesteNovo'];
   appModule = AppModule();
   validateArguments = ValidateArguments(appModule: appModule);
 

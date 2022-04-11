@@ -19,7 +19,6 @@ import 'package:ft_cli/models/entities/microfrontend/micro_core.dart';
 import 'package:recase/recase.dart';
 
 import 'global_variable.dart';
-import 'output_utils.dart';
 
 class ReservedWords {
   ReservedWords._();
@@ -59,12 +58,15 @@ class ReservedWords {
       var termReplace = _termReplace(fileString);
 
       String? term = fileString.substring(start + 2, end);
-      term = _removeTermReplace(term);
+
+      term = _removeTermReplace(term, all: true);
 
       String? word = term.split('.')[0];
       String? extension;
 
-      if (term.split('.').length > 1) extension = term.split('.')[1];
+      if (term.split('.').length > 1) {
+        extension = term.split('.')[1];
+      }
 
       if (!_containsWord(word)) {
         throw Exception('essa variavel não é aceita "$word"');
@@ -85,8 +87,7 @@ class ReservedWords {
         }
       }
 
-      fileString = _removeTermReplace(fileString);
-      fileString = fileString.replaceFirst('{{$term}}', word!);
+      fileString = _replaceFirstTerm(fileString, word!);
     }
 
     return fileString;
@@ -275,10 +276,11 @@ class ReservedWords {
   }
 
   static Map<String, String>? _termReplace(String fileString) {
-    final content = RegExp(r'''\((.*)\)''');
-
+    final containsReplace = RegExp(r'''.replace\((.*?)\)''');
+    final content = RegExp(r'''\((.*?)\)''');
+    Map<String, String>? termReplace;
     try {
-      if (content.hasMatch(fileString)) {
+      while (containsReplace.hasMatch(fileString)) {
         final term = content
             .stringMatch(fileString)
             ?.replaceAll('(', '')
@@ -286,17 +288,19 @@ class ReservedWords {
             .split(',');
         final key = term?[0] ?? '';
         final value = term?[1] ?? '';
-
-        return {key: value};
+        termReplace ??= {};
+        termReplace[key] = value;
+        fileString = _removeTermReplace(fileString);
       }
-      return null;
+      return termReplace;
     } catch (e) {
       return null;
     }
   }
 
-  static String _removeTermReplace(String fileString) {
-    final removeReplace = RegExp(r'''.replace\((.*)\)''');
+  static String _removeTermReplace(String fileString, {bool all = false}) {
+    final removeReplace = RegExp(r'''.replace\((.*?)\)''');
+    if (all) return fileString.replaceAll(removeReplace, '');
     return fileString.replaceFirst(removeReplace, '');
   }
 
@@ -305,12 +309,19 @@ class ReservedWords {
     Map<String, String>? termReplace,
   ) {
     if (termReplace != null) {
-      return word?.replaceAll(
-        termReplace.entries.first.key,
-        termReplace.entries.first.value,
-      );
+      for (var item in termReplace.entries) {
+        word = word?.replaceAll(
+          item.key,
+          item.value,
+        );
+      }
     }
 
     return word;
+  }
+
+  static String _replaceFirstTerm(String fileString, String word) {
+    final removeReplace = RegExp(r'''{{(.*?)}}''');
+    return fileString.replaceFirst(removeReplace, word);
   }
 }

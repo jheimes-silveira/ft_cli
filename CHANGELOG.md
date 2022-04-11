@@ -1,3 +1,7 @@
+## 0.1.8+5 - Agora é possivel user o replace
+- Aplicar multiplos replace em uma palavra reservada, exemplo:
+{{path.replace(xpto,novo).replace(xpto2,novo2)}}... .
+
 ## 0.1.8+4 - Agora é possivel user o replace
 - Nova ação de aplicar replace quando necessario dentro de qualquer teste de template.
 

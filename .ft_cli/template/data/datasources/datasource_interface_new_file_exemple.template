@@ -1,1 +1,34 @@
-class A {}
+import 'package:{{path.replace(\,/).replace(lib/,)}}/{{datasourcePathInterface}}/{{datasourceNameFileInterface}}.dart';
+import 'package:{{path.replace(\,/).replace(lib/,)}}/{{repositoryPathInterface}}/{{repositoryNameFileInterface}}.dart';
+import 'package:{{path.replace(\,/).replace(lib/,)}}/{{usecasePathInterface}}/{{usecaseNameFileInterface}}.dart';
+
+import 'package:flut_micro_commons_dependencies/flut_micro_commons_dependencies.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:modular_test/modular_test.dart';
+
+class {{name.pascalCase}}Mock extends Mock
+    implements {{datasourceNameClassInterface}} {}
+
+void main() {
+  final datasource = Modular.get<{{datasourceNameClassInterface}}>();
+  final repository = Modular.get<{{repositoryNameClassInterface}}>();
+  final usecase = Modular.get<{{usecaseNameClassInterface}}>();
+
+  setUp(() {
+    LocalJsonLocalization.delegate.directories = [
+      'assets/lang',
+    ];
+
+    initModule(HomeModule(), replaceBinds: [
+      Bind.singleton<{{datasourceNameClassInterface}}>(
+        (i) => {{name.pascalCase}}Mock(),
+      ),
+    ]);
+  });
+
+  test('Test', () async {
+    when(() => datasource()).thenAnswer((_) async {});
+
+    expect(usecase(), returnsNormally);
+  });
+}
