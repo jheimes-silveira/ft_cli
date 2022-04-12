@@ -1,3 +1,6 @@
+## 0.1.8+6 - Agora é possivel user o replace
+- Correção de bug para codigo hardcode
+
 ## 0.1.8+5 - Agora é possivel user o replace
 - Aplicar multiplos replace em uma palavra reservada, exemplo:
 {{path.replace(xpto,novo).replace(xpto2,novo2)}}... .
