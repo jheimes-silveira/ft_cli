@@ -376,7 +376,7 @@ As palavras reservadas podem ser utilizadas nos arquivos de modelo que são gera
 |------------------------------|-----------------------------------------------------------------------------------------------------------|
 | name                         | Entrada pelo terminal, este valor é o último parâmetro da expressão para gerar os modelos                 |
 | path                         | Entrada pelo terminal, caminho onde o novo arquivo será gerado                                            |
-| module                       | input input by the terminal, name of the module that will generate the new files                          |
+| module                       | Entrada pelo terminal, nome do módulo que irá gerar os novos arquivos                          |
 | projectName                  | Entrada do nome do projeto quando é criado um componente de microfrontend                                 |
 | projectNameComplete          | O nome do projeto concatenado com o padrão do modelo dos microfrontend                                    |
 | repositoryPathInterface      | domain/repositories                                                                                       |
