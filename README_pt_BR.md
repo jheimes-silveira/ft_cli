@@ -1,25 +1,26 @@
 # Flutter Arch CLI
 
-## Code generator to facilitate clean architecture
+## Gerador de código para facilitar uma arquitetura limpa
 
-###### [Documentation in pt-BR](https://github.com/jheimes-silveira/ft_cli/blob/master/README_pt_BR.md)
+###### [Documentação em inglês](https://github.com/jheimes-silveira/ft_cli/blob/master/README.md)
 
-Get Start:
+Vamos começar:
 ```bash
 dart pub global activate ft_cli
 ```
 
-Or:
+Ou:
 
 ```bash
 dart pub global activate --source path ./RepositoryProject
 ```
 
-### Overview
+### Visão Geral
 
-To make it easier and more intuitive to implement _Uncle Bob's Clean Architecture_. This CLI provides the base structure, where will dynamically generate the Classes as shown in the examples below.
+Para tornar mais fácil e intuitivo implementar a Arquitetura _Uncle Bob's Clean Architecture_. Esta CLI fornece a estrutura base, onde irá gerar dinamicamente as Classes conforme mostrado nos exemplos abaixo.
 
-You can also have the advantage of editing in an easy and dynamic way through the editing of template and __triggers__ to apply __replace__ in some piece of code and create new files from the commands.
+Também podendo ter a vantagem de editar de uma forma facíl e dinâmica atraves da edição de templete e __triggers__ para aplicar __replace__ em algum trexo de código e criar novos arquivos apartir dos comandos.
+
 
 ### Commands:
 
@@ -27,7 +28,7 @@ You can also have the advantage of editing in an easy and dynamic way through th
 ft_cli init 
 ```
 
-Create the configurable variables of your project, generating a basic structure, where will generate a `.ft_cli` folder.
+Cria as variaveis configuraveis do seu projeto, gerando uma estrutura básica, onde ira gerar uma pasta `.ft_cli`.
 
 ---
 
@@ -35,10 +36,10 @@ Create the configurable variables of your project, generating a basic structure,
 # Generate Micro Frontend
 ft_cli mf
 ```
-Select the component you want to create and write the name in snakeCase.
+Selecione o componente que deseja criar e escreva o nome em _snakeCase_.
 
 <details>
-<summary>Result</summary>
+<summary>Resultado</summary>
 
 ```bash
 ? Qual componente você deseja criar? › 
@@ -60,7 +61,7 @@ ft_cli g layer lib/app/module/home
 ft_cli g l lib/app/module/home
 ```
 <details>
-<summary>Result</summary>
+<summary>Resultado</summary>
 
 ![](./screenshots/layer.png)
 </details>
@@ -74,7 +75,7 @@ ft_cli g page lib/app/module/home HomeCards
 ft_cli g p lib/app/module/home HomeCards
 ```
 <details>
-<summary>Result</summary>
+<summary>Resultado</summary>
 
 ```dart
 // presentation/ui/pages/home_cards/home_cards_page.dart
@@ -123,7 +124,7 @@ ft_cli g controller lib/app/module/home HomeCards
 ft_cli g c lib/app/module/home HomeCards
 ```
 <details>
-<summary>Result</summary>
+<summary>Resultado</summary>
 
 ```dart
 // presentation/ui/pages/home_cards/home_cards_controller.dart
@@ -148,7 +149,7 @@ ft_cli g datasource lib/app/module/home GetHomeCards
 ft_cli g d lib/app/module/home GetHomeCards
 ```
 <details>
-<summary>Result</summary>
+<summary>Resultado</summary>
 
 ```dart
 // data/datasources/get_home_cards_datasource.dart
@@ -181,7 +182,7 @@ ft_cli g repository lib/app/module/home GetHomeCards
 ft_cli g repository lib/app/module/home GetHomeCards
 ```
 <details>
-<summary>Result</summary>
+<summary>Resultado</summary>
 
 ```dart
 // domain/repositories/get_home_cards_repository.dart
@@ -213,7 +214,7 @@ ft_cli g usecase lib/app/module/home GetHomeCards
 ft_cli g u lib/app/module/home GetHomeCards
 ```
 <details>
-<summary>Result</summary>
+<summary>Resultado</summary>
 
 ```dart
 // domain/usecases/get_home_cards_usecase.dart
@@ -246,7 +247,7 @@ ft_cli g usecase lib/app/module/home GetHomeCards -r -d
 ft_cli g u lib/app/module/home GetHomeCards -r -d
 ```
 <details>
-<summary>Result</summary>
+<summary>Resultado</summary>
 
 ![](./screenshots/datasource-repository-usecase.png)
 </details>
@@ -261,7 +262,7 @@ ft_cli g service lib/app/module/home HomeCards
 ft_cli g s lib/app/module/home HomeCards
 ```
 <details>
-<summary>Result</summary>
+<summary>Resultado</summary>
 
 ```dart
 // domain/services/home_cards_service.dart
@@ -295,7 +296,7 @@ ft_cli g entity lib/app/module/home Home
 ft_cli g e lib/app/module/home Home
 ```
 <details>
-<summary>Result</summary>
+<summary>Resultado</summary>
 
 ```dart
 // domain/models/entities/home_entity.dart 
@@ -313,7 +314,7 @@ class HomeEntity {
 ft_cli g dto lib/app/module/home Home
 ```
 <details>
-<summary>Result</summary>
+<summary>Resultado</summary>
 
 ```dart
 // domain/models/dtos/home_dto.dart
@@ -365,11 +366,11 @@ dto                 Cria os dto para transferência de dados...
 Exemplo: ft_cli g dto lib/app/modules/nome_modulo Nome
 
 ```
-### Reserved Words
+### Palavras Reservadas
 
-The reserved words can be used in the templet files that are generated in .ft_cli/templete the reserved words must be used inside mustaches `{{}}` example `{{name}}`, can also be used in reserved words an extension, example `{{name.pascalCase}}` whose extension will format the word as needed, you can check the lists below for all reserved words and extensions.
+As palavras reservadas podem ser utilizadas nos arquivos de modelo que são gerados em .ft_cli/templete as palavras reservadas devem ser usadas dentro de _mustaches_ `{{}}` exemplo `{{nome}}`, também podem ser usadas em palavras reservadas uma extensão, exemplo `{{name.pascalCase}}` cuja extensão formatará a palavra conforme necessário, você pode verificar as listas abaixo para todas as palavras reservadas e extensões.
 
-* `Reserved words can be edited in my_project\.ft_cli\configs.json`
+* `Palavras reservadas podem ser editadas em meu_projeto\.ft_cli\configs.json`
 
 | Reserved Words               | Default                |
 |------------------------------|-----------------------------------------------------------------------------------------------------------|
@@ -403,17 +404,17 @@ The reserved words can be used in the templet files that are generated in .ft_cl
 | controllerNameFile           | {{name.snakeCase}}_controller                                                                             |
 | controllerNameClass          | {{name.pascalCase}}Controller                                                                             |
 
-### Methods
+### Métodos
 
-The Methods can be used in `triggers` or `templates`, and work in sequence, example `{{path.replace(str1,str2).replace(str3, str4)}}`.
+Os _Methods_ podem ser utilizados em `triggers` ou `templates`, e funcionam em sequência, exemplo `{{path.replace(str1,str2).replace(str3, str4)}}`.
 
-*WARNING:* If changing routes, use in Windows `\\` and in Mac or Linux `/`.
+*ATENÇÃO:* Caso esteja alterando rotas, utilize no Windows `\\` e no Mac ou Linux `/`.
 
 | Method    | Exemple    |
 |--------------|------------|
 | replace    | {{path.replace(string1,string2)}}  |
 
-### Extensions
+### Extensões
 
 | Extension    | Exemple    |
 |--------------|------------|
@@ -428,10 +429,9 @@ The Methods can be used in `triggers` or `templates`, and work in sequence, exam
 | headerCase   | Teste-Case |
 | titleCase    | Teste Case |
 
-### Triggers
+### Gatilhos
 
-In `.ft_cli/templete` a `{{term}}_replace_trigger.json` file is generated where from your annotation it can apply a replace to any input expression, for example:
-
+Em `.ft_cli/templete`, um arquivo `{{term}}_replace_trigger.json` é gerado onde, a partir de sua anotação, ele pode aplicar uma substituição a qualquer expressão de entrada, por exemplo:
 ```json
 [
     {
@@ -446,13 +446,13 @@ In `.ft_cli/templete` a `{{term}}_replace_trigger.json` file is generated where 
     }
 ]
 ```
-Where will perform a replace on the pointed file, from the expression.
+Onde irá executar uma alteração no arquivo apontado, a partir da expressão.
 
-##### Generate new file
+##### Criar novo arquivo
 
-In `.ft_cli / templete` a file `{{term}} _ new_file_trigger.json` is generated where, from his annotation, he can create a new file with the pre-defined templete, for example:
+Em `.ft_cli/templete`, um arquivo `{{term}}_new_file_trigger.json` é gerado onde, a partir de sua anotação, ele pode criar um novo arquivo com o modelo predefinido, por exemplo:
 
-Note, the ``generate`` variable must be ``true`` to generate the file.
+Observe que a variável ``generate`` deve ser ``true`` para gerar o arquivo.
 
 ```json
 [
@@ -464,7 +464,7 @@ Note, the ``generate`` variable must be ``true`` to generate the file.
 ]
 ```
 
-### Templates
+### Modelos
 
  ``.ft_cli/template/layer/complete_new_file_exemple.template``
 
@@ -488,11 +488,11 @@ class {{module.pascalCase}}Module extends Module {
 }
 
 ```
-Where will generate a new file from the defined template.
+Onde irá gerar um novo arquivo partir do _template_ definido.
 
-### Tests
+### Testes
 
-To add tests, just create a template, example:
+Para adicionar testes, basta criar um _template_, exemplo:
 
 ```file
 import 'package:flutter_test/flutter_test.dart';
@@ -509,7 +509,7 @@ void main() {
 }
 ```
 
-Then add the path of the _template_ in the _trigger_ of creation of the class to be tested, making a _replace_ of the _path_ of this class, forwarding the test file to the tests folder, example:
+Em seguida, adicione o caminho do _template_ no _trigger_ de criação da classe a ser testada, fazendo um _replace_ do _path_ dessa classe, encaminhando o arquivo de teste para a pasta de testes, exemplo:
 
 ```json
 [
@@ -524,4 +524,5 @@ Then add the path of the _template_ in the _trigger_ of creation of the class to
 ```
 
 ---
-###### Submit feature and bug requests to improve __CLI__ [report issues](https://github.com/jheimes-silveira/ft_cli/issues).
+
+###### Envie solicitações de recursos e bugs para melhorar a __CLI__ [relatar problemas](https://github.com/jheimes-silveira/ft_cli/issues).
