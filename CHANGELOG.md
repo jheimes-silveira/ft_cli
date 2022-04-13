@@ -1,3 +1,7 @@
+## 0.1.8+7 - Documentação atualizada
+- Atualização na documentação sobre novas funcionalidades.
+- Correção de bug ao rodar comando ft_cli init, para gerar a configuração inicial do micro app.
+
 ## 0.1.8+6 - Agora é possivel user o replace
 - Correção de bug para codigo hardcode
 
