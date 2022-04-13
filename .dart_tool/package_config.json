@@ -86,6 +86,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "flutter_lints",
+      "rootUri": "file:///C:/Users/jheime/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/flutter_lints-1.0.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "frontend_server_client",
       "rootUri": "file:///C:/Users/jheime/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/frontend_server_client-2.1.2",
       "packageUri": "lib/",
@@ -132,6 +138,12 @@
       "rootUri": "file:///C:/Users/jheime/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/js-0.6.4",
       "packageUri": "lib/",
       "languageVersion": "2.16"
+    },
+    {
+      "name": "lints",
+      "rootUri": "file:///C:/Users/jheime/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/lints-1.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "logging",
@@ -344,7 +356,7 @@
       "languageVersion": "2.15"
     }
   ],
-  "generated": "2022-04-12T00:40:47.202335Z",
+  "generated": "2022-04-12T17:00:31.317605Z",
   "generator": "pub",
   "generatorVersion": "2.16.2"
 }

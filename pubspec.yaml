@@ -17,6 +17,6 @@ dependencies:
 
 dev_dependencies:
   test: ^1.16.5
-
+  flutter_lints: ^1.0.4
 executables:
   ft_cli: ft_cli
