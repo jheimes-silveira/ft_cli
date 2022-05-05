@@ -44,6 +44,11 @@ late Localization _localization;
 void main(List<String> arguments) async {
   warn(arguments);
 
+  arguments =
+      arguments.map((e) => e.replaceAll('/', Platform.pathSeparator)).toList();
+  arguments =
+      arguments.map((e) => e.replaceAll('\\', Platform.pathSeparator)).toList();
+
   appModule = AppModule();
   validateArguments = ValidateArguments(appModule: appModule);
 
