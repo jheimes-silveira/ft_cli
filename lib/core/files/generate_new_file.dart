@@ -14,10 +14,9 @@ class GenerateNewFile {
     final file = '${prefixNameNewFile}_new_file_trigger.json';
     final fileTemplate = '${prefixNameNewFile}_new_file_exemple.template';
     var root = '.ft_cli';
+    path = path.replaceAll('\\', '/');
+    path = ReservedWords.removeWordsInFile(fileString: '$group/$path');
 
-    path = ReservedWords.removeWordsInFile(
-      fileString: '$group/$path',
-    );
     var existFile = File('$root/$path/$file').existsSync();
 
     if (!existFile) {

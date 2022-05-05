@@ -1,6 +1,6 @@
 [
     {
-        "pathFile": "{{path.replace(teste\\outher\\xpto,test).pathCase}}/{{datasourcePathInterface}}/{{datasourceNameFileInterface}}_test",
+        "pathFile": "{{path.replace(novo/outher,test).pathCase}}/{{datasourcePathInterface}}/{{datasourceNameFileInterface}}_test",
         "pathTemplete": ".ft_cli/template/domain/usecases/usecase_new_file_exemple.template",
         "extension": "dart",
         "replaceOldFileWithNew": false,

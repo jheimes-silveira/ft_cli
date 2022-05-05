@@ -310,10 +310,10 @@ class ReservedWords {
   ) {
     if (termReplace != null) {
       for (var item in termReplace.entries) {
-        word = word?.replaceAll(
-          item.key,
-          item.value,
-        );
+        word = word?.replaceAll('\\', '/').replaceAll(
+              item.key,
+              item.value,
+            );
       }
     }
 

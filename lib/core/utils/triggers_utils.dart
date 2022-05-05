@@ -47,9 +47,9 @@ class TriggersUtils {
       prefixNameReplaceFile,
     );
 
-    newFiles.forEach((n) {
+    for (var n in newFiles) {
       _applyNewFileIfNecessary(n);
-    });
+    }
   }
 
   static void _initTriggerReplace(
@@ -63,9 +63,9 @@ class TriggersUtils {
       prefixNameReplaceFile,
     );
 
-    replaces.forEach((r) {
+    for (var r in replaces) {
       _applyReplaceIfNecessary(r);
-    });
+    }
   }
 
   static void _initTriggerScripts(
@@ -79,9 +79,9 @@ class TriggersUtils {
       prefixNameReplaceFile,
     );
 
-    scripts.forEach((script) {
+    for (var script in scripts) {
       _applyScriptsIfNecessary(script);
-    });
+    }
   }
 
   static void _applyReplaceIfNecessary(ReplaceDto r) {
@@ -121,9 +121,9 @@ class TriggersUtils {
       return;
     }
 
-    final pathFile = normalize(ReservedWords.replaceWordsInFile(
+    final pathFile = ReservedWords.replaceWordsInFile(
       fileString: newFileDto.pathFile,
-    ));
+    );
 
     if (!newFileDto.replaceOldFileWithNew) {
       if (File('$pathFile.${newFileDto.extension}').existsSync()) {
@@ -162,6 +162,9 @@ class TriggersUtils {
   }
 
   static String _pathFolder(String pathFile) {
+    pathFile = pathFile.replaceAll('/', Platform.pathSeparator);
+    pathFile = pathFile.replaceAll('\\', Platform.pathSeparator);
+    
     return pathFile
         .split(Platform.pathSeparator)
         .sublist(0, pathFile.split(Platform.pathSeparator).length - 1)
