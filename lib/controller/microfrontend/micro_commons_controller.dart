@@ -11,10 +11,10 @@ class MicroCommonsController extends MicrofrontendController {
 
   @override
   Future run() {
-    final _projectName = DialogUtils.newQuestion(
+    final projectName = DialogUtils.newQuestion(
       'Digite o nome do seu ${_microCommons.component}\nexemplos: auth, dependencies, utils, extensions...\n(obs): não deve conter espaço em branco\nnome ${_microCommons.component}: ',
     );
     stdout.write('\n\n');
-    return super.processRun(_microCommons, _projectName);
+    return super.processRun(_microCommons, projectName);
   }
 }

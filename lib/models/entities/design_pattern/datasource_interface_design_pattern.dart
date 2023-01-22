@@ -4,7 +4,7 @@ import 'package:ft_cli/models/entities/design_pattern/design_pattern.dart';
 
 class DatasourceInterfaceDesignPattern extends DesignPattern {
   static const _template = '''
-abstract class {{datasourceNameClassInterface.pascalCase}} {
+abstract class {{datasourceNameClassInterface}} {
   Future<void> call();
 }
   ''';
@@ -29,7 +29,7 @@ abstract class {{datasourceNameClassInterface.pascalCase}} {
   String nameClass() {
     return persistValue(
       'datasourceNameClassInterface',
-      '{{name.pascalCase}}Datasource',
+      '{{name.pascalCase}}DataSource',
     );
   }
 

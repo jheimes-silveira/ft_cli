@@ -4,7 +4,7 @@ import 'package:ft_cli/models/entities/design_pattern/design_pattern.dart';
 
 class UsecaseInterfaceDesignPattern extends DesignPattern {
   static const _template = '''
-abstract class {{usecaseNameClassInterface.pascalCase}} {
+abstract class {{usecaseNameClassInterface}} {
   Future<void> call();
 }
   ''';
@@ -29,7 +29,7 @@ abstract class {{usecaseNameClassInterface.pascalCase}} {
   String nameClass() {
     return persistValue(
       'usecaseNameClassInterface',
-      '{{name.pascalCase}}Usecase',
+      '{{name.pascalCase}}UseCase',
     );
   }
 

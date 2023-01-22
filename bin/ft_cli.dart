@@ -44,10 +44,7 @@ late Localization _localization;
 void main(List<String> arguments) async {
   warn(arguments);
 
-  arguments =
-      arguments.map((e) => e.replaceAll('/', Platform.pathSeparator)).toList();
-  arguments =
-      arguments.map((e) => e.replaceAll('\\', Platform.pathSeparator)).toList();
+  arguments = _normalizeTermsArguments(arguments);
 
   appModule = AppModule();
   validateArguments = ValidateArguments(appModule: appModule);
@@ -65,6 +62,14 @@ void main(List<String> arguments) async {
   }
 
   await _runProcess(arguments);
+}
+
+List<String> _normalizeTermsArguments(List<String> arguments) {
+  List<String> args = [];
+  args =
+      arguments.map((e) => e.replaceAll('/', Platform.pathSeparator)).toList();
+  args = args.map((e) => e.replaceAll('\\', Platform.pathSeparator)).toList();
+  return args;
 }
 
 Future<void> _runProcess(List<String> arguments) async {

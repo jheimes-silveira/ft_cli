@@ -4,8 +4,8 @@ import 'package:ft_cli/models/entities/design_pattern/design_pattern.dart';
 
 class DtoDesignPattern extends DesignPattern {
   static const String _template = '''
-class {{dtoNameClass.pascalCase}} {
-  {{dtoNameClass.pascalCase}}();
+class {{dtoNameClass}} {
+  {{dtoNameClass}}();
 }
   ''';
   @override

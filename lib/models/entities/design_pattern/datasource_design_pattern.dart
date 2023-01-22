@@ -4,9 +4,9 @@ import 'package:ft_cli/models/entities/design_pattern/design_pattern.dart';
 
 class DatasourceDesignPattern extends DesignPattern {
   static const String _template = '''
-import '../../{{datasourcePathInterface}}/{{datasourceNameFileInterface.snakeCase}}.dart';
+import '../../{{datasourcePathInterface}}/{{datasourceNameFileInterface}}.{{datasourceExtensionInterface}}';
 
-class {{datasourceNameClass.pascalCase}} implements {{datasourceNameClassInterface.pascalCase}} {
+class {{datasourceNameClass}} implements {{datasourceNameClassInterface}} {
   @override
   Future<void> call() {
     // TODO: implement call
@@ -18,7 +18,7 @@ class {{datasourceNameClass.pascalCase}} implements {{datasourceNameClassInterfa
   String nameFile() {
     return persistValue(
       'datasourceNameFile',
-      '{{name.snakeCase}}_imp_datasource',
+      '{{name.snakeCase}}_datasource_impl',
     );
   }
 
@@ -34,7 +34,7 @@ class {{datasourceNameClass.pascalCase}} implements {{datasourceNameClassInterfa
   String nameClass() {
     return persistValue(
       'datasourceNameClass',
-      '{{name.pascalCase}}ImpDatasource',
+      '{{name.pascalCase}}DataSourceImpl',
     );
   }
 

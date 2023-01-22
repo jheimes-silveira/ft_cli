@@ -8,7 +8,15 @@ abstract class Microfrontend {
   Microfrontend();
 
   String projectNameComplete(String projectName) {
-    return '$prefix$divider$component$divider$projectName';
+    final args = [];
+    if (prefix.isNotEmpty) {
+      args.add(prefix);
+    }
+    if (component.isNotEmpty) {
+      args.add(component);
+    }
+    args.add(projectName);
+    return args.join(divider);
   }
 
   String get divider {

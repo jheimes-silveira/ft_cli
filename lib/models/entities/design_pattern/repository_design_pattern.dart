@@ -4,9 +4,9 @@ import 'package:ft_cli/models/entities/design_pattern/design_pattern.dart';
 
 class RepositoryDesignPattern extends DesignPattern {
   static const String _template = '''
-import '../../{{repositoryPathInterface}}/{{repositoryNameFileInterface.snakeCase}}.dart';
+import '../../{{repositoryPathInterface}}/{{repositoryNameFileInterface}}.{{repositoryExtensionInterface}}';
 
-class {{repositoryNameClass.pascalCase}} implements {{repositoryNameClassInterface.pascalCase}} {
+class {{repositoryNameClass}} implements {{repositoryNameClassInterface}} {
   @override
   Future<void> call() {
     // TODO: implement call
@@ -20,7 +20,7 @@ class {{repositoryNameClass.pascalCase}} implements {{repositoryNameClassInterfa
   String nameFile() {
     return persistValue(
       'repositoryNameFile',
-      '{{name.snakeCase}}_imp_repository',
+      '{{name.snakeCase}}_repository_impl',
     );
   }
 
@@ -36,7 +36,7 @@ class {{repositoryNameClass.pascalCase}} implements {{repositoryNameClassInterfa
   String nameClass() {
     return persistValue(
       'repositoryNameClass',
-      '{{name.pascalCase}}ImpRepository',
+      '{{name.pascalCase}}RepositoryImpl',
     );
   }
 

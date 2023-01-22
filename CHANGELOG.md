@@ -1,3 +1,9 @@
+## 0.1.8+9 - Correção de geração pre fixo para micro frontend
+- Atualização de libs internar, correção de geração de mf apartir de pre fixo
+
+## 0.1.8+8 - Correção de formatação para plataformas diferentes 
+- Quando um templete é carregado no windows ou no mac, deve assimir o mesmo templete e formatações de separação como o barra de pastas.
+
 ## 0.1.8+7 - Documentação atualizada
 - Atualização na documentação sobre novas funcionalidades.
 - Correção de bug ao rodar comando ft_cli init, para gerar a configuração inicial do micro app.

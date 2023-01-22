@@ -4,7 +4,7 @@ import 'package:ft_cli/models/entities/design_pattern/design_pattern.dart';
 
 class ControllerDesignPattern extends DesignPattern {
   static const String _template = r'''
-class {{controllerNameClass.pascalCase}} {
+class {{controllerNameClass}} {
   bool loading = false;
 
   void setLoading(bool value) {

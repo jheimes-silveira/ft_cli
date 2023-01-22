@@ -4,7 +4,7 @@ import 'package:ft_cli/models/entities/design_pattern/design_pattern.dart';
 
 class ServiceInterfaceDesignPattern extends DesignPattern {
   static const _template = '''
-abstract class {{serviceNameClassInterface.pascalCase}} {
+abstract class {{serviceNameClassInterface}} {
   Future<void> call();
 }
   ''';

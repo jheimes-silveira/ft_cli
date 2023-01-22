@@ -4,9 +4,9 @@ import 'package:ft_cli/models/entities/design_pattern/design_pattern.dart';
 
 class ServiceDesignPattern extends DesignPattern {
   static const String _template = '''
-import '{{serviceNameFileInterface.snakeCase}}.dart';
+import '{{serviceNameFileInterface}}.{{serviceExtensionInterface}}';
 
-class {{serviceNameClass.pascalCase}} implements {{serviceNameClassInterface.pascalCase}} {
+class {{serviceNameClass}} implements {{serviceNameClassInterface}} {
   @override
   Future<void> call() {
     // TODO: implement call
@@ -18,7 +18,7 @@ class {{serviceNameClass.pascalCase}} implements {{serviceNameClassInterface.pas
   String nameFile() {
     return persistValue(
       'serviceNameFile',
-      '{{name.snakeCase}}_imp_service',
+      '{{name.snakeCase}}_service_impl',
     );
   }
 
@@ -34,7 +34,7 @@ class {{serviceNameClass.pascalCase}} implements {{serviceNameClassInterface.pas
   String nameClass() {
     return persistValue(
       'serviceNameClass',
-      '{{name.pascalCase}}ImpService',
+      '{{name.pascalCase}}ServiceImpl',
     );
   }
 

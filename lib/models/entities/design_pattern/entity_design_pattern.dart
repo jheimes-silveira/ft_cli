@@ -4,7 +4,7 @@ import 'package:ft_cli/models/entities/design_pattern/design_pattern.dart';
 
 class EntityDesignPattern extends DesignPattern {
   static const String _template = '''
-class {{entityNameClass.pascalCase}} {
+class {{entityNameClass}} {
   {{entityNameClass.pascalCase}}();
 }
   ''';

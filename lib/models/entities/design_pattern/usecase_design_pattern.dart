@@ -4,9 +4,9 @@ import 'package:ft_cli/models/entities/design_pattern/design_pattern.dart';
 
 class UsecaseDesignPattern extends DesignPattern {
   static const String _template = '''
-import '{{usecaseNameFileInterface.snakeCase}}.dart';
+import '{{usecaseNameFileInterface}}.dart';
 
-class {{usecaseNameClass.pascalCase}} implements {{usecaseNameClassInterface.pascalCase}} {
+class {{usecaseNameClass}} implements {{usecaseNameClassInterface}} {
   @override
   Future<void> call() {
     // TODO: implement call
@@ -18,7 +18,7 @@ class {{usecaseNameClass.pascalCase}} implements {{usecaseNameClassInterface.pas
   String nameFile() {
     return persistValue(
       'usecaseNameFile',
-      '{{name.snakeCase}}_imp_usecase',
+      '{{name.snakeCase}}_usecase_impl',
     );
   }
 
@@ -34,7 +34,7 @@ class {{usecaseNameClass.pascalCase}} implements {{usecaseNameClassInterface.pas
   String nameClass() {
     return persistValue(
       'usecaseNameClass',
-      '{{name.pascalCase}}ImpUsecase',
+      '{{name.pascalCase}}UseCaseImpl',
     );
   }
 
