@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:ft_cli/models/entities/design_pattern/controller_design_pattern.dart';
 import 'package:ft_cli/models/entities/design_pattern/datasource_design_pattern.dart';
 import 'package:ft_cli/models/entities/design_pattern/datasource_interface_design_pattern.dart';
@@ -204,7 +202,7 @@ class ReservedWords {
 
   static String? _replaceWordWithOptions(String word) {
     final action = {
-      'module': '${GlobalVariable.path.split(Platform.pathSeparator).last}',
+      'module': GlobalVariable.module,
       'name': GlobalVariable.name,
       'path': GlobalVariable.path,
       'repositoryPathInterface': RepositoryInterfaceDesignPattern().path(),

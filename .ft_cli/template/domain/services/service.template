@@ -1,0 +1,10 @@
+import '{{serviceNameFileInterface}}.{{serviceExtensionInterface}}';
+
+class {{serviceNameClass}} implements {{serviceNameClassInterface}} {
+  @override
+  Future<void> call() {
+    // TODO: implement call
+    throw UnimplementedError();
+  }
+}
+  

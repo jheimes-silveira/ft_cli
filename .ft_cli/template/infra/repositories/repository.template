@@ -1,0 +1,11 @@
+import '../../{{repositoryPathInterface}}/{{repositoryNameFileInterface}}.{{repositoryExtensionInterface}}';
+
+class {{repositoryNameClass}} implements {{repositoryNameClassInterface}} {
+  @override
+  Future<void> call() {
+    // TODO: implement call
+    throw UnimplementedError();
+  }
+}
+  
+  

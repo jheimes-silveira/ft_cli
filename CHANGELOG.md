@@ -1,3 +1,6 @@
+## 0.1.8+10 - Correção ao inserir um path apenas com o nome do modulo 
+- Ao entrar com o nome do path contendo apenas o nome do modulo, deve ser reconhecido o modulo 
+
 ## 0.1.8+9 - Correção de geração pre fixo para micro frontend
 - Atualização de libs internar, correção de geração de mf apartir de pre fixo
 

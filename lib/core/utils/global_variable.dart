@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:ft_cli/core/utils/path.dart';
 
 class GlobalVariable {
@@ -12,6 +14,13 @@ class GlobalVariable {
     GlobalVariable.action = _getFormatAction(arguments);
     try {
       GlobalVariable.path = normalize(arguments[2]);
+      if (GlobalVariable.path.split(Platform.pathSeparator).length == 1) {
+        GlobalVariable.module = GlobalVariable.path;
+        GlobalVariable.path = '';
+      } else {
+        GlobalVariable.module =
+            GlobalVariable.path.split(Platform.pathSeparator).last;
+      }
       // ignore: empty_catches
     } catch (e) {}
     try {

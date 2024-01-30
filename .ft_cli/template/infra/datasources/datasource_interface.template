@@ -1,0 +1,4 @@
+abstract class {{datasourceNameClassInterface}} {
+  Future<void> call();
+}
+  
