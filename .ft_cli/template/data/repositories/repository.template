@@ -1,6 +1,6 @@
-import '../../{{repositoryPathInterface}}/{{repositoryNameFileInterface.snakeCase}}.dart';
+import '../../{{repositoryPathInterface}}/{{repositoryNameFileInterface}}.{{repositoryExtensionInterface}}';
 
-class {{repositoryNameClass.pascalCase}} implements {{repositoryNameClassInterface.pascalCase}} {
+class {{repositoryNameClass}} implements {{repositoryNameClassInterface}} {
   @override
   Future<void> call() {
     // TODO: implement call

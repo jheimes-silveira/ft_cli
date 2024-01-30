@@ -1,4 +1,4 @@
-class {{controllerNameClass.pascalCase}} {
+class {{controllerNameClass}} {
   bool loading = false;
 
   void setLoading(bool value) {

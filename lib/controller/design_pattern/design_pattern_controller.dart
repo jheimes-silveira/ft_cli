@@ -34,7 +34,7 @@ class DesignPatternController {
     }
 
     await DirectoryUtils.create(
-      p.normalize(GlobalVariable.path + '/' + path),
+      p.normalize('${GlobalVariable.path}/$path'),
     );
 
     if (File(completePath).existsSync()) {

@@ -43,7 +43,6 @@ late Localization _localization;
 
 void main(List<String> arguments) async {
   warn(arguments);
-
   arguments = _normalizeTermsArguments(arguments);
 
   appModule = AppModule();

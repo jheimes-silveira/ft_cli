@@ -1,3 +1,6 @@
+## 0.1.8+11 - Removendo bug de templete
+- Removendo bug de templete
+
 ## 0.1.8+10 - Correção ao inserir um path apenas com o nome do modulo 
 - Ao entrar com o nome do path contendo apenas o nome do modulo, deve ser reconhecido o modulo 
 

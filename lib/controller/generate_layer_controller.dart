@@ -41,9 +41,8 @@ class GenerateLayerController {
   }
 
   Future<void> _generateLayer(DesignPattern designPattern) async {
-    final path = normalize(GlobalVariable.path +
-        '/' +
-        ReservedWords.removeWordsInFile(fileString: designPattern.path()));
+    final path = normalize(
+        '${GlobalVariable.path}/${ReservedWords.removeWordsInFile(fileString: designPattern.path())}');
 
     await DirectoryUtils.create(path);
 
