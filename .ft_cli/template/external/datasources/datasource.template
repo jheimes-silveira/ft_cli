@@ -1,6 +1,6 @@
-import '../../{{datasourcePathInterface}}/{{datasourceNameFileInterface.snakeCase}}.dart';
+import '../../{{datasourcePathInterface}}/{{datasourceNameFileInterface}}.{{datasourceExtensionInterface}}';
 
-class {{datasourceNameClass.pascalCase}} implements {{datasourceNameClassInterface.pascalCase}} {
+class {{datasourceNameClass}} implements {{datasourceNameClassInterface}} {
   @override
   Future<void> call() {
     // TODO: implement call

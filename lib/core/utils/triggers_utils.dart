@@ -121,9 +121,9 @@ class TriggersUtils {
       return;
     }
 
-    final pathFile = ReservedWords.replaceWordsInFile(
+    final pathFile = normalize(ReservedWords.replaceWordsInFile(
       fileString: newFileDto.pathFile,
-    );
+    ));
 
     if (!newFileDto.replaceOldFileWithNew) {
       if (File('$pathFile.${newFileDto.extension}').existsSync()) {

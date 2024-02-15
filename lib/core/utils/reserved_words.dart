@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:ft_cli/core/utils/path.dart';
 import 'package:ft_cli/models/entities/design_pattern/controller_design_pattern.dart';
 import 'package:ft_cli/models/entities/design_pattern/datasource_design_pattern.dart';
 import 'package:ft_cli/models/entities/design_pattern/datasource_interface_design_pattern.dart';
@@ -32,17 +33,19 @@ class ReservedWords {
 
       fileString = fileString.replaceFirst('{{$term}}', '');
     }
+    
+    fileString = normalize(fileString);
 
-    while (fileString.startsWith('/')) {
+    while (fileString.startsWith(Platform.pathSeparator)) {
       fileString = fileString.substring(1, fileString.length);
     }
 
-    while (fileString.endsWith('/')) {
+    while (fileString.endsWith(Platform.pathSeparator)) {
       fileString = fileString.substring(0, fileString.length - 1);
     }
 
     while (fileString.contains('//')) {
-      fileString = fileString.replaceAll('//', '/');
+      fileString = fileString.replaceAll('//', Platform.pathSeparator);
     }
 
     return fileString;
@@ -204,7 +207,7 @@ class ReservedWords {
 
   static String? _replaceWordWithOptions(String word) {
     final action = {
-      'module': '${GlobalVariable.path.split(Platform.pathSeparator).last}',
+      'module': GlobalVariable.module,
       'name': GlobalVariable.name,
       'path': GlobalVariable.path,
       'repositoryPathInterface': RepositoryInterfaceDesignPattern().path(),

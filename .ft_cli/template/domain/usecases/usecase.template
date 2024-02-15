@@ -1,6 +1,6 @@
-import '{{usecaseNameFileInterface.snakeCase}}.dart';
+import '{{usecaseNameFileInterface}}.dart';
 
-class {{usecaseNameClass.pascalCase}} implements {{usecaseNameClassInterface.pascalCase}} {
+class {{usecaseNameClass}} implements matatatatara {
   @override
   Future<void> call() {
     // TODO: implement call

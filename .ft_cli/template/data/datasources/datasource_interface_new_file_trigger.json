@@ -1,9 +1,1 @@
-[
-    {
-        "pathFile": "{{path.replace(lib\\app,test)}}/{{datasourcePathInterface}}/{{datasourceNameFileInterface}}_test",
-        "pathTemplete": ".ft_cli/template/data/datasources/datasource_interface_new_file_exemple.template",
-        "extension": "dart",
-        "replaceOldFileWithNew": false,
-        "generate": true
-    }
-]
+[{"pathFile":"","pathTemplete":".ft_cli/template/data/datasources/datasource_interface_new_file_exemple.template","extension":"dart","replaceOldFileWithNew":false,"generate":false}]
